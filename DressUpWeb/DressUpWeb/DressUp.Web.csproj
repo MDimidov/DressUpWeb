@@ -4,6 +4,7 @@
     <TargetFramework>net6.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+	  <RootNamespace>DressUp.Web</RootNamespace>
     <UserSecretsId>aspnet-DressUpWeb-f82071c0-ae09-4065-a3fe-170ab39a50bd</UserSecretsId>
   </PropertyGroup>
 
@@ -17,6 +18,12 @@
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.27" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.27" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DressUp.Common\DressUp.Common.csproj" />
+    <ProjectReference Include="..\DressUp.Data\DressUp.Data.csproj" />
+    <ProjectReference Include="..\DressUp.Web.ViewModels\DressUp.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>
