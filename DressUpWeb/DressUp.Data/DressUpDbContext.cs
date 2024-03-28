@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DressUp.Web.Data;
 
-public class ApplicationDbContext : IdentityDbContext
+public class DressUpDbContext : IdentityDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+    public DressUpDbContext(DbContextOptions<DressUpDbContext> options)
         : base(options)
     {
     }

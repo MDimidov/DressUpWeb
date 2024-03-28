@@ -8,7 +8,7 @@ using System;
 
 namespace DressUp.Web.Data.Migrations;
 
-[DbContext(typeof(ApplicationDbContext))]
+[DbContext(typeof(DressUpDbContext))]
 partial class ApplicationDbContextModelSnapshot : ModelSnapshot
 {
     protected override void BuildModel(ModelBuilder modelBuilder)
