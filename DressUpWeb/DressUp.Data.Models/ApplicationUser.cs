@@ -1,6 +1,10 @@
-﻿namespace DressUp.Data.Models;
+﻿using DressUp.Data.Models.Enums;
+using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class ApplicationUser
+namespace DressUp.Data.Models;
+
+public class ApplicationUser : IdentityUser<Guid>
 {
     public ApplicationUser()
     {
@@ -9,6 +13,16 @@ public class ApplicationUser
         ProductReviews = new HashSet<ProductReview>();
         Cards = new HashSet<Card>();
     }
+    public string? FirstName { get; set; }
+
+    public string? LastName { get; set; }
+
+    public GenderType? Gender {  get; set; }
+
+    [ForeignKey(nameof(Address))]
+    public Guid? AddressId { get; set; }
+    public virtual Address? Address { get; set; }
+
 
     public virtual ICollection<Favorite> Favorites { get; set; }
     public virtual ICollection<BuyedProduct> BuyedProducts { get; set; }

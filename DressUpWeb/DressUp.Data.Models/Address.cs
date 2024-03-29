@@ -11,6 +11,7 @@ public class Address
     {
         Id = Guid.NewGuid();
         Stores = new HashSet<Store>();
+        Users = new HashSet<ApplicationUser>();
     }
 
     [Key]
@@ -31,4 +32,5 @@ public class Address
     public virtual Country Country { get; set; }
 
     public virtual ICollection<Store> Stores { get; set; }
+    public virtual ICollection<ApplicationUser> Users { get; set; }
 }

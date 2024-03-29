@@ -21,7 +21,7 @@ public class Store
 
     [Required]
     [ForeignKey(nameof(Address))]
-    public int AddressId { get; set; }
+    public Guid AddressId { get; set; }
     public virtual Address Address { get; set; }
 
     [Required]

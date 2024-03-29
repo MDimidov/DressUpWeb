@@ -1,3 +1,4 @@
+using DressUp.Data.Models;
 using DressUp.Web.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -10,9 +11,20 @@ builder.Services.AddDbContext<DressUpDbContext>(options =>
     options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options =>
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = true;
+    options.SignIn.RequireConfirmedAccount = builder
+                    .Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
+    options.Password.RequireNonAlphanumeric = builder
+        .Configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
+    options.Password.RequireLowercase = builder
+        .Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
+    options.Password.RequireUppercase = builder
+        .Configuration.GetValue<bool>("Identity:Password:RequireUppercase");
+    options.Password.RequireDigit = builder
+        .Configuration.GetValue<bool>("Identity:Password:RequireDigit");
+    options.Password.RequiredLength = builder
+        .Configuration.GetValue<int>("Identity:Password:RequiredLength");
 })
     .AddEntityFrameworkStores<DressUpDbContext>();
 builder.Services.AddControllersWithViews();

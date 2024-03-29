@@ -32,7 +32,7 @@ public class ProductReview
 
     [Required]
     [ForeignKey(nameof(User))]
-    public int UserId { get; set; }
+    public Guid UserId { get; set; }
     public virtual ApplicationUser User { get; set; } = null!;
 
 }

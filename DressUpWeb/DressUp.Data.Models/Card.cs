@@ -33,6 +33,6 @@ public class Card
 
     [Required]
     [ForeignKey(nameof(Holder))]
-    public int HolderId { get; set; }
+    public Guid HolderId { get; set; }
     public virtual ApplicationUser Holder { get; set; }
 }
