@@ -32,33 +32,120 @@
 
 
 [
-  { "Name": "Sofia" },
-  { "Name": "Plovdiv" },
-  { "Name": "Varna" },
-  { "Name": "Burgas" },
-  { "Name": "Ruse" },
-  { "Name": "Stara Zagora" },
-  { "Name": "Pleven" },
-  { "Name": "Sliven" },
-  { "Name": "Dobrich" },
-  { "Name": "Shumen" },
-  { "Name": "Pernik" },
-  { "Name": "Yambol" },
-  { "Name": "Haskovo" },
-  { "Name": "Pazardzhik" },
-  { "Name": "Blagoevgrad" },
-  { "Name": "Veliko Tarnovo" },
-  { "Name": "Vratsa" },
-  { "Name": "Gabrovo" },
-  { "Name": "Asenovgrad" },
-  { "Name": "Kardzhali" },
-  { "Name": "Kyustendil" },
-  { "Name": "Razgrad" },
-  { "Name": "Petrich" },
-  { "Name": "Belogradchik" },
-  { "Name": "Sandanski" },
-  { "Name": "Gorna Oryahovitsa" },
-  { "Name": "Lovech" },
-  { "Name": "Targovishte" },
-  { "Name": "Svilengrad" }
+  {
+    "Id": 1,
+    "Name": "Sofia"
+  },
+  {
+    "Id": 2,
+    "Name": "Plovdiv"
+  },
+  {
+    "Id": 3,
+    "Name": "Varna"
+  },
+  {
+    "Id": 4,
+    "Name": "Burgas"
+  },
+  {
+    "Id": 5,
+    "Name": "Ruse"
+  },
+  {
+    "Id": 6,
+    "Name": "Stara Zagora"
+  },
+  {
+    "Id": 7,
+    "Name": "Pleven"
+  },
+  {
+    "Id": 8,
+    "Name": "Sliven"
+  },
+  {
+    "Id": 9,
+    "Name": "Dobrich"
+  },
+  {
+    "Id": 10,
+    "Name": "Shumen"
+  },
+  {
+    "Id": 11,
+    "Name": "Pernik"
+  },
+  {
+    "Id": 12,
+    "Name": "Yambol"
+  },
+  {
+    "Id": 13,
+    "Name": "Haskovo"
+  },
+  {
+    "Id": 14,
+    "Name": "Pazardzhik"
+  },
+  {
+    "Id": 15,
+    "Name": "Blagoevgrad"
+  },
+  {
+    "Id": 16,
+    "Name": "Veliko Tarnovo"
+  },
+  {
+    "Id": 17,
+    "Name": "Vratsa"
+  },
+  {
+    "Id": 18,
+    "Name": "Gabrovo"
+  },
+  {
+    "Id": 19,
+    "Name": "Asenovgrad"
+  },
+  {
+    "Id": 20,
+    "Name": "Kardzhali"
+  },
+  {
+    "Id": 21,
+    "Name": "Kyustendil"
+  },
+  {
+    "Id": 22,
+    "Name": "Razgrad"
+  },
+  {
+    "Id": 23,
+    "Name": "Petrich"
+  },
+  {
+    "Id": 24,
+    "Name": "Belogradchik"
+  },
+  {
+    "Id": 25,
+    "Name": "Sandanski"
+  },
+  {
+    "Id": 26,
+    "Name": "Gorna Oryahovitsa"
+  },
+  {
+    "Id": 27,
+    "Name": "Lovech"
+  },
+  {
+    "Id": 28,
+    "Name": "Targovishte"
+  },
+  {
+    "Id": 29,
+    "Name": "Svilengrad"
+  }
 ]

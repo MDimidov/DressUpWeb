@@ -1,0 +1,82 @@
+[
+  {
+    "Name": "T-Shirt",
+    "Description": "Cotton t-shirt with logo print",
+    "BrandId": 1,
+    "CategoryId": 1,
+    "Price": 15.99,
+    "Quantity": 100
+  },
+  {
+    "Name": "Jeans",
+    "Description": "Slim fit denim jeans",
+    "BrandId": 2,
+    "CategoryId": 2,
+    "Price": 29.99,
+    "Quantity": 50
+  },
+  {
+    "Name": "Dress Shirt",
+    "Description": "Formal dress shirt with button-down collar",
+    "BrandId": 3,
+    "CategoryId": 1,
+    "Price": 24.99,
+    "Quantity": 75
+  },
+  {
+    "Name": "Skirt",
+    "Description": "A-line skirt with floral pattern",
+    "BrandId": 4,
+    "CategoryId": 3,
+    "Price": 19.99,
+    "Quantity": 60
+  },
+  {
+    "Name": "Jacket",
+    "Description": "Waterproof jacket with hood",
+    "BrandId": 5,
+    "CategoryId": 4,
+    "Price": 49.99,
+    "Quantity": 30
+  },
+  {
+    "Name": "Sweater",
+    "Description": "Knitted sweater with crew neckline",
+    "BrandId": 1,
+    "CategoryId": 1,
+    "Price": 34.99,
+    "Quantity": 80
+  },
+  {
+    "Name": "Shorts",
+    "Description": "Casual shorts with drawstring waist",
+    "BrandId": 2,
+    "CategoryId": 2,
+    "Price": 22.99,
+    "Quantity": 45
+  },
+  {
+    "Name": "Dress",
+    "Description": "Maxi dress with spaghetti straps",
+    "BrandId": 3,
+    "CategoryId": 3,
+    "Price": 39.99,
+    "Quantity": 65
+  },
+  {
+    "Name": "Blouse",
+    "Description": "Chiffon blouse with ruffle detail",
+    "BrandId": 4,
+    "CategoryId": 1,
+    "Price": 29.99,
+    "Quantity": 70
+  },
+  {
+    "Name": "Coat",
+    "Description": "Wool blend coat with belt",
+    "BrandId": 5,
+    "CategoryId": 4,
+    "Price": 79.99,
+    "Quantity": 25
+  }
+]

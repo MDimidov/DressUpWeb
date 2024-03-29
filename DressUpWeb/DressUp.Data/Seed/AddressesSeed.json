@@ -1,0 +1,20 @@
+[
+  {
+    "Id": "36d433c7-1c34-4a02-b0a5-6b7b4a1b6b7e",
+    "Street": "Asparuhovo Blvd. Narodni Buditeli 2 fl. 2",
+    "CityId": 3,
+    "CountryId": 1
+  },
+  {
+    "Id": "8a0d518b-9d8a-4e80-a68b-5b2f89b14812",
+    "Street": "j.k. Izgrev 147",
+    "CityId": 4,
+    "CountryId": 1
+  },
+  {
+    "Id": "fbd8adbb-9de2-4e63-b8fc-32a01b6ed348",
+    "Street": "Varna, j.k. Vladislavovo Blvd. 3-ti Mart 4",
+    "CityId": 3,
+    "CountryId": 1
+  }
+]
