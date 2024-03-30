@@ -26,7 +26,9 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
     options.Password.RequiredLength = builder
         .Configuration.GetValue<int>("Identity:Password:RequiredLength");
 })
-    .AddEntityFrameworkStores<DressUpDbContext>();
+    .AddEntityFrameworkStores<DressUpDbContext>()
+    .AddDefaultTokenProviders();
+
 builder.Services.AddControllersWithViews();
 
 WebApplication app = builder.Build();
