@@ -1,5 +1,6 @@
 [
   {
+    "Id": 1,
     "Name": "T-Shirt",
     "Description": "Cotton t-shirt with logo print",
     "BrandId": 1,
@@ -8,6 +9,7 @@
     "Quantity": 100
   },
   {
+    "Id": 2,
     "Name": "Jeans",
     "Description": "Slim fit denim jeans",
     "BrandId": 2,
@@ -16,6 +18,7 @@
     "Quantity": 50
   },
   {
+    "Id": 3,
     "Name": "Dress Shirt",
     "Description": "Formal dress shirt with button-down collar",
     "BrandId": 3,
@@ -24,6 +27,7 @@
     "Quantity": 75
   },
   {
+    "Id": 4,
     "Name": "Skirt",
     "Description": "A-line skirt with floral pattern",
     "BrandId": 4,
@@ -32,6 +36,7 @@
     "Quantity": 60
   },
   {
+    "Id": 5,
     "Name": "Jacket",
     "Description": "Waterproof jacket with hood",
     "BrandId": 5,
@@ -40,6 +45,7 @@
     "Quantity": 30
   },
   {
+    "Id": 6,
     "Name": "Sweater",
     "Description": "Knitted sweater with crew neckline",
     "BrandId": 1,
@@ -48,6 +54,7 @@
     "Quantity": 80
   },
   {
+    "Id": 7,
     "Name": "Shorts",
     "Description": "Casual shorts with drawstring waist",
     "BrandId": 2,
@@ -56,6 +63,7 @@
     "Quantity": 45
   },
   {
+    "Id": 8,
     "Name": "Dress",
     "Description": "Maxi dress with spaghetti straps",
     "BrandId": 3,
@@ -64,6 +72,7 @@
     "Quantity": 65
   },
   {
+    "Id": 9,
     "Name": "Blouse",
     "Description": "Chiffon blouse with ruffle detail",
     "BrandId": 4,
@@ -72,6 +81,7 @@
     "Quantity": 70
   },
   {
+    "Id": 10,
     "Name": "Coat",
     "Description": "Wool blend coat with belt",
     "BrandId": 5,

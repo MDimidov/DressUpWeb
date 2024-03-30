@@ -44,7 +44,7 @@ public static class EntityValidationConstants
         public const int NameMaxLength = 35;
 
         public const int DescriptionMinLength = 5;
-        public const int DescriptionMaxLength = 35;
+        public const int DescriptionMaxLength = 500;
 
         //May be not string
         public const string PriceMinRange = "0.01";

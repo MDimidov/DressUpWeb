@@ -1,0 +1,26 @@
+[
+  {
+    "Email": "admin@softuni.bg",
+    "UserName": "admin@softuni.bg",
+    "Password": "admin",
+    "FirstName": "Admin",
+    "LastName": "Adminov",
+    "Gender": "Male"
+  },
+  {
+    "Email": "user@softuni.bg",
+    "UserName": "user@softuni.bg",
+    "Password": "softuni",
+    "FirstName": "User",
+    "LastName": "Userov",
+    "Gender": "Male"
+  },
+  {
+    "Email": "moderator@softuni.bg",
+    "UserName": "moderator@softuni.bg",
+    "Password": "softuni",
+    "FirstName": "Moderator",
+    "LastName": "Moderatorov",
+    "Gender": "Female"
+  }
+]

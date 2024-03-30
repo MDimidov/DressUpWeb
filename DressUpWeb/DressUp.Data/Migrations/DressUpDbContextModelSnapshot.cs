@@ -46,6 +46,29 @@ namespace DressUp.Data.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("36d433c7-1c34-4a02-b0a5-6b7b4a1b6b7e"),
+                            CityId = 3,
+                            CountryId = 1,
+                            Street = "Asparuhovo Blvd. Narodni Buditeli 2 fl. 2"
+                        },
+                        new
+                        {
+                            Id = new Guid("8a0d518b-9d8a-4e80-a68b-5b2f89b14812"),
+                            CityId = 4,
+                            CountryId = 1,
+                            Street = "j.k. Izgrev 147"
+                        },
+                        new
+                        {
+                            Id = new Guid("fbd8adbb-9de2-4e63-b8fc-32a01b6ed348"),
+                            CityId = 3,
+                            CountryId = 1,
+                            Street = "Varna, j.k. Vladislavovo Blvd. 3-ti Mart 4"
+                        });
                 });
 
             modelBuilder.Entity("DressUp.Data.Models.ApplicationUser", b =>
@@ -144,6 +167,33 @@ namespace DressUp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Brands");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Nike"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Adidas"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Puma"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Reebok"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Under Armour"
+                        });
                 });
 
             modelBuilder.Entity("DressUp.Data.Models.BuyedProduct", b =>
@@ -259,6 +309,153 @@ namespace DressUp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Sofia"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Plovdiv"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Varna"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Burgas"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Ruse"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Stara Zagora"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Pleven"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "Sliven"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "Dobrich"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Name = "Shumen"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Name = "Pernik"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Name = "Yambol"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Name = "Haskovo"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Name = "Pazardzhik"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Name = "Blagoevgrad"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Name = "Veliko Tarnovo"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Name = "Vratsa"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Name = "Gabrovo"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Name = "Asenovgrad"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Name = "Kardzhali"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Name = "Kyustendil"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Name = "Razgrad"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Name = "Petrich"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Name = "Belogradchik"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Name = "Sandanski"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Name = "Gorna Oryahovitsa"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Name = "Lovech"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Name = "Targovishte"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Name = "Svilengrad"
+                        });
                 });
 
             modelBuilder.Entity("DressUp.Data.Models.Country", b =>
@@ -277,6 +474,33 @@ namespace DressUp.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Bulgaria"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "United States"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Germany"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "United Kingdom"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Russia"
+                        });
                 });
 
             modelBuilder.Entity("DressUp.Data.Models.Favorite", b =>
@@ -313,8 +537,8 @@ namespace DressUp.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasMaxLength(35)
-                        .HasColumnType("nvarchar(35)");
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -334,6 +558,108 @@ namespace DressUp.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Description = "Cotton t-shirt with logo print",
+                            Name = "T-Shirt",
+                            Price = 15.99m,
+                            Quantity = 100
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BrandId = 2,
+                            CategoryId = 2,
+                            Description = "Slim fit denim jeans",
+                            Name = "Jeans",
+                            Price = 29.99m,
+                            Quantity = 50
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BrandId = 3,
+                            CategoryId = 1,
+                            Description = "Formal dress shirt with button-down collar",
+                            Name = "Dress Shirt",
+                            Price = 24.99m,
+                            Quantity = 75
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BrandId = 4,
+                            CategoryId = 3,
+                            Description = "A-line skirt with floral pattern",
+                            Name = "Skirt",
+                            Price = 19.99m,
+                            Quantity = 60
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BrandId = 5,
+                            CategoryId = 4,
+                            Description = "Waterproof jacket with hood",
+                            Name = "Jacket",
+                            Price = 49.99m,
+                            Quantity = 30
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BrandId = 1,
+                            CategoryId = 1,
+                            Description = "Knitted sweater with crew neckline",
+                            Name = "Sweater",
+                            Price = 34.99m,
+                            Quantity = 80
+                        },
+                        new
+                        {
+                            Id = 7,
+                            BrandId = 2,
+                            CategoryId = 2,
+                            Description = "Casual shorts with drawstring waist",
+                            Name = "Shorts",
+                            Price = 22.99m,
+                            Quantity = 45
+                        },
+                        new
+                        {
+                            Id = 8,
+                            BrandId = 3,
+                            CategoryId = 3,
+                            Description = "Maxi dress with spaghetti straps",
+                            Name = "Dress",
+                            Price = 39.99m,
+                            Quantity = 65
+                        },
+                        new
+                        {
+                            Id = 9,
+                            BrandId = 4,
+                            CategoryId = 1,
+                            Description = "Chiffon blouse with ruffle detail",
+                            Name = "Blouse",
+                            Price = 29.99m,
+                            Quantity = 70
+                        },
+                        new
+                        {
+                            Id = 10,
+                            BrandId = 5,
+                            CategoryId = 4,
+                            Description = "Wool blend coat with belt",
+                            Name = "Coat",
+                            Price = 79.99m,
+                            Quantity = 25
+                        });
                 });
 
             modelBuilder.Entity("DressUp.Data.Models.ProductReview", b =>
@@ -406,6 +732,38 @@ namespace DressUp.Data.Migrations
                     b.HasIndex("AddressId");
 
                     b.ToTable("Stores");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AddressId = new Guid("36d433c7-1c34-4a02-b0a5-6b7b4a1b6b7e"),
+                            ClosingTime = new DateTime(2024, 3, 30, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            ContactInfo = "123-456-7890",
+                            ImageUrl = "https://scontent-fco2-1.xx.fbcdn.net/v/t39.30808-6/338903224_567616675470867_4795870235142378988_n.jpg?stp=cp6_dst-jpg&_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=zArpB4FixbYAX-Wsqw4&_nc_ht=scontent-fco2-1.xx&oh=00_AfDQhl4Hmv6cqASl6aw8mMy5P-Hujg1mMlSJIbRz2hpIKw&oe=660CB54A",
+                            Name = "Fiolla Asparuhovo",
+                            OpeningTime = new DateTime(2024, 3, 30, 9, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AddressId = new Guid("8a0d518b-9d8a-4e80-a68b-5b2f89b14812"),
+                            ClosingTime = new DateTime(2024, 3, 30, 20, 0, 0, 0, DateTimeKind.Unspecified),
+                            ContactInfo = "987-654-3210",
+                            ImageUrl = "https://cdn.oink.bg/gallery/33810/994cc5d6-cbd1-43ed-847e-bd24ee336bbb_large.webp",
+                            Name = "Fiolla Izgrev",
+                            OpeningTime = new DateTime(2024, 3, 30, 10, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AddressId = new Guid("fbd8adbb-9de2-4e63-b8fc-32a01b6ed348"),
+                            ClosingTime = new DateTime(2024, 3, 30, 18, 0, 0, 0, DateTimeKind.Unspecified),
+                            ContactInfo = "555-123-4567",
+                            ImageUrl = "https://cdn.oink.bg/gallery/33810/326c67ed-db57-47b4-9a0d-81e0f1c412bc_large.webp",
+                            Name = "Fiolla Vladislavovo",
+                            OpeningTime = new DateTime(2024, 3, 30, 10, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("DressUp.Data.Models.StoreProduct", b =>

@@ -1,5 +1,6 @@
 [
   {
+    "Id": 1,
     "Name": "Fiolla Asparuhovo",
     "AddressId": "36d433c7-1c34-4a02-b0a5-6b7b4a1b6b7e",
     "ContactInfo": "123-456-7890",
@@ -8,6 +9,7 @@
     "ClosingTime": "21:00:00"
   },
   {
+    "Id": 2,
     "Name": "Fiolla Izgrev",
     "AddressId": "8a0d518b-9d8a-4e80-a68b-5b2f89b14812",
     "ContactInfo": "987-654-3210",
@@ -16,6 +18,7 @@
     "ClosingTime": "20:00:00"
   },
   {
+    "Id": 3,
     "Name": "Fiolla Vladislavovo",
     "AddressId": "fbd8adbb-9de2-4e63-b8fc-32a01b6ed348",
     "ContactInfo": "555-123-4567",
