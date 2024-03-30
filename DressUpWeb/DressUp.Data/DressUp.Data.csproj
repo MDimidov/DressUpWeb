@@ -19,6 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DressUp.Common\DressUp.Common.csproj" />
     <ProjectReference Include="..\DressUp.Data.Models\DressUp.Data.Models.csproj" />
+    <ProjectReference Include="..\DressUp.Data.Processor\DressUp.Data.Processor.csproj" />
   </ItemGroup>
 
   <ItemGroup>

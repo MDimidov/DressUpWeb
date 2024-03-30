@@ -5,17 +5,19 @@ VisualStudioVersion = 17.9.34714.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DressUp.Web", "DressUpWeb\DressUp.Web.csproj", "{E1FE8FC9-ECEE-4E25-BACB-169D3BCD19BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DressUp.Common", "DressUp.Common\DressUp.Common.csproj", "{053C251F-F213-42AC-8182-A898B2A5E260}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DressUp.Common", "DressUp.Common\DressUp.Common.csproj", "{053C251F-F213-42AC-8182-A898B2A5E260}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{38F2F9F3-02B5-4971-826E-E5DA36F0121C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{89808991-A5F0-469C-A3A3-F10912D4BBE0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DressUp.Data", "DressUp.Data\DressUp.Data.csproj", "{D2B60E0C-4671-492B-BE33-6711D7362766}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DressUp.Data", "DressUp.Data\DressUp.Data.csproj", "{D2B60E0C-4671-492B-BE33-6711D7362766}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DressUp.Data.Models", "DressUp.Data.Models\DressUp.Data.Models.csproj", "{46DF34F1-6D30-408F-8B75-D7C367A0DFEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DressUp.Data.Models", "DressUp.Data.Models\DressUp.Data.Models.csproj", "{46DF34F1-6D30-408F-8B75-D7C367A0DFEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DressUp.Web.ViewModels", "DressUp.Web.ViewModels\DressUp.Web.ViewModels.csproj", "{6EC5C82B-43CB-4B47-8FC7-3B54A4E06987}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DressUp.Web.ViewModels", "DressUp.Web.ViewModels\DressUp.Web.ViewModels.csproj", "{6EC5C82B-43CB-4B47-8FC7-3B54A4E06987}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DressUp.Data.Processor", "DressUp.Data.Processor\DressUp.Data.Processor.csproj", "{1287C657-5F5A-4948-89AF-AF88EF9A7D00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +45,10 @@ Global
 		{6EC5C82B-43CB-4B47-8FC7-3B54A4E06987}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6EC5C82B-43CB-4B47-8FC7-3B54A4E06987}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6EC5C82B-43CB-4B47-8FC7-3B54A4E06987}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1287C657-5F5A-4948-89AF-AF88EF9A7D00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1287C657-5F5A-4948-89AF-AF88EF9A7D00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1287C657-5F5A-4948-89AF-AF88EF9A7D00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1287C657-5F5A-4948-89AF-AF88EF9A7D00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +58,7 @@ Global
 		{D2B60E0C-4671-492B-BE33-6711D7362766} = {89808991-A5F0-469C-A3A3-F10912D4BBE0}
 		{46DF34F1-6D30-408F-8B75-D7C367A0DFEC} = {89808991-A5F0-469C-A3A3-F10912D4BBE0}
 		{6EC5C82B-43CB-4B47-8FC7-3B54A4E06987} = {38F2F9F3-02B5-4971-826E-E5DA36F0121C}
+		{1287C657-5F5A-4948-89AF-AF88EF9A7D00} = {89808991-A5F0-469C-A3A3-F10912D4BBE0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12A267E3-C3FD-49AE-860D-26CF68BFE47E}
