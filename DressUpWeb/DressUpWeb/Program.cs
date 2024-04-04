@@ -1,4 +1,6 @@
 using DressUp.Data.Models;
+using DressUp.Services.Data;
+using DressUp.Services.Data.Interfaces;
 using DressUp.Web.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -8,26 +10,29 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<DressUpDbContext>(options =>
-    options.UseSqlServer(connectionString));
+	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddScoped<IStoreService, StoreService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
-    options.SignIn.RequireConfirmedAccount = builder
-                    .Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
-    options.Password.RequireNonAlphanumeric = builder
-        .Configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
-    options.Password.RequireLowercase = builder
-        .Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
-    options.Password.RequireUppercase = builder
-        .Configuration.GetValue<bool>("Identity:Password:RequireUppercase");
-    options.Password.RequireDigit = builder
-        .Configuration.GetValue<bool>("Identity:Password:RequireDigit");
-    options.Password.RequiredLength = builder
-        .Configuration.GetValue<int>("Identity:Password:RequiredLength");
+	options.SignIn.RequireConfirmedAccount = builder
+					.Configuration.GetValue<bool>("Identity:SignIn:RequireConfirmedAccount");
+	options.Password.RequireNonAlphanumeric = builder
+		.Configuration.GetValue<bool>("Identity:Password:RequireNonAlphanumeric");
+	options.Password.RequireLowercase = builder
+		.Configuration.GetValue<bool>("Identity:Password:RequireLowercase");
+	options.Password.RequireUppercase = builder
+		.Configuration.GetValue<bool>("Identity:Password:RequireUppercase");
+	options.Password.RequireDigit = builder
+		.Configuration.GetValue<bool>("Identity:Password:RequireDigit");
+	options.Password.RequiredLength = builder
+		.Configuration.GetValue<int>("Identity:Password:RequiredLength");
 })
-    .AddEntityFrameworkStores<DressUpDbContext>()
-    .AddDefaultTokenProviders();
+	.AddEntityFrameworkStores<DressUpDbContext>()
+	.AddDefaultTokenProviders();
 
 builder.Services.AddControllersWithViews();
 
@@ -38,14 +43,14 @@ WebApplication app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
-    app.UseDeveloperExceptionPage();
+	app.UseMigrationsEndPoint();
+	app.UseDeveloperExceptionPage();
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+	app.UseExceptionHandler("/Home/Error");
+	// The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+	app.UseHsts();
 }
 
 app.UseHttpsRedirection();

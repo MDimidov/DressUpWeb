@@ -1,18 +1,24 @@
-﻿using DressUp.Web.ViewModels.Home;
+﻿using DressUp.Services.Data.Interfaces;
+using DressUp.Web.ViewModels.Home;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace DressUp.Web.Controllers;
 
-public class HomeController : Controller
+//[AllowAnonymous]
+public class HomeController : BaseController
 {
-    public HomeController()
+    private readonly IStoreService storeService;
+    public HomeController(IStoreService storeService)
     {
+        this.storeService = storeService;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        return View();
+        IEnumerable<IndexViewModel> viewModel = await storeService.LastThreeStoresAsync();
+        return View(viewModel);
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

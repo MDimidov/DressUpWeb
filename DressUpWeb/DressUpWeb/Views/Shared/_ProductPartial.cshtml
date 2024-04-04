@@ -1,0 +1,46 @@
+﻿@using DressUp.Services.Data.Interfaces
+@model AllProductsViewModel
+
+@* @inject IProductService ProductService *@
+
+<div class="col-md-4">
+	<div class="card mb-3">
+		@* <img class="card-img-top" src="@Model.ImageUrl" alt="House Image"> *@
+		<div class="card-body text-center">
+			<h4>@Model.Name</h4>
+			<h6>Brand: <b>@Model.Brand</b></h6>
+			<h6>
+				Price:
+				<b>@($"{Model.Price:f2}") BGN</b>
+			</h6>
+			<h6>(@(Model.Quantity > 0 ? "Quantity: " + Model.Quantity : "Product is unvaliable"))</h6>
+			<br />
+			<a asp-area="" asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id"
+			   class="btn btn-success">Details</a>
+
+			@if (User.Identity?.IsAuthenticated ?? false)
+			{
+				<a asp-area="" asp-controller="House" asp-action="Edit" asp-route-id="@Model.Id"
+				   class="btn btn-warning">Edit</a>
+				<a asp-area="" asp-controller="House" asp-action="Delete" asp-route-id="@Model.Id"
+				   class="btn btn-danger">Delete</a>
+				<p></p>
+
+				@if (Model.Quantity > 0)
+				{
+					@if (User.Identity?.IsAuthenticated ?? false)
+					{
+						<form class="input-group-sm" asp-area="" asp-controller="Product"
+							  asp-action="Order" asp-route-id="@Model.Id" method="post">
+							<input class="btn btn-primary" type="submit" value="Order" />
+						</form>
+					}
+				}
+				else
+				{
+					
+				}
+			}
+		</div>
+	</div>
+</div>
