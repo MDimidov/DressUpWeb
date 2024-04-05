@@ -1,4 +1,5 @@
-﻿using DressUp.Services.Data.Interfaces;
+﻿using DressUp.Data.Models.Enums;
+using DressUp.Services.Data.Interfaces;
 using DressUp.Web.Data;
 using DressUp.Web.ViewModels.Product;
 using Microsoft.EntityFrameworkCore;
@@ -29,5 +30,17 @@ public class ProductService : IProductService
         .ToArrayAsync();
 
     public async Task<AllProductsViewModel[]> GetMenProductsAsync()
-        => throw new NotImplementedException();
+        => await dbContext.Products
+        .AsNoTracking()
+        .Where(p => p.SizeType == SizeType.Men)
+        .Select(p => new AllProductsViewModel
+        {
+            Id = p.Id,
+            Name = p.Name,
+            Brand = p.Brand.Name,
+            Category = p.Category.Name,
+            Price = p.Price,
+            Quantity = p.Quantity,
+        })
+        .ToArrayAsync();
 }

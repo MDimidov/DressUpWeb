@@ -17,14 +17,18 @@ public class ProductController : BaseController
 
     public async Task<IActionResult> Men()
     {
-        return View();
+        AllProductsQueryModel model = new()
+        {
+            Products = await productService.GetMenProductsAsync()
+        };
+
+        return View(model);
     }
 
     public async Task<IActionResult> All()
     {
         AllProductsQueryModel model = new()
         {
-            
             Products = await productService.GetAllProductsAsync()
         };
 
