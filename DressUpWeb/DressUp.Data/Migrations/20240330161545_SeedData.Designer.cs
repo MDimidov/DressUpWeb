@@ -523,7 +523,7 @@ namespace DressUp.Data.Migrations
                     b.ToTable("Favorites");
                 });
 
-            modelBuilder.Entity("DressUp.Data.Models.Product", b =>
+            modelBuilder.Entity("DressUp.Data.Models.ProductImage", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -954,7 +954,7 @@ namespace DressUp.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("DressUp.Data.Models.Product", "Product")
+                    b.HasOne("DressUp.Data.Models.ProductImage", "ProductImage")
                         .WithMany("BuyedProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -962,7 +962,7 @@ namespace DressUp.Data.Migrations
 
                     b.Navigation("Buyer");
 
-                    b.Navigation("Product");
+                    b.Navigation("ProductImage");
                 });
 
             modelBuilder.Entity("DressUp.Data.Models.Card", b =>
@@ -978,7 +978,7 @@ namespace DressUp.Data.Migrations
 
             modelBuilder.Entity("DressUp.Data.Models.Favorite", b =>
                 {
-                    b.HasOne("DressUp.Data.Models.Product", "Product")
+                    b.HasOne("DressUp.Data.Models.ProductImage", "ProductImage")
                         .WithMany("Favorites")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -990,12 +990,12 @@ namespace DressUp.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("ProductImage");
 
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("DressUp.Data.Models.Product", b =>
+            modelBuilder.Entity("DressUp.Data.Models.ProductImage", b =>
                 {
                     b.HasOne("DressUp.Data.Models.Brand", "Brand")
                         .WithMany("Products")
@@ -1016,7 +1016,7 @@ namespace DressUp.Data.Migrations
 
             modelBuilder.Entity("DressUp.Data.Models.ProductReview", b =>
                 {
-                    b.HasOne("DressUp.Data.Models.Product", "Product")
+                    b.HasOne("DressUp.Data.Models.ProductImage", "ProductImage")
                         .WithMany("ProductReviews")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1028,7 +1028,7 @@ namespace DressUp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("ProductImage");
 
                     b.Navigation("User");
                 });
@@ -1046,7 +1046,7 @@ namespace DressUp.Data.Migrations
 
             modelBuilder.Entity("DressUp.Data.Models.StoreProduct", b =>
                 {
-                    b.HasOne("DressUp.Data.Models.Product", "Product")
+                    b.HasOne("DressUp.Data.Models.ProductImage", "ProductImage")
                         .WithMany("StoresProducts")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1058,7 +1058,7 @@ namespace DressUp.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Product");
+                    b.Navigation("ProductImage");
 
                     b.Navigation("Store");
                 });
@@ -1152,7 +1152,7 @@ namespace DressUp.Data.Migrations
                     b.Navigation("Addresses");
                 });
 
-            modelBuilder.Entity("DressUp.Data.Models.Product", b =>
+            modelBuilder.Entity("DressUp.Data.Models.ProductImage", b =>
                 {
                     b.Navigation("BuyedProducts");
 

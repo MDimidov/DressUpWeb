@@ -51,6 +51,11 @@ public static class EntityValidationConstants
         public const string PriceMaxRange = "1000.0";
     }
 
+    public static class ProductImage
+    {
+        public const int ImageUrlMaxLength = 2048;
+    }
+
     public static class Store
     {
         public const int NameMinLength = 3;

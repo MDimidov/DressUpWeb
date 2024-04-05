@@ -15,6 +15,7 @@ public class Product
         Favorites = new HashSet<Favorite>();
         BuyedProducts = new HashSet<BuyedProduct>();
         ProductReviews = new HashSet<ProductReview>();
+        ProductImages = new HashSet<ProductImage>();
     }
 
     [Key]
@@ -51,5 +52,6 @@ public class Product
     public virtual ICollection<Favorite> Favorites { get; set; }
     public virtual ICollection<BuyedProduct> BuyedProducts { get; set; }
     public virtual ICollection<ProductReview> ProductReviews { get; set; }
+    public virtual ICollection<ProductImage> ProductImages { get; set; }
     //public virtual ICollection<ProductSize> ProductsSizes { get; set; } = new HashSet<ProductSize>();
 }
