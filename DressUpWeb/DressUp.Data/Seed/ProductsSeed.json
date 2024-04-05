@@ -6,7 +6,8 @@
     "BrandId": 1,
     "CategoryId": 1,
     "Price": 15.99,
-    "Quantity": 100
+    "Quantity": 100,
+    "SizeType": "Men"
   },
   {
     "Id": 2,
@@ -15,7 +16,8 @@
     "BrandId": 2,
     "CategoryId": 2,
     "Price": 29.99,
-    "Quantity": 50
+    "Quantity": 50,
+    "SizeType": "Men"
   },
   {
     "Id": 3,
@@ -24,7 +26,8 @@
     "BrandId": 3,
     "CategoryId": 1,
     "Price": 24.99,
-    "Quantity": 75
+    "Quantity": 75,
+    "SizeType": "Men"
   },
   {
     "Id": 4,
@@ -33,7 +36,8 @@
     "BrandId": 4,
     "CategoryId": 3,
     "Price": 19.99,
-    "Quantity": 60
+    "Quantity": 60,
+    "SizeType": "Women"
   },
   {
     "Id": 5,
@@ -42,7 +46,8 @@
     "BrandId": 5,
     "CategoryId": 4,
     "Price": 49.99,
-    "Quantity": 30
+    "Quantity": 30,
+    "SizeType": "Men"
   },
   {
     "Id": 6,
@@ -51,7 +56,8 @@
     "BrandId": 1,
     "CategoryId": 1,
     "Price": 34.99,
-    "Quantity": 80
+    "Quantity": 80,
+    "SizeType": "Men"
   },
   {
     "Id": 7,
@@ -60,7 +66,8 @@
     "BrandId": 2,
     "CategoryId": 2,
     "Price": 22.99,
-    "Quantity": 45
+    "Quantity": 45,
+    "SizeType": "Men"
   },
   {
     "Id": 8,
@@ -69,7 +76,8 @@
     "BrandId": 3,
     "CategoryId": 3,
     "Price": 39.99,
-    "Quantity": 65
+    "Quantity": 65,
+    "SizeType": "Women"
   },
   {
     "Id": 9,
@@ -78,7 +86,8 @@
     "BrandId": 4,
     "CategoryId": 1,
     "Price": 29.99,
-    "Quantity": 70
+    "Quantity": 70,
+    "SizeType": "Women"
   },
   {
     "Id": 10,
@@ -87,6 +96,7 @@
     "BrandId": 5,
     "CategoryId": 4,
     "Price": 79.99,
-    "Quantity": 25
+    "Quantity": 25,
+    "SizeType": "Men"
   }
 ]

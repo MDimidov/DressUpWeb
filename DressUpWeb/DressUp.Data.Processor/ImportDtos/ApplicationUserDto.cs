@@ -1,4 +1,6 @@
-﻿using DressUp.Data.Models.Enums;
+﻿#nullable disable
+
+using DressUp.Data.Models.Enums;
 
 namespace DressUp.Data.Processor.ImportDtos;
 

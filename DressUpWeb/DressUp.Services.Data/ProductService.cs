@@ -27,4 +27,7 @@ public class ProductService : IProductService
             Quantity = p.Quantity,
         })
         .ToArrayAsync();
+
+    public async Task<AllProductsViewModel[]> GetMenProductsAsync()
+        => throw new NotImplementedException();
 }
