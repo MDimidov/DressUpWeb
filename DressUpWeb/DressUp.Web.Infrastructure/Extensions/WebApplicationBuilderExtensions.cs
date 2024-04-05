@@ -9,10 +9,9 @@ public static class WebApplicationBuilderExtensions
 {
     /// <summary>
     /// This method registers all services with their interfaces and implementations of given assembly
-    /// The assembly is taken from type of random service implementation provided.
+    /// The assembly is taken from type of random service interface or implementation provided.
     /// </summary>
-    /// <param name="services"></param>
-    /// <param name="serviceType">Type of random service implementation.</param>
+    /// <param name="serviceType">Type of random service</param>
     /// <exception cref="InvalidOperationException"></exception>
 	public static void AddApplicationServices(this IServiceCollection services, Type serviceType)
 	{
