@@ -25,6 +25,7 @@
     <ProjectReference Include="..\DressUp.Data.Models\DressUp.Data.Models.csproj" />
     <ProjectReference Include="..\DressUp.Data\DressUp.Data.csproj" />
     <ProjectReference Include="..\DressUp.Services.Data\DressUp.Services.Data.csproj" />
+    <ProjectReference Include="..\DressUp.Web.Infrastructure\DressUp.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\DressUp.Web.ViewModels\DressUp.Web.ViewModels.csproj" />
   </ItemGroup>
 

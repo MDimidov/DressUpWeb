@@ -2,6 +2,7 @@ using DressUp.Data.Models;
 using DressUp.Services.Data;
 using DressUp.Services.Data.Interfaces;
 using DressUp.Web.Data;
+using DressUp.Web.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,8 +14,7 @@ builder.Services.AddDbContext<DressUpDbContext>(options =>
 	options.UseSqlServer(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddScoped<IStoreService, StoreService>();
-builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddApplicationServices(typeof(IProductService));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
