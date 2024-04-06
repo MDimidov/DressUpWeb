@@ -26,6 +26,13 @@ public class ProductService : IProductService
             Category = p.Category.Name,
             Price = p.Price,
             Quantity = p.Quantity,
+            Images = p.ProductImages
+                .Select(pi => new ProductImagesViewModel()
+                {
+                    Id = pi.Id,
+                    ImageUrl = pi.ImageUrl,
+                })
+                .ToList()
         })
         .ToArrayAsync();
 
@@ -33,14 +40,21 @@ public class ProductService : IProductService
         => await dbContext.Products
         .AsNoTracking()
         .Where(p => p.SizeType == SizeType.Men)
-        .Select(p => new AllProductsViewModel
-        {
-            Id = p.Id,
-            Name = p.Name,
-            Brand = p.Brand.Name,
-            Category = p.Category.Name,
-            Price = p.Price,
-            Quantity = p.Quantity,
-        })
-        .ToArrayAsync();
+		.Select(p => new AllProductsViewModel
+		{
+			Id = p.Id,
+			Name = p.Name,
+			Brand = p.Brand.Name,
+			Category = p.Category.Name,
+			Price = p.Price,
+			Quantity = p.Quantity,
+			Images = p.ProductImages
+				.Select(pi => new ProductImagesViewModel()
+				{
+					Id = pi.Id,
+					ImageUrl = pi.ImageUrl,
+				})
+                .ToList()
+		})
+		.ToArrayAsync();
 }
