@@ -13,6 +13,29 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\DressPics\Men\Coat1.webp" />
+    <None Include="wwwroot\DressPics\Men\Coat2.webp" />
+    <None Include="wwwroot\DressPics\Men\DressShirt1.webp" />
+    <None Include="wwwroot\DressPics\Men\DressShirt2.webp" />
+    <None Include="wwwroot\DressPics\Men\Jeans1.webp" />
+    <None Include="wwwroot\DressPics\Men\Jeans2.webp" />
+    <None Include="wwwroot\DressPics\Men\Jacket1.webp" />
+    <None Include="wwwroot\DressPics\Men\Jacket2.webp" />
+    <None Include="wwwroot\DressPics\Men\Shorts1.webp" />
+    <None Include="wwwroot\DressPics\Men\Shorts2.webp" />
+    <None Include="wwwroot\DressPics\Men\Sweater1.webp" />
+    <None Include="wwwroot\DressPics\Men\Sweater2.webp" />
+    <None Include="wwwroot\DressPics\Men\T-Shirt1.webp" />
+    <None Include="wwwroot\DressPics\Men\T-Shirt2.webp" />
+    <None Include="wwwroot\DressPics\Women\Blouse1.webp" />
+    <None Include="wwwroot\DressPics\Women\Blouse2.webp" />
+    <None Include="wwwroot\DressPics\Women\Dress1.webp" />
+    <None Include="wwwroot\DressPics\Women\Dress2.webp" />
+    <None Include="wwwroot\DressPics\Women\Skirt1.webp" />
+    <None Include="wwwroot\DressPics\Women\Skirt2.webp" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.27" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.27" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.27" />
