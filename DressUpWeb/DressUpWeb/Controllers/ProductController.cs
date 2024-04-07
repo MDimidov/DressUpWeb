@@ -1,20 +1,26 @@
 ﻿using DressUp.Services.Data.Interfaces;
+using DressUp.Web.Infrastructure.Extensions;
 using DressUp.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DressUp.Web.Controllers;
 
-[AllowAnonymous]
+
 public class ProductController : BaseController
 {
     private readonly IProductService productService;
+    private readonly IFavoriteService favoriteService;
 
-    public ProductController(IProductService productService)
+    public ProductController(
+        IProductService productService,
+        IFavoriteService favoriteService)
     {
         this.productService = productService;
+        this.favoriteService = favoriteService;
     }
 
+    [AllowAnonymous]
     public async Task<IActionResult> Men()
     {
         AllProductsQueryModel model = new()
@@ -25,6 +31,7 @@ public class ProductController : BaseController
         return View(model);
     }
 
+    [AllowAnonymous]
     public async Task<IActionResult> All()
     {
         AllProductsQueryModel model = new()
@@ -34,7 +41,6 @@ public class ProductController : BaseController
 
         return View(model);
     }
-<<<<<<< HEAD
 
 
     public async Task<IActionResult> AddToFavorite(int productId)
@@ -65,6 +71,4 @@ public class ProductController : BaseController
 
         return RedirectToAction(nameof(All));
     }
-=======
->>>>>>> parent of e896abb (Add Favorite products)
 }

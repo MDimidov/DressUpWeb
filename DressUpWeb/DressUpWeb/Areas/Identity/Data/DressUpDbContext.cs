@@ -1,11 +1,10 @@
-﻿using DressUp.Data.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DressUp.Web.Data;
 
-public class DressUpDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
+public class DressUpDbContext : IdentityDbContext<IdentityUser>
 {
     public DressUpDbContext(DbContextOptions<DressUpDbContext> options)
         : base(options)
