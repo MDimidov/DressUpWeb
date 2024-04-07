@@ -59,11 +59,16 @@ public class ProductController : BaseController
 
     public async Task<IActionResult> Favorite()
     {
-        AllProductsQueryModel viewModel = new()
+        if (User.Identity?.IsAuthenticated ?? false)
         {
-            Products = await favoriteService.GetFavoriteProductsAsync(User.GetId())
-        };
-        return View(viewModel);
+            AllProductsQueryModel viewModel = new()
+            {
+                Products = await favoriteService.GetFavoriteProductsAsync(User.GetId())
+            };
 
+            return View(viewModel);
+        }
+
+        return RedirectToAction(nameof(All));
     }
 }
