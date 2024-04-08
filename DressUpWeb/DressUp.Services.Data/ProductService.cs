@@ -33,6 +33,16 @@ public class ProductService : IProductService
 		await dbContext.SaveChangesAsync();
 	}
 
+	public async Task DeleteProductByIdAsync(int id)
+	{
+		Product product = await dbContext
+			.Products
+			.FirstAsync(p => p.Id == id);
+
+		dbContext.Products.Remove(product);
+		await dbContext.SaveChangesAsync();
+	}
+
 	public async Task EditProductAsync(ProductFormModel model, int id)
 	{
 		Product? product = await dbContext
@@ -150,4 +160,40 @@ public class ProductService : IProductService
 			Quantity = p.Quantity,
 		})
 		.FirstAsync();
+
+	public async Task<ProductPreDeleteDetails> GetProductPreDeleteDetailsByIdAsync(int id)
+		=> await dbContext
+		.Products
+		.AsNoTracking()
+		.Where(p => p.Id == id)
+		.Select(p => new ProductPreDeleteDetails()
+		{
+			Id = p.Id,
+			Name = p.Name,
+			Description = p.Description,
+			Price = p.Price,
+			Quantity = p.Quantity,
+			Images = p.ProductImages
+				.Select(p => new ProductImagesViewModel()
+				{
+					Id = p.Id,
+					ImageUrl = p.ImageUrl,
+				})
+				.ToArray()
+		})
+		.FirstAsync();
+
+	public async Task<bool> IsProductExistByIdAsync(int id)
+	{
+		Product? product = await dbContext
+			.Products
+			.FindAsync(id);
+
+		if (product == null)
+		{
+			return false;
+		}
+
+		return true;
+	}
 }
