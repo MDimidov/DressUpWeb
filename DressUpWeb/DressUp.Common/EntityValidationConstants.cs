@@ -48,7 +48,7 @@ public static class EntityValidationConstants
 
         //May be not string
         public const string PriceMinRange = "0.01";
-        public const string PriceMaxRange = "1000.0";
+        public const string PriceMaxRange = "1000.00";
     }
 
     public static class ProductImage

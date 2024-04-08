@@ -4,7 +4,7 @@
     "Name": "Fiolla Asparuhovo",
     "AddressId": "36d433c7-1c34-4a02-b0a5-6b7b4a1b6b7e",
     "ContactInfo": "123-456-7890",
-    "ImageUrl": "https://scontent-fco2-1.xx.fbcdn.net/v/t39.30808-6/338903224_567616675470867_4795870235142378988_n.jpg?stp=cp6_dst-jpg&_nc_cat=111&ccb=1-7&_nc_sid=5f2048&_nc_ohc=zArpB4FixbYAX-Wsqw4&_nc_ht=scontent-fco2-1.xx&oh=00_AfDQhl4Hmv6cqASl6aw8mMy5P-Hujg1mMlSJIbRz2hpIKw&oe=660CB54A",
+    "ImageUrl": "~/DressPics/Stores/FIola.jpg",
     "OpeningTime": "09:00:00",
     "ClosingTime": "21:00:00"
   },
@@ -13,7 +13,7 @@
     "Name": "Fiolla Izgrev",
     "AddressId": "8a0d518b-9d8a-4e80-a68b-5b2f89b14812",
     "ContactInfo": "987-654-3210",
-    "ImageUrl": "https://cdn.oink.bg/gallery/33810/994cc5d6-cbd1-43ed-847e-bd24ee336bbb_large.webp",
+    "ImageUrl": "~/DressPics/Stores/Fiola2.webp",
     "OpeningTime": "10:00:00",
     "ClosingTime": "20:00:00"
   },
@@ -22,7 +22,7 @@
     "Name": "Fiolla Vladislavovo",
     "AddressId": "fbd8adbb-9de2-4e63-b8fc-32a01b6ed348",
     "ContactInfo": "555-123-4567",
-    "ImageUrl": "https://cdn.oink.bg/gallery/33810/326c67ed-db57-47b4-9a0d-81e0f1c412bc_large.webp",
+    "ImageUrl": "~/DressPics/Stores/Fiola3.webp",
     "OpeningTime": "10:00:00",
     "ClosingTime": "18:00:00"
   }

@@ -27,6 +27,8 @@
     <None Include="wwwroot\DressPics\Men\Sweater2.webp" />
     <None Include="wwwroot\DressPics\Men\T-Shirt1.webp" />
     <None Include="wwwroot\DressPics\Men\T-Shirt2.webp" />
+    <None Include="wwwroot\DressPics\Stores\Fiola2.webp" />
+    <None Include="wwwroot\DressPics\Stores\Fiola3.webp" />
     <None Include="wwwroot\DressPics\Women\Blouse1.webp" />
     <None Include="wwwroot\DressPics\Women\Blouse2.webp" />
     <None Include="wwwroot\DressPics\Women\Dress1.webp" />
