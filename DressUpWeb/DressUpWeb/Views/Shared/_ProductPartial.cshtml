@@ -30,9 +30,9 @@
 
 			@if (User.Identity?.IsAuthenticated ?? false)
 			{
-				<a asp-area="" asp-controller="House" asp-action="Edit" asp-route-id="@Model.Id"
+				<a asp-area="" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
 				   class="btn btn-warning">Edit</a>
-				<a asp-area="" asp-controller="House" asp-action="Delete" asp-route-id="@Model.Id"
+				<a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
 				   class="btn btn-danger">Delete</a>
 				<a asp-area="" asp-controller="Product" asp-action="AddToFavorite" asp-route-ProductId="@Model.Id"
 				   class="btn btn-success">Add to favorite</a>
