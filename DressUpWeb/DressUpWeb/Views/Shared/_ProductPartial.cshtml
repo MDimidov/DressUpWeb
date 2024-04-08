@@ -8,7 +8,7 @@
 		<div class="card-body text-center">
 			@if (Model.Images.Any())
 			{
-				<img class="card-img-top" src="@Url.Content(Model.Images.FirstOrDefault()!.ImageUrl)" alt="@Model.Name Image">
+				<img class="card-img-top" src="@Url.Content(Model.Images.First().ImageUrl)" alt="@Model.Name Image">
 			}
 			else
 			{

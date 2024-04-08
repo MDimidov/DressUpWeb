@@ -130,4 +130,12 @@ public class ProductController : BaseController
         await productService.EditProductAsync(formModel, id);
         return RedirectToAction(nameof(All));
 	}
+
+    [HttpGet]
+    public async Task<IActionResult> Details(int id)
+    {
+        ProductDetailsViewModel model = await productService.GetProductDetailsByIdAsync(id);
+
+        return View(model);
+    }
 }

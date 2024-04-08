@@ -8,73 +8,77 @@
     bool isAgentOwnerOfTheHouse = await AgentService.HasHouseWithIdAsync(User.GetId(), Model.Id);
     bool isHouseRentedByUser = await HouseService.IsRentedByUserWithIdAsync(Model.Id, User.GetId()!);
 } *@
-@model HouseDetailsViewModel
+@model ProductDetailsViewModel
 
 @{
-    ViewBag.Title = "Product Details";
+	ViewBag.Title = "Product Details";
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
 <hr />
 
 <div class="container" style="display:inline">
-    <div class="row">
-        <div class="col-4">
-            <img class="card-img-top" style="width: 20rem;"
-                 src="@Model.ImageUrl" alt="House Image">
-        </div>
-        <div class="card col-8 border-0">
-            <p style="font-size:25px;"><u>@Model.Title</u></p>
-            <p>Located in: <b>@Model.Address</b></p>
-            <p>
-                Price Per Month:
-                <b>@($"{Model.PricePerMonth:f2}") BGN</b>
-            </p>
-            <p>@Model.Description</p>
-            <p>Category: <b>@Model.Category</b></p>
-            <p><i>(@(Model.IsRented ? "Rented" : "Not Rented"))</i></p>
-            <div class="form-inline">
-                @if (User.Identity?.IsAuthenticated ?? false)
-                {
-                    @* @if ((isUserAgent && isAgentOwnerOfTheHouse) || User.IsAdmin()) *@
-                    {
-                        <a class="btn btn-warning" asp-controller="House" asp-action="Edit"
-                           asp-route-id="@Model.Id">Edit</a>
-                        <a class="ml-2 btn btn-danger" asp-controller="House" asp-action="Delete"
-                           asp-route-id="@Model.Id">Delete</a>
-                    }
+	<div class="row">
+		<div class="col-4">
+			@if (Model.Images.Any())
+			{
+				<img class="card-img-top" style="width: 20rem;"
+					 src="@Url.Content(@Model.Images.First().ImageUrl)" alt="@Model.Name Image">
+			}
+			else
+			{
+				<img class="card-img-top" style="width: 20rem;"
+					 src="~/DressPics/ImageCommingSoon.jpg" alt="Coming Soon Image">
+			}
+		</div>
+		<div class="card col-8 border-0">
+			<p style="font-size:25px;"><u>@Model.Name</u></p>
+			<p>@Model.Description</p>
+			@* <p>Located in: <b>@Model.Address</b></p> *@
+			<p>
+				Price:
+				<b>@($"{Model.Price:f2}") BGN</b>
+			</p>
+			<p>Brand: <b>@Model.Brand</b></p>
+			<p>Category: <b>@Model.Category</b></p>
+			<p>Dress for: <b>@Model.SizeType</b></p>
+			<p>Quantity: <b>@Model.Quantity</b></p>
+			<div class="form-inline">
+				@if (User.Identity?.IsAuthenticated ?? false)
+				{
+					<a asp-area="" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
+					   class="btn btn-warning">Edit</a>
+					<a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
+					   class="btn btn-danger">Delete</a>
+					<a asp-area="" asp-controller="Product" asp-action="AddToFavorite" asp-route-ProductId="@Model.Id"
+					   class="btn btn-success">Add to favorite</a>
+					<p></p>
 
-                    @if (!Model.IsRented)
-                    {
-                        @* @if (!isUserAgent || User.IsAdmin()) *@
-                        {
-                            <form class="ml-2" asp-controller="House"
-                                  asp-action="Rent" asp-route-id="@Model.Id" method="post">
-                                <input class="btn btn-primary" type="submit" value="Rent" />
-                            </form>
-                        }
-                    }
-                    else
-                    {
-                        @* @if (!isUserAgent && isHouseRentedByUser) *@
-                        {
-                            <form class="ml-2" asp-controller="House" asp-action="Leave"
-                                  asp-route-id="@Model.Id" method="post">
-                                <input class="btn btn-primary" type="submit" value="Leave" />
-                            </form>
-                        }
-                    }
-                }
-            </div>
-            <p></p>
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Agent Info</h5>
-                    <p class="card-text">Full Name: @Model.Agent.FullName</p>
-                    <p class="card-text">Email:  @Model.Agent.Email</p>
-                    <p class="card-text">Phone Number: @Model.Agent.PhoneNumber</p>
-                </div>
-            </div>
-        </div>
-    </div>
+					@if (Model.Quantity > 0)
+					{
+						@if (User.Identity?.IsAuthenticated ?? false)
+						{
+							<form class="input-group-sm" asp-area="" asp-controller="Product"
+								  asp-action="Order" asp-route-id="@Model.Id" method="post">
+								<input class="btn btn-primary" type="submit" value="Order" />
+							</form>
+						}
+					}
+					else
+					{
+
+					}
+				}
+			</div>
+			<p></p>
+			@* <div class="card" style="width: 18rem;">
+			<div class="card-body">
+			<h5 class="card-title">Agent Info</h5>
+			<p class="card-text">Full Name: @Model.Agent.FullName</p>
+			<p class="card-text">Email:  @Model.Agent.Email</p>
+			<p class="card-text">Phone Number: @Model.Agent.PhoneNumber</p>
+			</div>
+			</div> *@
+		</div>
+	</div>
 </div>

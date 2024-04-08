@@ -16,4 +16,6 @@ public interface IProductService
     Task <ProductFormModel> GetProductByIdAsync(int id);
 
     Task EditProductAsync(ProductFormModel model, int id);
+
+    Task <ProductDetailsViewModel> GetProductDetailsByIdAsync(int id);
 }
