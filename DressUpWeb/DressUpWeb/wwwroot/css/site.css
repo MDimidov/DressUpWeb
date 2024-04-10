@@ -16,3 +16,14 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+/*.hide-on-hover:hover{
+    display: none;
+}
+
+.hover-img-position{
+    position: relative;
+    top: 0;
+    left: 0;
+    display: none;
+}*/
