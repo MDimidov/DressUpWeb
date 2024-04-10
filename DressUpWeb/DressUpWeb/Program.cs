@@ -3,6 +3,7 @@ using DressUp.Services.Data;
 using DressUp.Services.Data.Interfaces;
 using DressUp.Web.Data;
 using DressUp.Web.Infrastructure.Extensions;
+using DressUp.Web.Infrastructure.ModelBinders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -34,7 +35,12 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 	.AddEntityFrameworkStores<DressUpDbContext>()
 	.AddDefaultTokenProviders();
 
-builder.Services.AddControllersWithViews();
+builder.Services
+	.AddControllersWithViews()
+	.AddMvcOptions(options =>
+	{
+		options.ModelBinderProviders.Insert(0, new DecimalModelBinderProvider());
+	});
 
 WebApplication app = builder.Build();
 
