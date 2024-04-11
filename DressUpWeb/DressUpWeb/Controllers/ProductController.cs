@@ -1,4 +1,5 @@
-﻿using DressUp.Services.Data.Interfaces;
+﻿using DressUp.Data.Models.Enums;
+using DressUp.Services.Data.Interfaces;
 using DressUp.Services.Data.Models.Product;
 using DressUp.Web.Infrastructure.Extensions;
 using DressUp.Web.ViewModels.Product;
@@ -25,17 +26,6 @@ public class ProductController : BaseController
 		this.favoriteService = favoriteService;
 		this.brandService = brandService;
 		this.categoryService = categoryService;
-	}
-
-	[AllowAnonymous]
-	public async Task<IActionResult> Men()
-	{
-		AllProductsQueryModel model = new()
-		{
-			Products = await productService.GetMenProductsAsync()
-		};
-
-		return View(model);
 	}
 
 	[HttpGet]
