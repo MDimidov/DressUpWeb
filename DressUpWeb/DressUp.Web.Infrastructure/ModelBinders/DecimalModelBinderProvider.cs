@@ -4,15 +4,15 @@ namespace DressUp.Web.Infrastructure.ModelBinders;
 
 public class DecimalModelBinderProvider : IModelBinderProvider
 {
-	public IModelBinder GetBinder(ModelBinderProviderContext? context)
+	public IModelBinder GetBinder(ModelBinderProviderContext context)
 	{
 		if (context == null)
 		{
 			throw new ArgumentNullException(nameof(context));
 		}
 
-		if(context.Metadata.ModelType != typeof(decimal) || 
-		   context.Metadata.ModelType != typeof(decimal?))
+		if (context.Metadata.ModelType == typeof(decimal) ||
+			context.Metadata.ModelType == typeof(decimal?))
 		{
 			return new DecimalModelBinder();
 		}
