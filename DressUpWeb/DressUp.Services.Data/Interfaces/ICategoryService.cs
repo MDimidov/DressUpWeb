@@ -6,4 +6,6 @@ namespace DressUp.Services.Data.Interfaces;
 public interface ICategoryService
 {
     Task<IEnumerable<AllCategoriesViewModel>> GetAllCategoriesAsync();
+
+    Task<IEnumerable<string>> GetCategoriesNamesAsync();
 }

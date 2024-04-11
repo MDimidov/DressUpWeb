@@ -1,4 +1,5 @@
 ﻿using DressUp.Services.Data.Interfaces;
+using DressUp.Services.Data.Models.Product;
 using DressUp.Web.Infrastructure.Extensions;
 using DressUp.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Authorization;
@@ -37,15 +38,20 @@ public class ProductController : BaseController
 		return View(model);
 	}
 
+	[HttpGet]
 	[AllowAnonymous]
-	public async Task<IActionResult> All()
+	public async Task<IActionResult> All([FromQuery]AllProductsQueryModel queryModel)
 	{
-		AllProductsQueryModel model = new()
-		{
-			Products = await productService.GetAllProductsAsync()
-		};
+		AllProductsFilteredAndPagedServiceModel serviceModel = await productService.AllAsync(queryModel);
 
-		return View(model);
+		queryModel.Products = serviceModel.Products;
+		queryModel.TotalProducts = serviceModel.TotalProductsCount;
+		queryModel.Categories = await categoryService.GetCategoriesNamesAsync();
+		queryModel.Brands = await brandService.GetBrandsNameAsync();
+		queryModel.SizeTypes = productService.GetAllSizeTypes();
+
+
+		return View(queryModel);
 	}
 
 
@@ -135,7 +141,6 @@ public class ProductController : BaseController
 	public async Task<IActionResult> Details(int id)
 	{
 		ProductDetailsViewModel model = await productService.GetProductDetailsByIdAsync(id);
-
 		return View(model);
 	}
 
@@ -157,6 +162,7 @@ public class ProductController : BaseController
 		if (await productService.IsProductExistByIdAsync(id))
 		{
 			await productService.DeleteProductByIdAsync(id);
+
 
 			return RedirectToAction(nameof(All));
 		}

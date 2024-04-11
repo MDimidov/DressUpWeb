@@ -7,9 +7,9 @@
 <h2 class="text-center mt-5">@ViewBag.Title</h2>
 <hr />
 
-@* <form method="get">
+<form method="get">
     <div class="row">
-        <div class="form-group col-md-3 d-flex justify-content-between">
+        <div class="form-group col-md-4 d-flex justify-content-between">
             <div class="form-group">
                 <label asp-for="Category"></label>
                 <select asp-for="Category" class="form-control">
@@ -22,8 +22,30 @@
             </div>
 
             <div class="form-group">
-                <label asp-for="HousesPerPage"></label>
-                <select asp-for="HousesPerPage" class="form-control">
+                <label asp-for="Brand"></label>
+                <select asp-for="Brand" class="form-control">
+                    <option value="">All</option>
+                    @foreach (var brand in Model.Brands)
+                    {
+                        <option value="@brand">@brand</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="SizeType"></label>
+                <select asp-for="SizeType" class="form-control">
+                    <option value="">All</option>
+                    @foreach (var sizeType in Model.SizeTypes)
+                    {
+                        <option value="@sizeType">@sizeType</option>
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ProductsPerPage"></label>
+                <select asp-for="ProductsPerPage" class="form-control">
                     <option value="3">3</option>
                     <option value="6">6</option>
                     <option value="9">9</option>
@@ -36,15 +58,15 @@
             <input asp-for="SearchString" class="form-control" placeholder="...">
         </div>
 
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-2">
             <div class="form-group">
-                <label asp-for="HouseSorting"></label>
-                <select asp-for="HouseSorting" class="form-control">
+                <label asp-for="ProductSorting"></label>
+                <select asp-for="ProductSorting" class="form-control">
                     <option value="0">Newest</option>
                     <option value="1">Oldest</option>
                     <option value="2">Price (Ascending)</option>
                     <option value="3">Price (Descending)</option>
-                    <option value="4">Not rented first</option>
+                    <option value="4">Most Favorites</option>
                 </select>
             </div>
         </div>
@@ -55,9 +77,9 @@
             </div>
         </div>
     </div>
-</form> *@
+</form>
 
-@* 
+
 @{
     int previousPage = Model.CurrentPage - 1;
     if (previousPage < 1)
@@ -65,8 +87,8 @@
         previousPage = 1;
     }
 
-    int maxPage = (int)Math.Ceiling((double)Model.TotalHouses /
-        Model.HousesPerPage);
+    int maxPage = (int)Math.Ceiling((double)Model.TotalProducts /
+        Model.ProductsPerPage);
 }
 
 <div class="row mb-5">
@@ -77,12 +99,12 @@
            asp-route-currentPage="@previousPage"
            asp-route-category="@Model.Category"
            asp-route-searchTerm="@Model.SearchString"
-           asp-route-sorting="@((int)Model.HouseSorting)"><<</a>
+           asp-route-sorting="@((int)Model.ProductSorting)"><<</a>
     </div>
 
     @{
         bool shouldNextPageBeDisabled = Model.CurrentPage == maxPage ||
-        !Model.Houses.Any();
+        !Model.Products.Any();
     }
 
     <div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
@@ -93,15 +115,15 @@
            asp-route-currentPage="@(Model.CurrentPage + 1)"
            asp-route-category="@Model.Category"
            asp-route-searchTerm="@Model.SearchString"
-           asp-route-sorting="@((int)Model.HouseSorting)">>></a>
+           asp-route-sorting="@((int)Model.ProductSorting)">>></a>
     </div>
-</div> *@
+</div>
 
-@* @if (!Model.Products.Any())
+@if (!Model.Products.Any())
 {
     <h2 class="text-center">No houses found by the given criteria!</h2>
 }
- *@
+
 <div class="row">
     @foreach (var product in Model.Products)
     {

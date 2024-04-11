@@ -23,4 +23,11 @@ public class BrandService : IBrandService
                 Name = b.Name,
             })
             .ToArrayAsync();
+
+	public async Task<IEnumerable<string>> GetBrandsNameAsync()
+	    => await dbContext
+        .Brands
+        .AsNoTracking()
+        .Select(b=> b.Name)
+        .ToArrayAsync();
 }

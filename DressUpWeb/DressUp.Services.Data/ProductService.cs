@@ -1,8 +1,10 @@
 ﻿using DressUp.Data.Models;
 using DressUp.Data.Models.Enums;
 using DressUp.Services.Data.Interfaces;
+using DressUp.Services.Data.Models.Product;
 using DressUp.Web.Data;
 using DressUp.Web.ViewModels.Product;
+using DressUp.Web.ViewModels.Product.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace DressUp.Services.Data;
@@ -31,6 +33,75 @@ public class ProductService : IProductService
 
 		await dbContext.Products.AddAsync(product);
 		await dbContext.SaveChangesAsync();
+	}
+
+	public async Task<AllProductsFilteredAndPagedServiceModel> AllAsync(AllProductsQueryModel queryModel)
+	{
+		IQueryable<Product> productsQuery = dbContext
+			.Products
+			.AsQueryable();
+
+		if (!string.IsNullOrWhiteSpace(queryModel.Category))
+		{
+			productsQuery = productsQuery
+				.Where(p => p.Category.Name == queryModel.Category);
+		}
+
+		if (!string.IsNullOrWhiteSpace(queryModel.Brand))
+		{
+			productsQuery = productsQuery
+				.Where(p => p.Brand.Name == queryModel.Brand);
+		}
+
+		//if(!string.IsNullOrWhiteSpace(queryModel.SizeType.ToString()))
+		if (queryModel.SizeType != null)
+		{
+			productsQuery = productsQuery
+				.Where(p => p.SizeType == queryModel.SizeType);
+		}
+
+		if (!string.IsNullOrWhiteSpace(queryModel.SearchString))
+		{
+			string wildCard = $"%{queryModel.SearchString.ToLower()}%";
+			productsQuery = productsQuery
+				.Where(p => EF.Functions.Like(p.Name, wildCard) ||
+								  EF.Functions.Like(p.Description, wildCard));
+		}
+
+		//productsQuery = queryModel.ProductSorting switch
+		//{
+		//	ProductSorting.Newest => productsQuery
+		//		.OrderByDescending(p => p.Description)
+		//}
+
+		IEnumerable<AllProductsViewModel> allProducts = await productsQuery
+			.Skip((queryModel.CurrentPage - 1) * queryModel.ProductsPerPage)
+			.Take(queryModel.ProductsPerPage)
+			.Select(p => new AllProductsViewModel
+			{
+				Id = p.Id,
+				Name = p.Name,
+				Brand = p.Brand.Name,
+				Category = p.Category.Name,
+				Images = p.ProductImages
+					.Select(pi => new ProductImagesViewModel()
+					{
+						Id = pi.Id,
+						ImageUrl = pi.ImageUrl,
+					})
+					.ToList(),
+				Price = p.Price,
+				Quantity = p.Quantity,
+			})
+			.ToArrayAsync();
+
+		int totalProducts = productsQuery.Count();
+
+		return new AllProductsFilteredAndPagedServiceModel()
+		{
+			TotalProductsCount = totalProducts,
+			Products = allProducts
+		};
 	}
 
 	public async Task DeleteProductByIdAsync(int id)

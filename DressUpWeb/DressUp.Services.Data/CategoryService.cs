@@ -25,4 +25,11 @@ public class CategoryService : ICategoryService
             Name = c.Name,
         })
         .ToArrayAsync();
+
+	public async Task<IEnumerable<string>> GetCategoriesNamesAsync()
+	    => await dbContext
+        .Categories
+        .AsNoTracking()
+        .Select(c => c.Name)
+        .ToArrayAsync();
 }
