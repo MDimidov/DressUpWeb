@@ -68,11 +68,23 @@ public class ProductService : IProductService
 								  EF.Functions.Like(p.Description, wildCard));
 		}
 
-		//productsQuery = queryModel.ProductSorting switch
-		//{
-		//	ProductSorting.Newest => productsQuery
-		//		.OrderByDescending(p => p.Description)
-		//}
+		productsQuery = queryModel.ProductSorting switch
+		{
+			ProductSorting.Newest => productsQuery
+				.OrderByDescending(p => p.AddedOn),
+			ProductSorting.Oldest => productsQuery
+				.OrderBy(p => p.AddedOn),
+			ProductSorting.PriceDescending => productsQuery
+				.OrderByDescending(p => p.Price),
+			ProductSorting.PriceAscending => productsQuery
+				.OrderBy(p => p.Price),
+			ProductSorting.Favorites => productsQuery
+				.OrderByDescending(p => p.Favorites.Count),
+			ProductSorting.AvaliableQuantity => productsQuery
+				.OrderByDescending(p => p.Quantity),
+			_ => productsQuery
+				.OrderByDescending(p => p.Quantity)
+		};
 
 		IEnumerable<AllProductsViewModel> allProducts = await productsQuery
 			.Skip((queryModel.CurrentPage - 1) * queryModel.ProductsPerPage)

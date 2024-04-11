@@ -7,4 +7,5 @@ public enum ProductSorting
 	PriceAscending = 2,
 	PriceDescending = 3,
 	Favorites = 4, 
+	AvaliableQuantity = 5,
 }

@@ -11,6 +11,7 @@ public class Product
 {
     public Product()
     {
+        AddedOn = DateTime.UtcNow;
         StoresProducts = new HashSet<StoreProduct>();
         Favorites = new HashSet<Favorite>();
         BuyedProducts = new HashSet<BuyedProduct>();
@@ -38,6 +39,8 @@ public class Product
     [ForeignKey(nameof(Category))]
     public int CategoryId { get; set; }
     public virtual Category Category { get; set; }
+
+    public DateTime AddedOn { get; set; }
 
     [Required]
     public SizeType SizeType {  get; set; }
