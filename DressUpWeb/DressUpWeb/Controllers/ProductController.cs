@@ -31,24 +31,31 @@ public class ProductController : BaseController
 
 	[HttpGet]
 	[AllowAnonymous]
-	public async Task<IActionResult> All([FromQuery]AllProductsQueryModel queryModel)
+	public async Task<IActionResult> All([FromQuery] AllProductsQueryModel queryModel)
 	{
-		AllProductsFilteredAndPagedServiceModel serviceModel = await productService.AllAsync(queryModel);
+		try
+		{
+			AllProductsFilteredAndPagedServiceModel serviceModel = await productService.AllAsync(queryModel);
 
-		queryModel.Products = serviceModel.Products;
-		queryModel.TotalProducts = serviceModel.TotalProductsCount;
-		queryModel.Categories = await categoryService.GetCategoriesNamesAsync();
-		queryModel.Brands = await brandService.GetBrandsNameAsync();
-		queryModel.SizeTypes = productService.GetAllSizeTypes();
+			queryModel.Products = serviceModel.Products;
+			queryModel.TotalProducts = serviceModel.TotalProductsCount;
+			queryModel.Categories = await categoryService.GetCategoriesNamesAsync();
+			queryModel.Brands = await brandService.GetBrandsNameAsync();
+			queryModel.SizeTypes = productService.GetAllSizeTypes();
 
 
-		return View(queryModel);
+			return View(queryModel);
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
 	}
 
 
 	public async Task<IActionResult> AddToFavorite(int productId)
 	{
-		if(!User.Identity?.IsAuthenticated ?? false)
+		if (!User.Identity?.IsAuthenticated ?? false)
 		{
 			TempData[ErrorMessage] = ErrorMessages.YouMustLogedInToAddFavorite;
 			return RedirectToAction("Index", "Home");
@@ -64,48 +71,63 @@ public class ProductController : BaseController
 			}
 			await favoriteService.AddToFavoriteAsync(productId, User.GetId());
 			TempData[SuccessMessage] = SuccessMessages.AddedToFavorite;
+			return RedirectToAction(nameof(All));
 		}
 		catch
 		{
 			throw new ArgumentException("Product is already added to favorites or does not exist");
 		}
-
-		return RedirectToAction(nameof(All));
 	}
 
+	[HttpGet]
 	public async Task<IActionResult> Favorite()
 	{
-		if (User.Identity?.IsAuthenticated ?? false)
-		{
-			AllProductsQueryModel viewModel = new();
 
-            try
+		if (!User.Identity?.IsAuthenticated ?? false)
+		{
+			TempData[ErrorMessage] = ErrorMessages.YouMustLogedInToSeeFavorite;
+			return RedirectToAction(nameof(All));
+		}
+
+		try
+		{
+			AllProductsQueryModel viewModel = new()
 			{
-				viewModel.Products = await favoriteService.GetFavoriteProductsAsync(User.GetId());
-            }			
-			catch (Exception ex)
-			{
-				throw new ArgumentException(ex.Message);
-			}
+				Products = await favoriteService.GetFavoriteProductsAsync(User.GetId())
+			};
 
 			return View(viewModel);
 		}
-
-        TempData[ErrorMessage] = ErrorMessages.YouMustLogedInToSeeFavorite;
-        return RedirectToAction(nameof(All));
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
 	}
 
+	[HttpGet]
 	public async Task<IActionResult> Add()
 	{
-		ProductFormModel formModel = new()
+		if (!User.Identity?.IsAuthenticated ?? false)
 		{
-			Brands = await brandService.GetAllBrandsAsync(),
-			Categories = await categoryService.GetAllCategoriesAsync(),
-			SizeTypes = productService.GetAllSizeTypes()
-		};
+			TempData[ErrorMessage] = ErrorMessages.LogInToAdd;
+			return RedirectToAction(nameof(All));
+		}
 
+		try
+		{
+			ProductFormModel formModel = new()
+			{
+				Brands = await brandService.GetAllBrandsAsync(),
+				Categories = await categoryService.GetAllCategoriesAsync(),
+				SizeTypes = productService.GetAllSizeTypes()
+			};
 
-		return View(formModel);
+			return View(formModel);
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
 	}
 
 	[HttpPost]
@@ -116,68 +138,161 @@ public class ProductController : BaseController
 			return View(formModel);
 		}
 
-		await productService.AddProductAsync(formModel);
-		return RedirectToAction(nameof(All));
+		if (!User.Identity?.IsAuthenticated ?? false)
+		{
+			TempData[ErrorMessage] = ErrorMessages.LogInToAdd;
+			return RedirectToAction(nameof(All));
+		}
+
+		try
+		{
+			await productService.AddProductAsync(formModel);
+			TempData[SuccessMessage] = SuccessMessages.AddedProduct;
+			return RedirectToAction(nameof(All));
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
 	}
 
 	[HttpGet]
 	public async Task<IActionResult> Edit(int id)
 	{
-		ProductFormModel formModel = await productService.GetProductByIdAsync(id);
+		if (!User.Identity?.IsAuthenticated ?? false)
+		{
+			TempData[ErrorMessage] = ErrorMessages.LogInToEdit;
+			return RedirectToAction(nameof(All));
+		}
 
-		formModel.Brands = await brandService.GetAllBrandsAsync();
-		formModel.Categories = await categoryService.GetAllCategoriesAsync();
-		formModel.SizeTypes = productService.GetAllSizeTypes();
+		try
+		{
 
-		return View(formModel);
+			bool isProductExist = await productService.IsProductExistByIdAsync(id);
+			if (!isProductExist)
+			{
+				TempData[ErrorMessage] = ErrorMessages.ProductDoesNotExist;
+				return BadRequest();
+			}
+
+			ProductFormModel formModel = await productService.GetProductByIdAsync(id);
+
+			formModel.Brands = await brandService.GetAllBrandsAsync();
+			formModel.Categories = await categoryService.GetAllCategoriesAsync();
+			formModel.SizeTypes = productService.GetAllSizeTypes();
+
+			return View(formModel);
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
 	}
 
 	[HttpPost]
 	public async Task<IActionResult> Edit(ProductFormModel formModel, int id)
 	{
-		formModel.Brands = await brandService.GetAllBrandsAsync();
-		formModel.Categories = await categoryService.GetAllCategoriesAsync();
-		formModel.SizeTypes = productService.GetAllSizeTypes();
+
+		if (!User.Identity?.IsAuthenticated ?? false)
+		{
+			TempData[ErrorMessage] = ErrorMessages.LogInToEdit;
+			return RedirectToAction(nameof(All));
+		}
 
 		if (!ModelState.IsValid)
 		{
 			return View(formModel);
 		}
 
-		await productService.EditProductAsync(formModel, id);
-		return RedirectToAction(nameof(All));
+		try
+		{
+			formModel.Brands = await brandService.GetAllBrandsAsync();
+			formModel.Categories = await categoryService.GetAllCategoriesAsync();
+			formModel.SizeTypes = productService.GetAllSizeTypes();
+
+			await productService.EditProductAsync(formModel, id);
+			TempData[SuccessMessage] = SuccessMessages.EditedProduct;
+			return RedirectToAction(nameof(All));
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
 	}
 
 	[HttpGet]
 	public async Task<IActionResult> Details(int id)
 	{
-		ProductDetailsViewModel model = await productService.GetProductDetailsByIdAsync(id);
-		return View(model);
+		try
+		{
+			bool isProductExist = await productService.IsProductExistByIdAsync(id);
+			if (!isProductExist)
+			{
+				TempData[ErrorMessage] = ErrorMessages.ProductDoesNotExist;
+				return NotFound();
+			}
+
+			ProductDetailsViewModel model = await productService.GetProductDetailsByIdAsync(id);
+			return View(model);
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
 	}
 
 	public async Task<IActionResult> Delete(int id)
 	{
-		if (await productService.IsProductExistByIdAsync(id))
+		if (!User.Identity?.IsAuthenticated ?? false)
 		{
-			ProductPreDeleteDetails model = await productService.GetProductPreDeleteDetailsByIdAsync(id);
-
-			return View(model);
+			TempData[ErrorMessage] = ErrorMessages.LogInToDelete;
+			return BadRequest();
 		}
 
-		return BadRequest();
+		try
+		{
+			bool isProductExist = await productService.IsProductExistByIdAsync(id);
+			if (!isProductExist)
+			{
+				TempData[ErrorMessage] = ErrorMessages.ProductDoesNotExist;
+				return NotFound();
+			}
+
+			ProductPreDeleteDetails model = await productService.GetProductPreDeleteDetailsByIdAsync(id);
+			return View(model);
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
 	}
 
 	[HttpPost]
 	public async Task<IActionResult> Delete(ProductPreDeleteDetails model, int id)
 	{
-		if (await productService.IsProductExistByIdAsync(id))
+		if (!User.Identity?.IsAuthenticated ?? false)
 		{
-			await productService.DeleteProductByIdAsync(id);
-
-
-			return RedirectToAction(nameof(All));
+			TempData[ErrorMessage] = ErrorMessages.LogInToDelete;
+			return BadRequest();
 		}
 
-		return View(model);
+		try
+		{
+			bool isProductExist = await productService.IsProductExistByIdAsync(id);
+			if (!isProductExist)
+			{
+				TempData[ErrorMessage] = ErrorMessages.ProductDoesNotExist;
+				return NotFound();
+			}
+
+			await productService.DeleteProductByIdAsync(id);
+			TempData[WarningMessage] = WarningMessages.ProductDeletedSuccessfuly;
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
+
+		return RedirectToAction(nameof(All));
 	}
 }

@@ -4,6 +4,7 @@ using DressUp.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DressUp.Data.Migrations
 {
     [DbContext(typeof(DressUpDbContext))]
-    partial class DressUpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240412122254_UpdatedProducts")]
+    partial class UpdatedProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,7 +157,7 @@ namespace DressUp.Data.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "d029db1b-89a8-47ba-bded-6dd16225bf33",
+                            ConcurrencyStamp = "a0f53404-a18c-4fce-9bd3-7793276da058",
                             Email = "admin@softuni.bg",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -164,7 +166,7 @@ namespace DressUp.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SOFTUNI.BG",
                             NormalizedUserName = "ADMIN@SOFTUNI.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAELE7Q8m3oABkHtbllLbImIC4alPwUkJy2QFUzmigV5JPZcxihTh6y9XrL/X6RRFTFw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECKBxRZsHAxRADy/R7ZyQ+GIT7PGxZVu4454n1ZB/Tqlv7k3bTOAEvk7WHM70TykkQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "078f1394-e303-4e74-9d19-0a9c539b7bd7",
                             TwoFactorEnabled = false,
@@ -174,7 +176,7 @@ namespace DressUp.Data.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "1f6b67bf-a32d-4146-945d-b7d424cc623f",
+                            ConcurrencyStamp = "88fda697-28a6-4933-b48d-07657500e3d8",
                             Email = "user@softuni.bg",
                             EmailConfirmed = true,
                             FirstName = "User",
@@ -183,7 +185,7 @@ namespace DressUp.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@SOFTUNI.BG",
                             NormalizedUserName = "USER@SOFTUNI.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEGePCohkSrw2A4kzMqNUcnA4obXoskTuliFYBI5kW9T6hfuylqu3Jzlsfg9a/YKJ7A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAECRAL0Mhmsn9mX8RWRkf4SHbACPwK2VnrK3o1Sx7qzcfYmnSkbmS1T729Ty7eLJCAA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "5ef1716d-6383-48af-b42e-cf0d4f3a1b31",
                             TwoFactorEnabled = false,
@@ -193,7 +195,7 @@ namespace DressUp.Data.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "bfd0b964-cd00-41bb-9d37-bfff54cdc5fa",
+                            ConcurrencyStamp = "c0796cb1-dd94-4631-8cd1-666ad7ae0def",
                             Email = "moderator@softuni.bg",
                             EmailConfirmed = true,
                             FirstName = "Moderator",
@@ -202,7 +204,7 @@ namespace DressUp.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MODERATOR@SOFTUNI.BG",
                             NormalizedUserName = "MODERATOR@SOFTUNI.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFHqrSydcUWJR+jYweO6PerMsDNiDS8BY3DhaRYezcwVYk3k/Q3+Mib37cLPL27NsQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMgHKoZY2F4lXoPh1aAiEbrSkUBYGBR6a1iSA+KUvGTxjXDc7gYVPcL3YpeAqDGLPw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7c9e579e-36b4-464b-bf11-8f26f1d525d9",
                             TwoFactorEnabled = false,
@@ -628,7 +630,7 @@ namespace DressUp.Data.Migrations
                         new
                         {
                             Id = 1,
-                            AddedOn = new DateTime(2024, 4, 12, 12, 29, 24, 914, DateTimeKind.Utc).AddTicks(9150),
+                            AddedOn = new DateTime(2024, 4, 12, 12, 22, 53, 662, DateTimeKind.Utc).AddTicks(2854),
                             BrandId = 1,
                             CategoryId = 1,
                             Description = "Cotton t-shirt with logo print",
@@ -640,7 +642,7 @@ namespace DressUp.Data.Migrations
                         new
                         {
                             Id = 2,
-                            AddedOn = new DateTime(2024, 4, 12, 12, 29, 24, 914, DateTimeKind.Utc).AddTicks(9480),
+                            AddedOn = new DateTime(2024, 4, 12, 12, 22, 53, 662, DateTimeKind.Utc).AddTicks(3103),
                             BrandId = 2,
                             CategoryId = 2,
                             Description = "Slim fit denim jeans",
@@ -652,7 +654,7 @@ namespace DressUp.Data.Migrations
                         new
                         {
                             Id = 3,
-                            AddedOn = new DateTime(2024, 4, 12, 12, 29, 24, 914, DateTimeKind.Utc).AddTicks(9641),
+                            AddedOn = new DateTime(2024, 4, 12, 12, 22, 53, 662, DateTimeKind.Utc).AddTicks(3351),
                             BrandId = 3,
                             CategoryId = 1,
                             Description = "Formal dress shirt with button-down collar",
@@ -664,7 +666,7 @@ namespace DressUp.Data.Migrations
                         new
                         {
                             Id = 4,
-                            AddedOn = new DateTime(2024, 4, 12, 12, 29, 24, 914, DateTimeKind.Utc).AddTicks(9778),
+                            AddedOn = new DateTime(2024, 4, 12, 12, 22, 53, 662, DateTimeKind.Utc).AddTicks(3825),
                             BrandId = 4,
                             CategoryId = 3,
                             Description = "A-line skirt with floral pattern",
@@ -676,7 +678,7 @@ namespace DressUp.Data.Migrations
                         new
                         {
                             Id = 5,
-                            AddedOn = new DateTime(2024, 4, 12, 12, 29, 24, 914, DateTimeKind.Utc).AddTicks(9918),
+                            AddedOn = new DateTime(2024, 4, 12, 12, 22, 53, 662, DateTimeKind.Utc).AddTicks(3996),
                             BrandId = 5,
                             CategoryId = 4,
                             Description = "Waterproof jacket with hood",
@@ -688,7 +690,7 @@ namespace DressUp.Data.Migrations
                         new
                         {
                             Id = 6,
-                            AddedOn = new DateTime(2024, 4, 12, 12, 29, 24, 915, DateTimeKind.Utc).AddTicks(67),
+                            AddedOn = new DateTime(2024, 4, 12, 12, 22, 53, 662, DateTimeKind.Utc).AddTicks(4167),
                             BrandId = 1,
                             CategoryId = 1,
                             Description = "Knitted sweater with crew neckline",
@@ -700,7 +702,7 @@ namespace DressUp.Data.Migrations
                         new
                         {
                             Id = 7,
-                            AddedOn = new DateTime(2024, 4, 12, 12, 29, 24, 915, DateTimeKind.Utc).AddTicks(202),
+                            AddedOn = new DateTime(2024, 4, 12, 12, 22, 53, 662, DateTimeKind.Utc).AddTicks(4314),
                             BrandId = 2,
                             CategoryId = 2,
                             Description = "Casual shorts with drawstring waist",
@@ -712,7 +714,7 @@ namespace DressUp.Data.Migrations
                         new
                         {
                             Id = 8,
-                            AddedOn = new DateTime(2024, 4, 12, 12, 29, 24, 915, DateTimeKind.Utc).AddTicks(448),
+                            AddedOn = new DateTime(2024, 4, 12, 12, 22, 53, 662, DateTimeKind.Utc).AddTicks(4445),
                             BrandId = 3,
                             CategoryId = 3,
                             Description = "Maxi dress with spaghetti straps",
@@ -724,7 +726,7 @@ namespace DressUp.Data.Migrations
                         new
                         {
                             Id = 9,
-                            AddedOn = new DateTime(2024, 4, 12, 12, 29, 24, 915, DateTimeKind.Utc).AddTicks(584),
+                            AddedOn = new DateTime(2024, 4, 12, 12, 22, 53, 662, DateTimeKind.Utc).AddTicks(4575),
                             BrandId = 4,
                             CategoryId = 1,
                             Description = "Chiffon blouse with ruffle detail",
@@ -736,7 +738,7 @@ namespace DressUp.Data.Migrations
                         new
                         {
                             Id = 10,
-                            AddedOn = new DateTime(2024, 4, 12, 12, 29, 24, 915, DateTimeKind.Utc).AddTicks(717),
+                            AddedOn = new DateTime(2024, 4, 12, 12, 22, 53, 662, DateTimeKind.Utc).AddTicks(4735),
                             BrandId = 5,
                             CategoryId = 4,
                             Description = "Wool blend coat with belt",
@@ -1207,7 +1209,7 @@ namespace DressUp.Data.Migrations
                     b.HasOne("DressUp.Data.Models.Product", "Product")
                         .WithMany("Favorites")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("DressUp.Data.Models.ApplicationUser", "User")

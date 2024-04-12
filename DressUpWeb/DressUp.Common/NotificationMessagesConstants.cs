@@ -17,10 +17,15 @@ public static class NotificationMessagesConstants
         public const string YouMustLogedInToSeeFavorite = "You must be Loged In User to see your Favorite Products";
         public const string InvalidProductToFavorite = "This product does not exist, plese add to Favorite avaliable product";
         public const string LogInToOrder = "To order this product you must be Loged In";
+        public const string LogInToEdit = "To edit this product you must be Loged In";
+        public const string LogInToAdd = "To add the product you must be Loged In";
+        public const string LogInToDelete = "To delete this product you must be Loged In";
+        public const string ProductDoesNotExist = "The product with given Id does not exist";
     }
 
     public static class WarningMessages
     {
+        public const string ProductDeletedSuccessfuly = "The product was deleted successfuly";
 
     }
 
@@ -32,5 +37,7 @@ public static class NotificationMessagesConstants
     public static class SuccessMessages
     {
         public const string AddedToFavorite = "You added successfully this product to Favorite";
+        public const string AddedProduct = "You added successfully this product to our collection";
+        public const string EditedProduct = "You edited successfully this product";
     }
 }
