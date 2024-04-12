@@ -69,6 +69,14 @@ public class ProductController : BaseController
 				TempData[ErrorMessage] = ErrorMessages.InvalidProductToFavorite;
 				return BadRequest();
 			}
+
+			bool isProductFavorite = await productService.IsProductFavorite(User.GetId(), productId);
+			if(isProductFavorite)
+			{
+				TempData[ErrorMessage] = ErrorMessages.AlreadyAddedToFavorite;
+				return BadRequest();
+			}
+
 			await favoriteService.AddToFavoriteAsync(productId, User.GetId());
 			TempData[SuccessMessage] = SuccessMessages.AddedToFavorite;
 			return RedirectToAction(nameof(All));
@@ -95,6 +103,14 @@ public class ProductController : BaseController
 				TempData[ErrorMessage] = ErrorMessages.InvalidProductToFavorite;
 				return BadRequest();
 			}
+
+			bool isProductFavorite = await productService.IsProductFavorite(User.GetId(), productId);
+			if (!isProductFavorite)
+			{
+				TempData[ErrorMessage] = ErrorMessages.InvalidProductToRemoveFromFavorite;
+				return BadRequest();
+			}
+
 			await favoriteService.RemoveFromFavoriteAsync(productId, User.GetId());
 			TempData[SuccessMessage] = SuccessMessages.RemovedFromFavorite;
 			return RedirectToAction(nameof(All));

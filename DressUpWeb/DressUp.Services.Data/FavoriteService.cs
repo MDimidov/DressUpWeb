@@ -19,15 +19,6 @@ public class FavoriteService : IFavoriteService
 	//Add products to favorite
 	public async Task AddToFavoriteAsync(int productId, string userId)
 	{
-		//bool isAlreadyAdded = dbContext
-		//	.Favorites
-		//	.Any(f => f.UserId.ToString() == userId && f.ProductId == productId);
-
-		//if (isAlreadyAdded)
-		//{
-		//	return;
-		//}
-
 		Favorite favorite = new()
 		{
 			ProductId = productId,

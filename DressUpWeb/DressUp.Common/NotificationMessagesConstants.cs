@@ -17,6 +17,7 @@ public static class NotificationMessagesConstants
         public const string YouMustLogedInToRemoveFavorite = "You must be Loged In User to remove Products from Favorite";
         public const string YouMustLogedInToSeeFavorite = "You must be Loged In User to see your Favorite Products";
         public const string InvalidProductToFavorite = "This product does not exist, plese add to Favorite avaliable product";
+        public const string InvalidProductToRemoveFromFavorite = "This product does not exist in your Favorites list";
         public const string LogInToOrder = "To order this product you must be Loged In";
         public const string LogInToEdit = "To edit this product you must be Loged In";
         public const string LogInToAdd = "To add the product you must be Loged In";
