@@ -263,11 +263,11 @@ public class ProductController : BaseController
 	}
 
 	[HttpGet]
-	public async Task<IActionResult> Details(int id)
+	public async Task<IActionResult> Details(int id, string information)
 	{
 		try
 		{
-			bool isProductExist = await productService.IsProductExistByIdAsync(id);
+			bool isProductExist = await productService.IsProductExistByIdAsync(id); 
 			if (!isProductExist)
 			{
 				TempData[ErrorMessage] = ErrorMessages.ProductDoesNotExist;
@@ -275,6 +275,12 @@ public class ProductController : BaseController
 			}
 
 			ProductDetailsViewModel model = await productService.GetProductDetailsByIdAsync(id);
+
+			if(model.GetUrlInformation() != information)
+			{
+				return NotFound();
+			}
+
 			return View(model);
 		}
 		catch (Exception ex)

@@ -25,7 +25,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DressUp.Services.Data", "Dr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DressUp.Web.Infrastructure", "DressUp.Web.Infrastructure\DressUp.Web.Infrastructure.csproj", "{88B434C6-FB47-40F5-84A3-43DA61885E59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DressUp.Services.Data.Models", "DressUp.Services.Data.Models\DressUp.Services.Data.Models.csproj", "{9E076D12-8C9B-4508-80BE-B30DD0CB8CBA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DressUp.Services.Data.Models", "DressUp.Services.Data.Models\DressUp.Services.Data.Models.csproj", "{9E076D12-8C9B-4508-80BE-B30DD0CB8CBA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

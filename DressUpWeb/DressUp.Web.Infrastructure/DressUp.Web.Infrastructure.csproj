@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DressUp.Services.Data\DressUp.Services.Data.csproj" />
+    <ProjectReference Include="..\DressUp.Web.ViewModels\DressUp.Web.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

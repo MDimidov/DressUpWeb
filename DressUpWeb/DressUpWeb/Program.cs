@@ -73,10 +73,19 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseEndpoints(endpoints =>
+{
+	endpoints.MapControllerRoute(
+		  name: "ProtectingUrlPattern",
+		  pattern: "/{controller}/{action}/{id}/{information}",
+		  defaults: new { Controller = "Product", Action = "Details"});
+	endpoints.MapDefaultControllerRoute();
+	endpoints.MapRazorPages();
+});
 //app.MapControllerRoute(
 //    name: "default",
 //    pattern: "{controller=Home}/{action=Index}/{id?}");
-app.MapDefaultControllerRoute();
-app.MapRazorPages();
+//app.MapDefaultControllerRoute();
+//app.MapRazorPages();
 
 app.Run();

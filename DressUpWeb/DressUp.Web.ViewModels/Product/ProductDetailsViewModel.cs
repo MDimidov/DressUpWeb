@@ -1,8 +1,10 @@
 ﻿#nullable disable
 
+using DressUp.Web.ViewModels.Product.Interfaces;
+
 namespace DressUp.Web.ViewModels.Product;
 
-public class ProductDetailsViewModel
+public class ProductDetailsViewModel : IProductDetailsModel
 {
 	public ProductDetailsViewModel()
 	{
