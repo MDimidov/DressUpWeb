@@ -2,6 +2,7 @@
 
 @{
 	ViewBag.Title = "Delete Product";
+	List<ProductImagesViewModel> dressImages = Model.Images.ToList();
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -12,11 +13,31 @@
 		<div class="col-md-4">
 			@if (Model.Images.Any())
 			{
-				<img class="card-img-top" src="@Url.Content(Model.Images.First().ImageUrl)" alt="@Model.Name Image">
+				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+					<div class="carousel-inner">
+						@for (int i = 0; i < Model.Images.Count(); i++)
+						{
+							ProductImagesViewModel dressImg = dressImages[i];
+							<div class="carousel-item @(i == 0 ? "active" : string.Empty)">
+								<img class="d-block w-100" style="width: 20rem;"
+									 src="@Url.Content(dressImg.ImageUrl)" alt="@Model.Name Image with Id = @dressImg.Id">
+							</div>
+						}
+					</div>
+					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
 			}
 			else
 			{
-				<img class="card-img-top" src="~/DressPics/ImageCommingSoon.jpg" alt="Coming Soon Image">
+				<img class="card-img-top" style="width: 20rem;"
+					 src="~/DressPics/ImageCommingSoon.jpg" alt="Coming Soon Image">
 			}
 		</div>
 		<div class="col-md-8">
