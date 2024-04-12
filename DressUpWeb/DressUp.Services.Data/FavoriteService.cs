@@ -17,31 +17,31 @@ public class FavoriteService : IFavoriteService
 
 
 	//Add products to favorite
-	public async Task AddToFavoriteAsync(int productId, string UserId)
+	public async Task AddToFavoriteAsync(int productId, string userId)
 	{
-		bool isAlreadyAdded = dbContext
-			.Favorites
-			.Any(f => f.UserId.ToString() == UserId && f.ProductId == productId);
+		//bool isAlreadyAdded = dbContext
+		//	.Favorites
+		//	.Any(f => f.UserId.ToString() == userId && f.ProductId == productId);
 
-		if (isAlreadyAdded)
-		{
-			return;
-		}
+		//if (isAlreadyAdded)
+		//{
+		//	return;
+		//}
 
 		Favorite favorite = new()
 		{
 			ProductId = productId,
-			UserId = Guid.Parse(UserId)
+			UserId = Guid.Parse(userId)
 		};
 
 		dbContext.Favorites.Add(favorite);
 		await dbContext.SaveChangesAsync();
 	}
 
-	public async Task<IEnumerable<AllProductsViewModel>> GetFavoriteProductsAsync(string UserId)
+	public async Task<IEnumerable<AllProductsViewModel>> GetFavoriteProductsAsync(string userId)
 		=> await dbContext.Products
 		.AsNoTracking()
-		.Where(p => p.Favorites.Any(f => f.UserId.ToString() == UserId))
+		.Where(p => p.Favorites.Any(f => f.UserId.ToString() == userId))
 		.Select(p => new AllProductsViewModel
 		{
 			Id = p.Id,
@@ -59,4 +59,13 @@ public class FavoriteService : IFavoriteService
 				.ToList()
 		})
 		.ToArrayAsync();
+
+	public async Task RemoveFromFavoriteAsync(int productId, string userId)
+	{
+		Favorite favoriteToRemove = await dbContext.Favorites
+			.FirstAsync(f => f.UserId.ToString() == userId && f.ProductId == productId);
+
+		dbContext.Favorites.Remove(favoriteToRemove);
+		await dbContext.SaveChangesAsync();
+	}
 }

@@ -1,7 +1,16 @@
 ﻿@using DressUp.Services.Data.Interfaces
+@using DressUp.Web.Infrastructure.Extensions
 @model AllProductsViewModel
 
-@* @inject IProductService ProductService *@
+@inject IProductService ProductService
+
+@{
+	bool isProductFavorite = false;
+	if (User.Identity?.IsAuthenticated ?? false)
+	{
+		isProductFavorite = await ProductService.IsProductFavorite(User.GetId(), Model.Id);
+	}
+}
 
 <div class="col-md-4">
 	<div class="card mb-3">
@@ -26,7 +35,7 @@
 			<a asp-area="" asp-controller="Product" asp-action="Details" asp-route-id="@Model.Id"
 			   class="btn btn-success">Details</a>
 
-			
+
 
 			@if (User.Identity?.IsAuthenticated ?? false)
 			{
@@ -34,8 +43,17 @@
 				   class="btn btn-warning">Edit</a>
 				<a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
 				   class="btn btn-danger">Delete</a>
-				<a asp-area="" asp-controller="Product" asp-action="AddToFavorite" asp-route-ProductId="@Model.Id"
-				   class="btn btn-success">Add to favorite</a>
+				if (isProductFavorite)
+				{
+					<a asp-area="" asp-controller="Product" asp-action="RemoveFromFavorite" asp-route-productId="@Model.Id"
+					   class="btn btn-success">Remove from favorite</a>
+				}
+				else
+				{
+					<a asp-area="" asp-controller="Product" asp-action="AddToFavorite" asp-route-productId="@Model.Id"
+					   class="btn btn-success">Add to favorite</a>
+				}
+
 				<p></p>
 
 				@if (Model.Quantity > 0)

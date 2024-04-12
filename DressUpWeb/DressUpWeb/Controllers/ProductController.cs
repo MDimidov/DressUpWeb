@@ -58,7 +58,7 @@ public class ProductController : BaseController
 		if (!User.Identity?.IsAuthenticated ?? false)
 		{
 			TempData[ErrorMessage] = ErrorMessages.YouMustLogedInToAddFavorite;
-			return RedirectToAction("Index", "Home");
+			return RedirectToAction(nameof(All));
 		}
 
 		try
@@ -71,6 +71,32 @@ public class ProductController : BaseController
 			}
 			await favoriteService.AddToFavoriteAsync(productId, User.GetId());
 			TempData[SuccessMessage] = SuccessMessages.AddedToFavorite;
+			return RedirectToAction(nameof(All));
+		}
+		catch
+		{
+			throw new ArgumentException("Product is already added to favorites or does not exist");
+		}
+	}
+
+	public async Task<IActionResult> RemoveFromFavorite(int productId)
+	{
+		if (!User.Identity?.IsAuthenticated ?? false)
+		{
+			TempData[ErrorMessage] = ErrorMessages.YouMustLogedInToRemoveFavorite;
+			return RedirectToAction(nameof(All));
+		}
+
+		try
+		{
+			bool isProductExist = await productService.IsProductExistByIdAsync(productId);
+			if (!isProductExist)
+			{
+				TempData[ErrorMessage] = ErrorMessages.InvalidProductToFavorite;
+				return BadRequest();
+			}
+			await favoriteService.RemoveFromFavoriteAsync(productId, User.GetId());
+			TempData[SuccessMessage] = SuccessMessages.RemovedFromFavorite;
 			return RedirectToAction(nameof(All));
 		}
 		catch

@@ -278,4 +278,11 @@ public class ProductService : IProductService
 
 		return true;
 	}
+
+	public async Task<bool> IsProductFavorite(string userId, int productId)
+		=>	await dbContext
+			.Favorites
+			.AnyAsync(f => f.ProductId == productId 
+								&& f.UserId.ToString() == userId);
+	
 }

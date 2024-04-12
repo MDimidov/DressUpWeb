@@ -27,4 +27,6 @@ public interface IProductService
 	Task<bool> IsProductExistByIdAsync(int id);
 
 	Task<AllProductsFilteredAndPagedServiceModel> AllAsync(AllProductsQueryModel queryModel);
+
+	Task<bool> IsProductFavorite(string userId, int productId);
 }
