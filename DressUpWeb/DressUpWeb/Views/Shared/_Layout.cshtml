@@ -11,9 +11,12 @@
     <link rel="stylesheet" href="~/css/Theme.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/DressUpWeb.styles.css" asp-append-version="true" />
-    <link href="toastr.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/toastr.css" />
+
 </head>
 <body>
+
+    
     <header>
 
         <nav class="navbar navbar-expand-lg bg-light" data-bs-theme="light">
@@ -76,11 +79,13 @@
             </div>
         </nav> *@
     </header>
+    
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
+    
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -92,11 +97,13 @@
             
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/toastr.js"></script>
     @* <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script> *@
     <script src="~/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="toastr.js"></script>
+    <partial name="_NotificationsPartial" />
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

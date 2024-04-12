@@ -5,6 +5,7 @@ using DressUp.Web.Infrastructure.Extensions;
 using DressUp.Web.ViewModels.Product;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using static DressUp.Common.NotificationMessagesConstants;
 
 namespace DressUp.Web.Controllers;
 
@@ -49,6 +50,7 @@ public class ProductController : BaseController
 	{
 		try
 		{
+			TempData[SuccessMessage] = "You are alraedy test";
 			await favoriteService.AddToFavoriteAsync(productId, User.GetId());
 		}
 		catch
