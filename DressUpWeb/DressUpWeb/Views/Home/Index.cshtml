@@ -18,8 +18,8 @@
 		<p class="lead">
 			@if (User.Identity?.IsAuthenticated ?? false)
 			{
-				<a asp-controller="House" asp-action="Add" class="btn btn-primary btn-lg"
-				   role="button">Add House</a>
+				<a asp-controller="Product" asp-action="Add" class="btn btn-primary btn-lg"
+				   role="button">Add Product</a>
 			}
 		</p>
 	</div>
@@ -37,7 +37,7 @@
 					 src="@Url.Content(store.ImageUrl)" alt="@store.Address">
 				<div class="carousel-caption d-none d-md-block">
 					<h5>
-						<a class="btn btn-primary" asp-controller="House" asp-action="Details"
+						<a class="btn btn-primary" asp-controller="Store" asp-action="Details"
 						   asp-route-id="@store.Id"> @store.Address</a>
 					</h5>
 				</div>

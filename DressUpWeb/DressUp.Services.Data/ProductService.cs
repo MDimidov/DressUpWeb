@@ -53,7 +53,6 @@ public class ProductService : IProductService
 				.Where(p => p.Brand.Name == queryModel.Brand);
 		}
 
-		//if(!string.IsNullOrWhiteSpace(queryModel.SizeType.ToString()))
 		if (queryModel.SizeType != null)
 		{
 			productsQuery = productsQuery

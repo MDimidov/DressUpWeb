@@ -8,6 +8,7 @@
     bool isAgentOwnerOfTheHouse = await AgentService.HasHouseWithIdAsync(User.GetId(), Model.Id);
     bool isHouseRentedByUser = await HouseService.IsRentedByUserWithIdAsync(Model.Id, User.GetId()!);
 } *@
+@using static DressUp.Common.NotificationMessagesConstants;
 @model ProductDetailsViewModel
 
 @{
@@ -87,6 +88,10 @@
 					{
 
 					}
+				}
+				else
+				{
+					<p>@ErrorMessages.LogInToOrder</p>
 				}
 			</div>
 			<p></p>

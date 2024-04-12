@@ -4,7 +4,7 @@ namespace DressUp.Web.Controllers;
 
 public class BrandController : BaseController
 {
-    public IActionResult Index()
+    public IActionResult All()
     {
         return View();
     }

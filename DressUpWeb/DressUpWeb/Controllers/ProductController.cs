@@ -48,14 +48,26 @@ public class ProductController : BaseController
 
 	public async Task<IActionResult> AddToFavorite(int productId)
 	{
+		if(!User.Identity?.IsAuthenticated ?? false)
+		{
+			TempData[ErrorMessage] = ErrorMessages.YouMustLogedInToAddFavorite;
+			return RedirectToAction("Index", "Home");
+		}
+
 		try
 		{
-			TempData[SuccessMessage] = "You are alraedy test";
+			bool isProductExist = await productService.IsProductExistByIdAsync(productId);
+			if (!isProductExist)
+			{
+				TempData[ErrorMessage] = ErrorMessages.InvalidProductToFavorite;
+				return BadRequest();
+			}
 			await favoriteService.AddToFavoriteAsync(productId, User.GetId());
+			TempData[SuccessMessage] = SuccessMessages.AddedToFavorite;
 		}
 		catch
 		{
-			throw new ArgumentException("Product is already added to favorites");
+			throw new ArgumentException("Product is already added to favorites or does not exist");
 		}
 
 		return RedirectToAction(nameof(All));
@@ -65,15 +77,22 @@ public class ProductController : BaseController
 	{
 		if (User.Identity?.IsAuthenticated ?? false)
 		{
-			AllProductsQueryModel viewModel = new()
+			AllProductsQueryModel viewModel = new();
+
+            try
 			{
-				Products = await favoriteService.GetFavoriteProductsAsync(User.GetId())
-			};
+				viewModel.Products = await favoriteService.GetFavoriteProductsAsync(User.GetId());
+            }			
+			catch (Exception ex)
+			{
+				throw new ArgumentException(ex.Message);
+			}
 
 			return View(viewModel);
 		}
 
-		return RedirectToAction(nameof(All));
+        TempData[ErrorMessage] = ErrorMessages.YouMustLogedInToSeeFavorite;
+        return RedirectToAction(nameof(All));
 	}
 
 	public async Task<IActionResult> Add()
