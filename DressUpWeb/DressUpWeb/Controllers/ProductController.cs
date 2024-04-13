@@ -149,9 +149,9 @@ public class ProductController : BaseController
 	[HttpGet]
 	public async Task<IActionResult> Add()
 	{
-		if (!User.Identity?.IsAuthenticated ?? false)
+		if (!User.IsAdmin())
 		{
-			TempData[ErrorMessage] = ErrorMessages.LogInToAdd;
+			TempData[ErrorMessage] = ErrorMessages.AdminToAdd;
 			return RedirectToAction(nameof(All));
 		}
 
@@ -180,9 +180,9 @@ public class ProductController : BaseController
 			return View(formModel);
 		}
 
-		if (!User.Identity?.IsAuthenticated ?? false)
+		if (!User.IsAdmin())
 		{
-			TempData[ErrorMessage] = ErrorMessages.LogInToAdd;
+			TempData[ErrorMessage] = ErrorMessages.AdminToAdd;
 			return RedirectToAction(nameof(All));
 		}
 
@@ -201,13 +201,13 @@ public class ProductController : BaseController
 	[HttpGet]
 	public async Task<IActionResult> Edit(int id)
 	{
-		if (!User.Identity?.IsAuthenticated ?? false)
+		if (!User.IsAdmin())
 		{
-			TempData[ErrorMessage] = ErrorMessages.LogInToEdit;
-			return RedirectToAction(nameof(All));
-		}
+			TempData[ErrorMessage] = ErrorMessages.AdminToEdit;
+            return RedirectToAction(nameof(All));
+        }
 
-		try
+        try
 		{
 
 			bool isProductExist = await productService.IsProductExistByIdAsync(id);
@@ -235,13 +235,13 @@ public class ProductController : BaseController
 	public async Task<IActionResult> Edit(ProductFormModel formModel, int id)
 	{
 
-		if (!User.Identity?.IsAuthenticated ?? false)
+		if (!User.IsAdmin())
 		{
-			TempData[ErrorMessage] = ErrorMessages.LogInToEdit;
+			TempData[ErrorMessage] = ErrorMessages.AdminToEdit; 
 			return RedirectToAction(nameof(All));
-		}
+        }
 
-		if (!ModelState.IsValid)
+        if (!ModelState.IsValid)
 		{
 			return View(formModel);
 		}
@@ -291,9 +291,9 @@ public class ProductController : BaseController
 
 	public async Task<IActionResult> Delete(int id)
 	{
-		if (!User.Identity?.IsAuthenticated ?? false)
+		if (!User.IsAdmin())
 		{
-			TempData[ErrorMessage] = ErrorMessages.LogInToDelete;
+			TempData[ErrorMessage] = ErrorMessages.AdminToDelete;
 			return BadRequest();
 		}
 
@@ -318,9 +318,9 @@ public class ProductController : BaseController
 	[HttpPost]
 	public async Task<IActionResult> Delete(ProductPreDeleteDetails model, int id)
 	{
-		if (!User.Identity?.IsAuthenticated ?? false)
+		if (!User.IsAdmin())
 		{
-			TempData[ErrorMessage] = ErrorMessages.LogInToDelete;
+			TempData[ErrorMessage] = ErrorMessages.AdminToDelete;
 			return BadRequest();
 		}
 
