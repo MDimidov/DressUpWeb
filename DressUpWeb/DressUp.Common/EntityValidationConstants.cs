@@ -90,4 +90,10 @@ public static class EntityValidationConstants
         public const int PasswordMinLength = 6;
         public const int PasswordMaxLength = 100;
     }
+
+    public static class Role
+    {
+        public const int RoleNameMinLength = 3;
+        public const int RoleNameMaxLength = 50;
+    }
 }
