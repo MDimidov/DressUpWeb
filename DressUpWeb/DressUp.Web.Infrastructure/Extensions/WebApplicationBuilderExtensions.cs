@@ -44,6 +44,13 @@ public static class WebApplicationBuilderExtensions
         }
     }
 
+    /// <summary>
+    /// This method seeds admin role if it dose not exist.
+    /// Passed email shoud be valid email of existing user in application.
+    /// </summary>
+    /// <param name="app"></param>
+    /// <param name="email"></param>
+    /// <returns></returns>
     public static IApplicationBuilder SeedAdministrator(this IApplicationBuilder app, string email)
     {
         using IServiceScope scopedSerivces = app.ApplicationServices.CreateScope();

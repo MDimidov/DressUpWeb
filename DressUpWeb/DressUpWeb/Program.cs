@@ -75,7 +75,11 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.SeedAdministrator(DevelopmentAdminEmail);
+//Seed first Admin
+if (app.Environment.IsDevelopment())
+{
+    app.SeedAdministrator(DevelopmentAdminEmail);
+}
 
 app.UseEndpoints(endpoints =>
 {
