@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace DressUp.Web.Controllers;
 
-//[AllowAnonymous]
+[AllowAnonymous]
 public class HomeController : BaseController
 {
     private readonly IStoreService storeService;

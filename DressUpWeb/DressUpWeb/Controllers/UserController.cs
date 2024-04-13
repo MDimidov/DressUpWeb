@@ -1,10 +1,14 @@
 ﻿using DressUp.Data.Models;
 using DressUp.Web.ViewModels.User;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using static DressUp.Common.NotificationMessagesConstants;
 
 namespace DressUp.Web.Controllers
 {
+    [AllowAnonymous]
     public class UserController : BaseController
     {
         private readonly SignInManager<ApplicationUser> signInManager;
@@ -24,12 +28,23 @@ namespace DressUp.Web.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            if (User.Identity?.IsAuthenticated ?? false)
+            {
+                TempData[ErrorMessage] = ErrorMessages.AlreadyRegistered;
+                return RedirectToAction("Index", "Home");
+            }
+
             return View();
         }
 
         [HttpPost]
         public async Task<IActionResult> Register(RegisterFormModel model)
         {
+            if (User.Identity?.IsAuthenticated ?? false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -61,6 +76,50 @@ namespace DressUp.Web.Controllers
             //this.memoryCache.Remove(UsersCacheKey);
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Login(string? returnUrl = null)
+        {
+            if(User.Identity?.IsAuthenticated ?? false)
+            {
+                TempData[ErrorMessage] = ErrorMessages.AlreadyLogedIn;
+                return RedirectToAction("Index", "Home");
+            }
+
+            LoginFormModel model = new LoginFormModel()
+            {
+                ReturnUrl = returnUrl
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginFormModel model)
+        {
+            if (User.Identity?.IsAuthenticated ?? false)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var signInResult = 
+                await signInManager.PasswordSignInAsync(model.Email, model.Password, 
+                                                        model.RememberMe, false);
+
+            if (!signInResult.Succeeded)
+            {
+                TempData[ErrorMessage] = ErrorMessages.LogInError;
+
+                return View(model);
+            }
+
+            return Redirect(model.ReturnUrl ?? "/Home/Index");
         }
     }
 }

@@ -23,6 +23,9 @@ public static class NotificationMessagesConstants
         public const string LogInToAdd = "To add the product you must be Loged In";
         public const string LogInToDelete = "To delete this product you must be Loged In";
         public const string ProductDoesNotExist = "The product with given Id does not exist";
+        public const string LogInError = "There was an error while logging you in! Please try again later or contact an administrator.";
+        public const string AlreadyLogedIn = "You are logged in!";
+        public const string AlreadyRegistered = "You are registered!";
     }
 
     public static class WarningMessages
