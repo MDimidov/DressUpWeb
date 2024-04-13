@@ -7,4 +7,8 @@ public static class GeneralApplicationConstants
     //AllProductQueryModel
     public const int DefaultPage = 1;
     public const int EntitiesPerPage = 3;
+
+    //Roles
+    public const string AdminRoleName = "Administrator";
+    public const string DevelopmentAdminEmail= "admin@softuni.bg";
 }

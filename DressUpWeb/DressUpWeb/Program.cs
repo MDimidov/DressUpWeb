@@ -6,6 +6,7 @@ using DressUp.Web.Infrastructure.Extensions;
 using DressUp.Web.Infrastructure.ModelBinders;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using static DressUp.Common.GeneralApplicationConstants;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +33,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 	options.Password.RequiredLength = builder
 		.Configuration.GetValue<int>("Identity:Password:RequiredLength");
 })
+	.AddRoles<IdentityRole<Guid>>()
 	.AddEntityFrameworkStores<DressUpDbContext>()
 	.AddDefaultTokenProviders();
 
@@ -72,6 +74,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.SeedAdministrator(DevelopmentAdminEmail);
 
 app.UseEndpoints(endpoints =>
 {
