@@ -78,4 +78,16 @@ public static class EntityValidationConstants
         public const int RateMinRange = 1;
         public const int RateMaxRange = 10;
     }
+
+    public static class User
+    {
+        public const int FirstNameMinLength = 3;
+        public const int FirstNameMaxLength = 50;
+
+        public const int LastNameMinLength = 3;
+        public const int LastNameMaxLength = 50;
+
+        public const int PasswordMinLength = 6;
+        public const int PasswordMaxLength = 100;
+    }
 }
