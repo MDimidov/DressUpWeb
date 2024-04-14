@@ -64,7 +64,9 @@ public class ProductService : IProductService
 			string wildCard = $"%{queryModel.SearchString.ToLower()}%";
 			productsQuery = productsQuery
 				.Where(p => EF.Functions.Like(p.Name, wildCard) ||
-								  EF.Functions.Like(p.Description, wildCard));
+								  EF.Functions.Like(p.Description, wildCard) ||
+								  EF.Functions.Like(p.Brand.Name, wildCard) ||
+								  EF.Functions.Like(p.Category.Name, wildCard));
 		}
 
 		productsQuery = queryModel.ProductSorting switch
