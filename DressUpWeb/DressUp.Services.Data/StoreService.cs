@@ -14,9 +14,10 @@ public class StoreService : IStoreService
         this.dbContext = dbContext;
     }
 
-    public async Task<IEnumerable<IndexViewModel>> LastThreeStoresAsync()
+    public async Task<IEnumerable<IndexViewModel>> LastThreeOpenStoresAsync()
         => await dbContext
         .Stores
+        .Where(s => s.ClosingTime.TimeOfDay > DateTime.Now.TimeOfDay)
         .AsNoTracking()
         .Select(a => new IndexViewModel
         {

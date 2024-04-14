@@ -17,7 +17,7 @@ public class HomeController : BaseController
 
     public async Task<IActionResult> Index()
     {
-        IEnumerable<IndexViewModel> viewModel = await storeService.LastThreeStoresAsync();
+        IEnumerable<IndexViewModel> viewModel = await storeService.LastThreeOpenStoresAsync();
         return View(viewModel);
     }
 

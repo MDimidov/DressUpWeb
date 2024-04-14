@@ -5,5 +5,5 @@ namespace DressUp.Services.Data.Interfaces;
 
 public interface IStoreService
 {
-    Task<IEnumerable<IndexViewModel>> LastThreeStoresAsync();
+    Task<IEnumerable<IndexViewModel>> LastThreeOpenStoresAsync();
 }
