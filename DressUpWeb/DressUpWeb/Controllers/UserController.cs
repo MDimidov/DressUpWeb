@@ -1,5 +1,6 @@
 ﻿using DressUp.Data.Models;
 using DressUp.Web.ViewModels.User;
+using Griesoft.AspNetCore.ReCaptcha;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -38,6 +39,8 @@ namespace DressUp.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateRecaptcha(Action = nameof(Register),
+            ValidationFailedAction = ValidationFailedAction.ContinueRequest)]
         public async Task<IActionResult> Register(RegisterFormModel model)
         {
             if (User.Identity?.IsAuthenticated ?? false)
