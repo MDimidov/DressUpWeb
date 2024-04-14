@@ -117,7 +117,7 @@ public class ProductService : IProductService
 		};
 	}
 
-	public async Task DeleteProductByIdAsync(int id)
+    public async Task DeleteProductByIdAsync(int id)
 	{
 		Product product = await dbContext
 			.Products

@@ -122,7 +122,7 @@ public class ProductController : BaseController
 	}
 
 	[HttpGet]
-	public async Task<IActionResult> Favorite()
+	public async Task<IActionResult> Favorite([FromQuery] AllProductsQueryModel queryModel)
 	{
 
 		if (!User.Identity?.IsAuthenticated ?? false)
@@ -133,12 +133,17 @@ public class ProductController : BaseController
 
 		try
 		{
-			AllProductsQueryModel viewModel = new()
-			{
-				Products = await favoriteService.GetFavoriteProductsAsync(User.GetId())
-			};
+            AllProductsFilteredAndPagedServiceModel serviceModel = await favoriteService.AllFavoritesAsync(queryModel, User.GetId());
 
-			return View(viewModel);
+			queryModel.Products = serviceModel.Products;
+			queryModel.TotalProducts = serviceModel.TotalProductsCount;
+            queryModel.Categories = await categoryService.GetCategoriesNamesAsync();
+            queryModel.Brands = await brandService.GetBrandsNameAsync();
+            queryModel.SizeTypes = productService.GetAllSizeTypes();
+
+
+
+            return View(queryModel);
 		}
 		catch (Exception ex)
 		{
