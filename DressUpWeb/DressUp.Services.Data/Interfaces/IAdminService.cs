@@ -4,9 +4,13 @@ namespace DressUp.Services.Data.Interfaces;
 
 public interface IAdminService
 {
-    Task<IEnumerable<RoleViewModel>> GetAllRoles();
+	Task<IEnumerable<RoleViewModel>> GetAllRoles();
 
-    Task<bool> CreateRoleIfNotExistsAsync(string roleForm);
+	Task CreateRole(string roleForm);
 
-    Task<bool> AddUserToRoleAsync(string userEmail, string roleName);
+	Task<bool> IsRoleExist(string roleName);
+
+	Task AddUserToRoleAsync(string userEmail, string roleName);
+
+	Task<bool> IsUserHasRole(string userEmail, string roleName);
 }

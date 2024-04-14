@@ -26,6 +26,10 @@ public static class NotificationMessagesConstants
         public const string LogInError = "There was an error while logging you in! Please try again later or contact an administrator.";
         public const string AlreadyLogedIn = "You are logged in!";
         public const string AlreadyRegistered = "You are registered!";
+        public const string RoleDoesNotExist = "Role {0} does not exist";
+        public const string RoleAlreadyExist = "Role {0} already exist!";
+        public const string UserDoesNotExist = "User with e-mail: {0} does not exist";
+        public const string UserAlreadyHasARole = "User {0} already has a role {1}!";
     }
 
     public static class WarningMessages
@@ -45,5 +49,7 @@ public static class NotificationMessagesConstants
         public const string RemovedFromFavorite = "You removed successfully product from Favorite";
         public const string AddedProduct = "You added successfully this product to our collection";
         public const string EditedProduct = "You edited successfully this product";
+        public const string AddedUserToRole = "You added successfully user {0}, to role {1}";
+        public const string CreatedRole = "You created successfully rele {0}";
     }
 }

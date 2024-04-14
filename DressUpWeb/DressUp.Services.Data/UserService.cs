@@ -42,4 +42,9 @@ public class UserService : IUserService
 		}
 
 	}
+
+	public async Task<bool> IsUserExistByEmailAsync(string email)
+		=> await dbContext
+			.Users
+			.AnyAsync(u => u.Email == email);
 }
