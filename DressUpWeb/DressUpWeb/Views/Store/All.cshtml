@@ -1,0 +1,98 @@
+﻿@model AllStoresQueryModel
+
+@{
+	ViewBag.Title = "All Stores";
+}
+
+<h2 class="text-center mt-5">@ViewBag.Title</h2>
+<hr />
+
+<form method="get">
+	<div class="row justify-content-center">
+		<div class="form-group col-md-2">
+			<div class="form-group">
+				<label asp-for="StoresPerPage"></label>
+				<select asp-for="StoresPerPage" class="form-control">
+					<option value="3">3</option>
+					<option value="6">6</option>
+					<option value="9">9</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="form-group col-md-2">
+			<label asp-for="SearchString"></label>
+			<input asp-for="SearchString" class="form-control" placeholder="...">
+		</div>
+
+		<div class="form-group col-md-2">
+			<div class="form-group">
+				<label asp-for="StoreStatus"></label>
+				<select asp-for="StoreStatus" class="form-control">
+					<option value="0">All</option>
+					<option value="1">Open</option>
+					<option value="2">Closed</option>
+				</select>
+			</div>
+		</div>
+
+		<div class="col-md-3">
+			<div class="form-group mt-4 p-2">
+				<input type="submit" value="Search" class="btn btn-primary" />
+			</div>
+		</div>
+	</div>
+</form>
+
+
+@{
+	int previousPage = Model.CurrentPage - 1;
+	if (previousPage < 1)
+	{
+		previousPage = 1;
+	}
+
+	int maxPage = (int)Math.Ceiling((double)Model.TotalStores /
+		Model.StoresPerPage);
+}
+
+<div class="row mb-5">
+	<div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-start">
+		<a class="btn btn-primary @(Model.CurrentPage == 1 ? "disabled" : string.Empty)"
+		   asp-controller="Store"
+		   asp-action="All"
+		   asp-route-currentPage="@previousPage"
+		   asp-route-storesPerPage="@Model.StoresPerPage"
+		   asp-route-searchString="@Model.SearchString"
+		   asp-route-storeStatus="@((int?)Model.StoreStatus)"><<</a>
+	</div>
+
+	@{
+		bool shouldNextPageBeDisabled = Model.CurrentPage == maxPage ||
+		!Model.Stores.Any();
+	}
+
+	<div class="col-md-6 d-grid gap-2 d-md-flex justify-content-md-end">
+		<a class="btn btn-primary
+           @(shouldNextPageBeDisabled ? "disabled" : string.Empty)"
+		   asp-controller="Store"
+		   asp-action="All"
+		   asp-route-currentPage="@(Model.CurrentPage + 1)"
+		   asp-route-storesPerPage="@Model.StoresPerPage"
+		   asp-route-searchString="@Model.SearchString"
+		   asp-route-storeStatus="@((int?)Model.StoreStatus)">>></a>
+	</div>
+</div>
+
+@if (!Model.Stores.Any())
+{
+	<h2 class="text-center">No sotres found by the given criteria!</h2>
+}
+
+<div class="row">
+	@foreach (var store in Model.Stores)
+	{
+		<partial name="_StorePartial" model="@store" />
+	}
+</div>
+

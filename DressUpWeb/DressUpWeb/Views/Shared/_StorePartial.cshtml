@@ -1,5 +1,62 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@using DressUp.Services.Data.Interfaces
+@using DressUp.Web.Infrastructure.Extensions
+@model AllStoresViewModel
+
+@inject IProductService ProductService
+
 @{
+	bool isStoreFavorite = false;
+	if (User.Identity?.IsAuthenticated ?? false)
+	{
+
+	}
 }
+
+<div class="col-md-4">
+	<div class="card mb-3">
+		<div class="card-body text-center">
+			<img class="card-img-top" src="@Url.Content(Model.ImageUrl)" alt="@Model.Name Image">
+			<h4>@Model.Name</h4>
+			<h6>Address: <b>@Model.Address</b></h6>
+			<h6>Contact Info: <b>@Model.ContactInfo</b></h6>
+			<h6>Opening Time: <b>@Model.OpeningTime.ToShortTimeString()</b></h6>
+			<h6>Closing Time: <b>@Model.ClosingTime.ToShortTimeString()</b></h6>
+			<h6>At the moment:
+				@if (Model.Status == true)
+				{
+					<span class="text-success"><strong>Отворено</strong></span>
+				}
+				else
+				{
+					<span class="text-danger"><strong>Затворено</strong></span>
+				}
+			</h6>
+
+			<br />
+			<a asp-area="" asp-controller="Store" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-success">Details</a>
+
+
+
+			@if (User.Identity?.IsAuthenticated ?? false)
+			{
+				<a asp-area="" asp-controller="Store" asp-action="Edit" asp-route-id="@Model.Id"
+				   class="btn btn-warning">Edit</a>
+				<a asp-area="" asp-controller="Store" asp-action="Delete" asp-route-id="@Model.Id"
+				   class="btn btn-danger">Delete</a>
+				if (isStoreFavorite)
+				{
+					<a asp-area="" asp-controller="Store" asp-action="RemoveFromFavorite" asp-route-storeId="@Model.Id"
+					   class="btn btn-success">Remove from favorite</a>
+				}
+				else
+				{
+					<a asp-area="" asp-controller="Store" asp-action="AddToFavorite" asp-route-storeId="@Model.Id"
+					   class="btn btn-success">Add to favorite</a>
+				}
+
+				<p></p>
+
+			}
+		</div>
+	</div>
+</div>

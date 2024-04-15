@@ -8,7 +8,7 @@ public class AllStoresFilteredAndPagedServiceModel
 	{
 		Stores = new HashSet<AllStoresViewModel>();
 	}
-	public int TotalProductsCount { get; set; }
+	public int TotalStoresCount { get; set; }
 
 	public IEnumerable<AllStoresViewModel> Stores { get; set; }
 }
