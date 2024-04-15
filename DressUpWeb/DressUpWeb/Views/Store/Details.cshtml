@@ -1,0 +1,46 @@
+﻿@using static DressUp.Common.NotificationMessagesConstants;
+@model StoreDetailsViewModel
+
+@{
+	ViewBag.Title = "Store Details";
+}
+
+<h2 class="text-center">@ViewBag.Title</h2>
+<hr />
+
+<div class="container" style="display:inline">
+	<div class="row">
+		<div class="col-6">
+				<img class="d-block w-100" style="width: 40rem;" src="@Url.Content(Model.ImageUrl)" alt="@Model.Name Image">
+		</div>
+		<div class="card col-6 border-0">
+			<p style="font-size:25px;"><u>@Model.Name</u></p>
+			<h6>Address: <b>@Model.Address</b></h6>
+			<h6>Contact Info: <b>@Model.ContactInfo</b></h6>
+			<h6>Opening Time: <b>@Model.OpeningTime.ToShortTimeString()</b></h6>
+			<h6>Closing Time: <b>@Model.ClosingTime.ToShortTimeString()</b></h6>
+			<h6>
+				At the moment:
+				@if (Model.Status == true)
+				{
+					<span class="text-success"><strong>Open</strong></span>
+				}
+				else
+				{
+					<span class="text-danger"><strong>Closed</strong></span>
+				}
+			</h6>
+			<div class="form-inline">
+				@if (User.Identity?.IsAuthenticated ?? false)
+				{
+					<a asp-area="" asp-controller="Store" asp-action="Edit" asp-route-id="@Model.Id"
+					   class="btn btn-warning">Edit</a>
+					<a asp-area="" asp-controller="Store" asp-action="Delete" asp-route-id="@Model.Id"
+					   class="btn btn-danger">Delete</a>
+					<p></p>
+				}
+			</div>
+			<p></p>
+		</div>
+	</div>
+</div>

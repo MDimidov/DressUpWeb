@@ -294,6 +294,7 @@ public class ProductController : BaseController
 		}
 	}
 
+	[HttpGet]
 	public async Task<IActionResult> Delete(int id)
 	{
 		if (!User.IsAdmin())

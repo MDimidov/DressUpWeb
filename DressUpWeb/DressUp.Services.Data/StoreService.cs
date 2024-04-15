@@ -44,7 +44,7 @@ public class StoreService : IStoreService
 
 			StoreStatus.Closed => storesQuery
 				.Where(s => s.ClosingTime.TimeOfDay <= DateTime.Now.TimeOfDay
-					&& s.OpeningTime.TimeOfDay > DateTime.Now.TimeOfDay),
+					|| s.OpeningTime.TimeOfDay > DateTime.Now.TimeOfDay),
 
 			_ => storesQuery.OrderByDescending(s => s.ClosingTime.TimeOfDay > DateTime.Now.TimeOfDay),
 		};
@@ -57,9 +57,7 @@ public class StoreService : IStoreService
 			{
 				Id = s.Id,
 				Name = s.Name,
-				Address = s.Address.City.Name,
 				ImageUrl = s.ImageUrl,
-				ContactInfo = s.ContactInfo,
 				OpeningTime = s.OpeningTime,
 				ClosingTime = s.ClosingTime,
 			})
@@ -85,16 +83,39 @@ public class StoreService : IStoreService
 
 		return storeStatuses;
 	}
-	
+
+	public async Task<StoreDetailsViewModel> GetStoreDetailsAsyncById(int storeId)
+		=> await dbContext
+		.Stores
+		.AsNoTracking()
+		.Where(s => s.Id == storeId)
+		.Select(s => new StoreDetailsViewModel()
+		{
+			Id = s.Id,
+			Name = s.Name,
+			Address = $"{s.Address.Street}, {s.Address.City.Name}, {s.Address.Country.Name}",
+			OpeningTime = s.OpeningTime,
+			ClosingTime = s.ClosingTime,
+			ContactInfo = s.ContactInfo,
+			ImageUrl = s.ImageUrl,
+		})
+		.FirstAsync();
+
+	public async Task<bool> IsStoreExistByIdAsync(int storeId)
+		=> await dbContext
+		.Stores
+		.AsNoTracking()
+		.AnyAsync(s => s.Id == storeId);
 
 	public async Task<IEnumerable<IndexViewModel>> LastThreeOpenStoresAsync()
 		=> await dbContext
 		.Stores
-		.Where(s => s.ClosingTime.TimeOfDay > DateTime.Now.TimeOfDay)
+		.Where(s => s.ClosingTime.TimeOfDay > DateTime.Now.TimeOfDay
+			&& s.OpeningTime.TimeOfDay <= DateTime.Now.TimeOfDay)
 		.AsNoTracking()
 		.Select(a => new IndexViewModel
 		{
-			Address = a.Address.Street,
+			Address = $"{a.Address.Street}, {a.Address.City.Name}, {a.Address.Country.Name}",
 			Id = a.Id,
 			ImageUrl = a.ImageUrl,
 		})

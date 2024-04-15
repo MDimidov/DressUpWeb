@@ -1,14 +1,4 @@
-﻿@* @using HouseRentingSystem.Services.Data.Interfaces
-@using HouseRentingSystem.Web.Infrastructure.Extensions
-
-@inject IAgentService AgentService
-@inject IHouseService HouseService
-@{
-    bool isUserAgent = await AgentService.AgentExistsByUserIdAsync(User.GetId()!);
-    bool isAgentOwnerOfTheHouse = await AgentService.HasHouseWithIdAsync(User.GetId(), Model.Id);
-    bool isHouseRentedByUser = await HouseService.IsRentedByUserWithIdAsync(Model.Id, User.GetId()!);
-} *@
-@using static DressUp.Common.NotificationMessagesConstants;
+﻿@using static DressUp.Common.NotificationMessagesConstants;
 @model ProductDetailsViewModel
 
 @{
@@ -54,7 +44,6 @@
 		<div class="card col-8 border-0">
 			<p style="font-size:25px;"><u>@Model.Name</u></p>
 			<p>@Model.Description</p>
-			@* <p>Located in: <b>@Model.Address</b></p> *@
 			<p>
 				Price:
 				<b>@($"{Model.Price:f2}") BGN</b>
@@ -84,10 +73,6 @@
 							</form>
 						}
 					}
-					else
-					{
-
-					}
 				}
 				else
 				{
@@ -95,14 +80,6 @@
 				}
 			</div>
 			<p></p>
-			@* <div class="card" style="width: 18rem;">
-			<div class="card-body">
-			<h5 class="card-title">Agent Info</h5>
-			<p class="card-text">Full Name: @Model.Agent.FullName</p>
-			<p class="card-text">Email:  @Model.Agent.Email</p>
-			<p class="card-text">Phone Number: @Model.Agent.PhoneNumber</p>
-			</div>
-			</div> *@
 		</div>
 	</div>
 </div>

@@ -1,7 +1,4 @@
-﻿using DressUp.Services.Data.Models.Product;
-using DressUp.Services.Data;
-using DressUp.Web.ViewModels.Product;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using DressUp.Web.ViewModels.Store;
 using DressUp.Services.Data.Interfaces;
@@ -33,6 +30,26 @@ public class StoreController : BaseController
 			queryModel.StoreStatuses = storeService.GetAllStoreStatus();
 
 			return View(queryModel);
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
+	}
+
+	[HttpGet]
+	[AllowAnonymous]
+	public async Task<IActionResult> Details(int id)
+	{
+		try
+		{
+			if (!await storeService.IsStoreExistByIdAsync(id))
+			{
+				return NotFound();
+			}
+
+			StoreDetailsViewModel viewModel = await storeService.GetStoreDetailsAsyncById(id);
+			return View(viewModel);
 		}
 		catch (Exception ex)
 		{

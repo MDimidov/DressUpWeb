@@ -14,4 +14,7 @@ public interface IStoreService
 
     IEnumerable<StoreStatus> GetAllStoreStatus();
 
+    Task<StoreDetailsViewModel> GetStoreDetailsAsyncById(int storeId);
+
+    Task<bool> IsStoreExistByIdAsync(int storeId);
 }
