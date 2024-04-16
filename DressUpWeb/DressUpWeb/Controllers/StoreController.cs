@@ -6,6 +6,7 @@ using DressUp.Services.Data.Interfaces;
 using DressUp.Services.Data.Models.Store;
 using DressUp.Web.Infrastructure.Extensions;
 using static DressUp.Common.NotificationMessagesConstants;
+using DressUp.Services.Data;
 
 namespace DressUp.Web.Controllers;
 
@@ -166,6 +167,28 @@ public class StoreController : BaseController
     [HttpPost]
     public async Task<IActionResult> Edit(StoreFormModel formModel, int id)
     {
-        return Ok();
-    }
+		if (!User.IsAdmin())
+		{
+			TempData[ErrorMessage] = ErrorMessages.AdminToEdit;
+			return RedirectToAction(nameof(All));
+		}
+
+		if (!ModelState.IsValid)
+		{
+			formModel.AddressForm.Cities = await addressService.GetAllCitiesAsync();
+			formModel.AddressForm.Countries = await addressService.GetAllCountriesAsync();
+			return View(formModel);
+		}
+
+		try
+		{
+			await storeService.EditStoreAsync(formModel, id);
+			TempData[SuccessMessage] = string.Format(SuccessMessages.EditedStore, formModel.Name);
+			return RedirectToAction(nameof(All));
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
+	}
 }
