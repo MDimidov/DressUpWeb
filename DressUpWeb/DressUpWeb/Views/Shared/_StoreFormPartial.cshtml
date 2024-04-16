@@ -13,15 +13,28 @@
 				<input asp-for="ContactInfo" rows="2" class="form-control" placeholder="Contact to us on phone number..." />
 				<span asp-validation-for="ContactInfo" class="text-danger"></span>
 			</div>
+			@{
+				string? openingTime = Model.OpeningTime.TimeOfDay.ToString();
+				string? closingTime = Model.ClosingTime.TimeOfDay.ToString();
 
+				if (openingTime == "00:00:00")
+				{
+					openingTime = "09:00";
+				}
+				if (closingTime == "00:00:00")
+				{
+					closingTime = "18:00";
+				}
+
+			}
 			<div class="form-group">
 				<label asp-for="OpeningTime"></label>
-				<input asp-for="OpeningTime" class="form-control" type="time" value="09:00" />
+				<input asp-for="OpeningTime" class="form-control" type="time" value="@openingTime" />
 				<span asp-validation-for="OpeningTime" class="text-danger"></span>
 			</div>
 			<div class="form-group">
 				<label asp-for="ClosingTime"></label>
-				<input asp-for="ClosingTime" class="form-control" type="time" value="18:00" />
+				<input asp-for="ClosingTime" class="form-control" type="time" value="@closingTime" />
 				<span asp-validation-for="ClosingTime" class="text-danger"></span>
 			</div>
 			<div class="form-group">

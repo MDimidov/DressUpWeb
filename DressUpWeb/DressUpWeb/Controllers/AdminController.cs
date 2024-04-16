@@ -1,5 +1,4 @@
-﻿using DressUp.Services.Data;
-using DressUp.Services.Data.Interfaces;
+﻿using DressUp.Services.Data.Interfaces;
 using DressUp.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -23,7 +22,7 @@ public class AdminController : BaseController
 	}
 
 	[HttpGet]
-	public async Task<IActionResult> AddRole()
+	public async Task<IActionResult> AddDeleteRole()
 	{
 		AddRoleViewModel form = new()
 		{
@@ -34,7 +33,7 @@ public class AdminController : BaseController
 	}
 
 	[HttpPost]
-	public async Task<IActionResult> AddRole(AddRoleViewModel roleForm)
+	public async Task<IActionResult> AddDeleteRole(AddRoleViewModel roleForm)
 	{
 		if (!ModelState.IsValid)
 		{
@@ -42,15 +41,15 @@ public class AdminController : BaseController
 			return View(roleForm);
 		}
 
-		if (await adminService.IsRoleExist(roleForm.RoleName))
-		{
-			TempData[ErrorMessage] = string.Format(ErrorMessages.RoleAlreadyExist, roleForm.RoleName);
-			roleForm.Roles = await adminService.GetAllRoles();
-			return View(roleForm);
-		}
-
 		try
 		{
+			if (await adminService.IsRoleExist(roleForm.RoleName))
+			{
+				TempData[ErrorMessage] = string.Format(ErrorMessages.RoleAlreadyExist, roleForm.RoleName);
+				roleForm.Roles = await adminService.GetAllRoles();
+				return View(roleForm);
+			}
+
 			await adminService.CreateRole(roleForm.RoleName);
 			TempData[SuccessMessage] = string.Format(SuccessMessages.CreatedRole, roleForm.RoleName);
 		}
@@ -59,9 +58,8 @@ public class AdminController : BaseController
 			throw new ArgumentException(ex.Message, nameof(roleForm));
 		}
 
-		return RedirectToAction("Index", "Home");
+		return RedirectToAction(nameof(AddDeleteRole));
 	}
-
 
 	[HttpGet]
 	public async Task<IActionResult> AddUserToRolе()
@@ -88,18 +86,21 @@ public class AdminController : BaseController
 			if (!await adminService.IsRoleExist(userToRoleForm.RoleName))
 			{
 				TempData[ErrorMessage] = string.Format(ErrorMessages.RoleDoesNotExist, userToRoleForm.RoleName);
+
 				userToRoleForm.Roles = await adminService.GetAllRoles();
 				return View(userToRoleForm);
 			}
 
 			if (!await userService.IsUserExistByEmailAsync(userToRoleForm.UserEmail))
 			{
-				TempData[ErrorMessage] = string.Format(ErrorMessages.UserDoesNotExist, userToRoleForm.UserEmail);
+				ModelState.AddModelError(nameof(userToRoleForm.UserEmail), 
+					string.Format(ErrorMessages.UserDoesNotExist, userToRoleForm.UserEmail));
+
 				userToRoleForm.Roles = await adminService.GetAllRoles();
 				return View(userToRoleForm);
 			}
 
-			if(await adminService.IsUserHasRole(userToRoleForm.UserEmail, userToRoleForm.RoleName))
+			if (await adminService.IsUserHasRole(userToRoleForm.UserEmail, userToRoleForm.RoleName))
 			{
 				TempData[ErrorMessage] = string.Format(ErrorMessages.UserAlreadyHasARole, userToRoleForm.UserEmail, userToRoleForm.RoleName);
 				userToRoleForm.Roles = await adminService.GetAllRoles();
@@ -116,5 +117,27 @@ public class AdminController : BaseController
 
 
 		return RedirectToAction("Index", "Home");
+	}
+
+	[HttpGet]
+	public async Task<IActionResult> DeleteRole(string roleId, string roleName)
+	{
+		try
+		{
+			if (!await adminService.IsRoleExist(roleName))
+			{
+				TempData[ErrorMessage] = string.Format(ErrorMessages.RoleDoesNotExist, roleName);
+				return RedirectToAction(nameof(AddDeleteRole));
+			}
+
+			await adminService.DeleteRoleAsync(roleName, roleId);
+			TempData[WarningMessage] = string.Format(WarningMessages.DeletedRole, roleName);
+
+			return RedirectToAction(nameof(AddDeleteRole));
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message, nameof(roleName));
+		}
 	}
 }

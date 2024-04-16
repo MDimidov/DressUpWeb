@@ -268,6 +268,7 @@ public class ProductController : BaseController
 	}
 
 	[HttpGet]
+	[AllowAnonymous]
 	public async Task<IActionResult> Details(int id, string information)
 	{
 		try
