@@ -2,9 +2,11 @@
 
 namespace DressUp.Data.Models;
 
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using static DressUp.Common.EntityValidationConstants.Brand;
 
+[Comment("Dress brand")]
 public class Brand
 {
     public Brand()

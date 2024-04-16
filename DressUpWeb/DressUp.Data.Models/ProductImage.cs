@@ -3,8 +3,10 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using DressUp.Data.Models;
+using Microsoft.EntityFrameworkCore;
 using static DressUp.Common.EntityValidationConstants.ProductImage;
 
+[Comment("Image link for Product")]
 public class ProductImage
 {
     public ProductImage()
@@ -22,5 +24,6 @@ public class ProductImage
 
     [Required]
     [MaxLength(ImageUrlMaxLength)]
+    [Comment("Image link")]
     public string ImageUrl { get; set; }
 }

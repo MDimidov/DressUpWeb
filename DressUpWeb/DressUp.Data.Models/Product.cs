@@ -1,6 +1,7 @@
 ﻿#nullable disable
 
 using DressUp.Data.Models.Enums;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static DressUp.Common.EntityValidationConstants.Product;
@@ -43,6 +44,7 @@ public class Product
     public DateTime AddedOn { get; set; }
 
     [Required]
+    [Comment("Dress gender type")]
     public SizeType SizeType {  get; set; }
 
     [Required]
@@ -56,5 +58,4 @@ public class Product
     public virtual ICollection<BuyedProduct> BuyedProducts { get; set; }
     public virtual ICollection<ProductReview> ProductReviews { get; set; }
     public virtual ICollection<ProductImage> ProductImages { get; set; }
-    //public virtual ICollection<ProductSize> ProductsSizes { get; set; } = new HashSet<ProductSize>();
 }

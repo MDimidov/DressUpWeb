@@ -1,10 +1,12 @@
 ﻿#nullable disable
 
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using static DressUp.Common.EntityValidationConstants.Address;
 namespace DressUp.Data.Models;
 
+[Comment("Address table")]
 public class Address
 {
     public Address()
@@ -19,6 +21,7 @@ public class Address
 
     [Required]
     [MaxLength(StreetMaxLength)]
+    [Comment("Address street")]
     public string Street { get; set; }
 
 

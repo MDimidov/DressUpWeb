@@ -1,9 +1,11 @@
 ﻿using DressUp.Data.Models.Enums;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DressUp.Data.Models;
 
+[Comment("Extendet Identity user table")]
 public class ApplicationUser : IdentityUser<Guid>
 {
     public ApplicationUser()

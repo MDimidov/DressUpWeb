@@ -1,9 +1,11 @@
 ﻿#nullable disable
 
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DressUp.Data.Models;
 
+[Comment("Mapping table with Stores and Products")]
 public class StoreProduct
 {
     [ForeignKey(nameof(Store))]

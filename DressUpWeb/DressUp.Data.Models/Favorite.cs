@@ -1,10 +1,12 @@
 ﻿#nullable disable
 
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DressUp.Data.Models;
 
+[Comment("Favorite products mapping table")]
 public class Favorite
 {
     public Favorite()
