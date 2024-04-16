@@ -20,7 +20,8 @@ public static class NotificationMessagesConstants
         public const string InvalidProductToRemoveFromFavorite = "This product does not exist in your Favorites list";
         public const string LogInToOrder = "To order this product you must be Loged In";
         public const string AdminToEdit = "To edit this product you must be Administrator";
-        public const string AdminToAdd = "To add the product you must be Administrator";
+        public const string AdminToAddProduct = "To add the product you must be Administrator";
+        public const string AdminToAddStore = "To add the store you must be Administrator";
         public const string AdminToDelete = "To delete this product you must be Administrator";
         public const string ProductDoesNotExist = "The product with given Id does not exist";
         public const string StoreDoesNotExist = "The store with given Id does not exist";
@@ -38,6 +39,7 @@ public static class NotificationMessagesConstants
     public static class WarningMessages
     {
         public const string ProductDeletedSuccessfuly = "The product was deleted successfuly";
+        public const string DeletedStore = "The store was deleted successfully";
 
     }
 
@@ -53,7 +55,6 @@ public static class NotificationMessagesConstants
         public const string AddedProduct = "You added successfully this product to our collection";
         public const string EditedProduct = "You edited successfully this product";
         public const string EditedStore = "You edited {0} store successfully";
-        public const string DeletedStore = "Store {0} deleted successfully";
         public const string AddedUserToRole = "You added successfully user {0}, to role {1}";
         public const string CreatedRole = "You created successfully rele {0}";
         public const string AddedStore = "You added successfully this store to our collection";

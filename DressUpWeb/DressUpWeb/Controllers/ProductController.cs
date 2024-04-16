@@ -156,7 +156,7 @@ public class ProductController : BaseController
 	{
 		if (!User.IsAdmin())
 		{
-			TempData[ErrorMessage] = ErrorMessages.AdminToAdd;
+			TempData[ErrorMessage] = ErrorMessages.AdminToAddProduct;
 			return RedirectToAction(nameof(All));
 		}
 
@@ -187,7 +187,7 @@ public class ProductController : BaseController
 
 		if (!User.IsAdmin())
 		{
-			TempData[ErrorMessage] = ErrorMessages.AdminToAdd;
+			TempData[ErrorMessage] = ErrorMessages.AdminToAddProduct;
 			return RedirectToAction(nameof(All));
 		}
 

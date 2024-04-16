@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<IndexViewModel>
+@using static DressUp.Web.Infrastructure.Extensions.ClaimsPrincipalExtensions;
 
 @{
 	ViewData["Title"] = "Home Page";
@@ -12,14 +13,14 @@
 		@* Check this - > To Do *@
 		<h1 class="display-4">Welcome to the best place to order your Dresses!</h1>
 		<p class="lead">
-			There are no products in the system currently available.
+			There are no open stores at the moment.
 		</p>
 		<hr class="my-4">
 		<p class="lead">
-			@if (User.Identity?.IsAuthenticated ?? false)
+			@if (User.Identity?.IsAuthenticated ?? false && User.IsAdmin())
 			{
-				<a asp-controller="Product" asp-action="Add" class="btn btn-primary btn-lg"
-				   role="button">Add Product</a>
+				<a asp-controller="Store" asp-action="Add" class="btn btn-primary btn-lg"
+				   role="button">Add Store</a>
 			}
 		</p>
 	</div>

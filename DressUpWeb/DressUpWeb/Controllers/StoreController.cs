@@ -70,7 +70,7 @@ public class StoreController : BaseController
     {
         if (!User.IsAdmin())
         {
-            TempData[ErrorMessage] = ErrorMessages.AdminToAdd;
+            TempData[ErrorMessage] = ErrorMessages.AdminToAddStore;
             return RedirectToAction(nameof(All));
         }
 
@@ -97,7 +97,7 @@ public class StoreController : BaseController
 
         if (!User.IsAdmin())
         {
-            TempData[ErrorMessage] = ErrorMessages.AdminToAdd;
+            TempData[ErrorMessage] = ErrorMessages.AdminToAddStore;
             return RedirectToAction(nameof(All));
         }
 
@@ -225,7 +225,7 @@ public class StoreController : BaseController
 		try
 		{
 			await storeService.DeleteStoreByIdAsync(id);
-			TempData[SuccessMessage] = string.Format(SuccessMessages.DeletedStore, formModel.Name);
+			TempData[WarningMessage] = WarningMessages.DeletedStore;
 			return RedirectToAction(nameof(All));
 		}
 		catch (Exception ex)
