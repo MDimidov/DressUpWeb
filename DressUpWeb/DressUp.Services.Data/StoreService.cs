@@ -7,7 +7,6 @@ using DressUp.Web.ViewModels.Address;
 using DressUp.Web.ViewModels.Store;
 using DressUp.Web.ViewModels.Store.Enums;
 using Microsoft.EntityFrameworkCore;
-using System.Xml.Linq;
 
 namespace DressUp.Services.Data;
 
@@ -106,7 +105,17 @@ public class StoreService : IStoreService
         };
     }
 
-    public async Task EditStoreAsync(StoreFormModel formModel, int storeId)
+	public async Task DeleteStoreByIdAsync(int storeId)
+	{
+		Store store = await dbContext
+            .Stores
+            .FirstAsync(s => s.Id == storeId);
+
+        dbContext.Stores.Remove(store);
+        await dbContext.SaveChangesAsync(); 
+	}
+
+	public async Task EditStoreAsync(StoreFormModel formModel, int storeId)
     {
         Address? address = await GetAddressByModelAsync(formModel.AddressForm);
 
@@ -146,7 +155,22 @@ public class StoreService : IStoreService
         return storeStatuses;
     }
 
-    public async Task<StoreFormModel> GetStoreByIdAsync(int storeId)
+	public async Task<StorePreDeleteDetails> GetProductPreDeleteDetailsByIdAsync(int storeId)
+	    => await dbContext
+        .Stores
+        .AsNoTracking()
+        .Where(s => s.Id == storeId)
+        .Select(s => new StorePreDeleteDetails()
+        {
+            Id = s.Id,
+            Name = s.Name,
+            ContactInfo = s.ContactInfo,
+            ImageUrl = s.ImageUrl,
+			Address = $"{s.Address.Street}, {s.Address.City.Name}, {s.Address.Country.Name}"
+		})
+        .FirstAsync();
+
+	public async Task<StoreFormModel> GetStoreByIdAsync(int storeId)
         => await dbContext
         .Stores
         .AsNoTracking()

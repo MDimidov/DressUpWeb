@@ -1,4 +1,5 @@
-﻿namespace DressUp.Web.ViewModels.Product;
+﻿#nullable disable
+namespace DressUp.Web.ViewModels.Product;
 
 public class ProductPreDeleteDetails
 {

@@ -53,6 +53,7 @@ public static class NotificationMessagesConstants
         public const string AddedProduct = "You added successfully this product to our collection";
         public const string EditedProduct = "You edited successfully this product";
         public const string EditedStore = "You edited {0} store successfully";
+        public const string DeletedStore = "Store {0} deleted successfully";
         public const string AddedUserToRole = "You added successfully user {0}, to role {1}";
         public const string CreatedRole = "You created successfully rele {0}";
         public const string AddedStore = "You added successfully this store to our collection";

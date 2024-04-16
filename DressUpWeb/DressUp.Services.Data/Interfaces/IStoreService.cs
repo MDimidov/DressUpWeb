@@ -24,4 +24,8 @@ public interface IStoreService
     Task<StoreFormModel> GetStoreByIdAsync(int storeId);
 
     Task EditStoreAsync(StoreFormModel formModel, int storeId);
+
+    Task<StorePreDeleteDetails> GetProductPreDeleteDetailsByIdAsync(int storeId);
+
+    Task DeleteStoreByIdAsync(int storeId);
 }

@@ -191,4 +191,46 @@ public class StoreController : BaseController
 			throw new ArgumentException(ex.Message);
 		}
 	}
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(int id)
+    {
+		try
+		{
+			if (!await storeService.IsStoreExistByIdAsync(id))
+			{
+				TempData[ErrorMessage] = ErrorMessages.StoreDoesNotExist;
+				return RedirectToAction(nameof(All));
+			}
+
+			StorePreDeleteDetails formModel = await storeService.GetProductPreDeleteDetailsByIdAsync(id);
+
+			return View(formModel);
+		}
+		catch (Exception ex)
+		{
+			throw new InvalidOperationException(ex.Message);
+		}
+	}
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(StorePreDeleteDetails formModel, int id)
+    {
+		if (!User.IsAdmin())
+		{
+			TempData[ErrorMessage] = ErrorMessages.AdminToEdit;
+			return RedirectToAction(nameof(All));
+		}
+        
+		try
+		{
+			await storeService.DeleteStoreByIdAsync(id);
+			TempData[SuccessMessage] = string.Format(SuccessMessages.DeletedStore, formModel.Name);
+			return RedirectToAction(nameof(All));
+		}
+		catch (Exception ex)
+		{
+			throw new ArgumentException(ex.Message);
+		}
+	}
 }
