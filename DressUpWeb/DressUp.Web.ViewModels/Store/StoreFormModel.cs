@@ -18,12 +18,15 @@ public class StoreFormModel
 
 	[Required]
 	[MaxLength(ImageUrlMaxLength)]
+	[Display(Name = "Image Link")]
 	public string ImageUrl { get; set; }
 
 	[Required]
+	[Display(Name = "Opening time")]
 	public DateTime OpeningTime { get; set; }
 
 	[Required]
+	[Display(Name = "Closing time")]
 	public DateTime ClosingTime { get; set; }
 
 	public AddressFormModel AddressForm { get; set; }

@@ -1,62 +1,65 @@
 ﻿@model StoreFormModel
 
 <div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form asp-action="Add" method="post">
-            <div class="mb-3">
-                <label asp-for="@Model.Name" class="form-label-add-edit"><bold>Name</bold></label>
-                <input asp-for="@Model.Name" class="form-control" aria-required="true" />
-                <span asp-validation-for="@Model.Name" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.ContactInfo" class="form-label-add-edit"><bold>Contact Info</bold></label>
-                <input asp-for="@Model.ContactInfo" class="form-control" aria-required="true" />
-                <span asp-validation-for="@Model.ContactInfo" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.OpeningTime" class="form-label-add-edit"><bold>Opening time</bold></label>
-                <input asp-for="@Model.OpeningTime" class="form-control" aria-required="true" type="time" />
-                <span asp-validation-for="@Model.OpeningTime" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.ClosingTime" class="form-label-add-edit"><bold>Closing time</bold></label>
-                <input asp-for="@Model.ClosingTime" class="form-control" aria-required="true" type="time" />
-                <span asp-validation-for="@Model.ClosingTime" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.ImageUrl" class="form-label-add-edit"><bold>Image Link</bold></label>
-                <input asp-for="@Model.ImageUrl" class="form-control" aria-required="true" />
-                <span asp-validation-for="@Model.ImageUrl" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.AddressForm.Street" class="form-label-add-edit"><bold>Address</bold></label>
-                <input asp-for="@Model.AddressForm.Street" class="form-control" aria-required="true" />
-                <span asp-validation-for="@Model.AddressForm.Street" class="text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.AddressForm.CityId"></label>
-                <select asp-for="@Model.AddressForm.CityId" class="form-control">
-                    @foreach (var city in Model.AddressForm.Cities)
-                    {
-                        <option value="@city.Id">@city.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="@Model.AddressForm.CityId" class="small text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <label asp-for="@Model.AddressForm.CountryId"></label>
-                <select asp-for="@Model.AddressForm.CountryId" class="form-control">
-                    @foreach (var country in Model.AddressForm.Countries)
-                    {
-                        <option value="@country.Id">@country.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="@Model.AddressForm.CountryId" class="small text-danger"></span>
-            </div>
-            <div class="mb-3">
-                <input class="btn btn-success mb-2 w-100 p-3 fw-bold" type="submit" value="Add" />
-                <a asp-action="All" class="btn btn-secondary mb-1 w-100 p-3 fw-bold">Return to All Stores</a>
-            </div>
-        </form>
-    </div>
+	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+		<form method="post">
+			<div class="form-group">
+				<label asp-for="Name">Name</label>
+				<input asp-for="Name" class="form-control" placeholder="Title..." />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="ContactInfo"></label>
+				<input asp-for="ContactInfo" rows="2" class="form-control" placeholder="Contact to us on phone number..." />
+				<span asp-validation-for="ContactInfo" class="text-danger"></span>
+			</div>
+
+			<div class="form-group">
+				<label asp-for="OpeningTime"></label>
+				<input asp-for="OpeningTime" class="form-control" type="time" value="09:00" />
+				<span asp-validation-for="OpeningTime" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="ClosingTime"></label>
+				<input asp-for="ClosingTime" class="form-control" type="time" value="18:00" />
+				<span asp-validation-for="ClosingTime" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="ImageUrl"></label>
+				<input asp-for="ImageUrl" class="form-control" />
+				<span asp-validation-for="ImageUrl" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="AddressForm.Street"></label>
+				<input asp-for="AddressForm.Street" class="form-control" placeholder="Str. Ivan Vazov, No 3, ap. 23..." />
+				<span asp-validation-for="AddressForm.Street" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="AddressForm.CityId"></label>
+				<select asp-for="AddressForm.CityId" class="form-control">
+					<option value="">Choose your city</option>
+					@foreach (var city in Model.AddressForm.Cities)
+					{
+						<option value="@city.Id">@city.Name</option>
+					}
+				</select>
+				<span asp-validation-for="AddressForm.CityId" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="AddressForm.CountryId"></label>
+				<select asp-for="AddressForm.CountryId" class="form-control">
+					<option value="">Choose your country</option>
+					@foreach (var country in Model.AddressForm.Countries)
+					{
+						<option value="@country.Id">@country.Name</option>
+					}
+				</select>
+				<span asp-validation-for="AddressForm.CountryId" class="small text-danger"></span>
+			</div>
+			<div class="form-group">
+				<input class="btn btn-success mb-2 mt-2 w-100 p-3 fw-bold" type="submit" value="Save" />
+				<a asp-action="All" class="btn btn-secondary mb-1 w-100 p-3 fw-bold">Return to All Stores</a>
+			</div>
+		</form>
+	</div>
 </div>

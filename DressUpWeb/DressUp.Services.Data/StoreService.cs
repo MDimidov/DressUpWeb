@@ -3,9 +3,11 @@ using DressUp.Services.Data.Interfaces;
 using DressUp.Services.Data.Models.Store;
 using DressUp.Web.Data;
 using DressUp.Web.ViewModels.Home;
+using DressUp.Web.ViewModels.Address;
 using DressUp.Web.ViewModels.Store;
 using DressUp.Web.ViewModels.Store.Enums;
 using Microsoft.EntityFrameworkCore;
+using System.Xml.Linq;
 
 namespace DressUp.Services.Data;
 
@@ -24,11 +26,7 @@ public class StoreService : IStoreService
 
     public async Task AddStoreAsync(StoreFormModel formModel)
     {
-        Address? address = await
-            dbContext
-            .Addresses
-            .FirstOrDefaultAsync(a =>
-                a.Street.ToLower() == formModel.AddressForm.Street.ToLower());
+        Address? address = await GetAddressByModelAsync(formModel.AddressForm);
 
         if (address == null)
         {
@@ -108,6 +106,34 @@ public class StoreService : IStoreService
         };
     }
 
+    public async Task EditStoreAsync(StoreFormModel formModel, int storeId)
+    {
+        Address? address = await GetAddressByModelAsync(formModel.AddressForm);
+
+        if (address == null)
+        {
+            address = new()
+            {
+                Street = formModel.AddressForm.Street,
+                CityId = formModel.AddressForm.CityId,
+                CountryId = formModel.AddressForm.CountryId,
+            };
+        }
+
+        Store store = await dbContext
+            .Stores
+            .FirstAsync(s => s.Id == storeId);
+
+        store.Name = formModel.Name;
+        store.Address = address;
+        store.OpeningTime = formModel.OpeningTime;
+        store.ClosingTime = formModel.ClosingTime;
+        store.ContactInfo = formModel.ContactInfo;
+        store.ImageUrl = formModel.ImageUrl;
+
+        await dbContext.SaveChangesAsync();
+    }
+
     public IEnumerable<StoreStatus> GetAllStoreStatus()
     {
         StoreStatus[] storeStatuses =
@@ -119,6 +145,27 @@ public class StoreService : IStoreService
 
         return storeStatuses;
     }
+
+    public async Task<StoreFormModel> GetStoreByIdAsync(int storeId)
+        => await dbContext
+        .Stores
+        .AsNoTracking()
+        .Where(s => s.Id == storeId)
+        .Select(s => new StoreFormModel()
+        {
+            Name = s.Name,
+            AddressForm = new AddressFormModel()
+            {
+                Street = s.Address.Street,
+                CityId = s.Address.CityId,
+                CountryId = s.Address.CountryId,
+            },
+            ClosingTime = s.ClosingTime,
+            OpeningTime = s.OpeningTime,
+            ContactInfo = s.ContactInfo,
+            ImageUrl = s.ImageUrl,
+        })
+        .FirstAsync();
 
     public async Task<StoreDetailsViewModel> GetStoreDetailsAsyncById(int storeId)
         => await dbContext
@@ -156,4 +203,13 @@ public class StoreService : IStoreService
             ImageUrl = a.ImageUrl,
         })
         .ToArrayAsync();
+
+    private async Task<Address?> GetAddressByModelAsync(AddressFormModel addressModel)
+        => await
+            dbContext
+            .Addresses
+            .FirstOrDefaultAsync(a =>
+                a.Street.ToLower() == addressModel.Street.ToLower() &&
+                a.CityId == addressModel.CityId &&
+                a.CountryId == addressModel.CountryId);
 }

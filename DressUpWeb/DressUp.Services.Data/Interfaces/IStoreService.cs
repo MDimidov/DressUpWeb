@@ -19,7 +19,9 @@ public interface IStoreService
 
     Task<bool> IsStoreExistByIdAsync(int storeId);
 
-    //Task<bool> IsStoreExistByAddressAsync(AddressFormModel addressFormModel);
-
     Task AddStoreAsync(StoreFormModel formModel);
+
+    Task<StoreFormModel> GetStoreByIdAsync(int storeId);
+
+    Task EditStoreAsync(StoreFormModel formModel, int storeId);
 }

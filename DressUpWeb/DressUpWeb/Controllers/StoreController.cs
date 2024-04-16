@@ -90,7 +90,7 @@ public class StoreController : BaseController
         {
             formModel.AddressForm.Cities = await addressService.GetAllCitiesAsync();
             formModel.AddressForm.Countries = await addressService.GetAllCountriesAsync();
-            
+
             return View(formModel);
         }
 
@@ -102,7 +102,7 @@ public class StoreController : BaseController
 
         try
         {
-            if(!await addressService.IsCityExistByIdAsync(formModel.AddressForm.CityId))
+            if (!await addressService.IsCityExistByIdAsync(formModel.AddressForm.CityId))
             {
                 TempData[ErrorMessage] = ErrorMessages.CityDoesNotExist;
 
@@ -112,7 +112,7 @@ public class StoreController : BaseController
                 return View(formModel);
             }
 
-            if(!await addressService.IsCountryExistByIdAsync(formModel.AddressForm.CountryId))
+            if (!await addressService.IsCountryExistByIdAsync(formModel.AddressForm.CountryId))
             {
                 TempData[ErrorMessage] = ErrorMessages.CountryDoesNotExist;
 
@@ -125,11 +125,47 @@ public class StoreController : BaseController
             await storeService.AddStoreAsync(formModel);
             TempData[SuccessMessage] = SuccessMessages.AddedStore;
         }
-        catch(Exception ex) 
+        catch (Exception ex)
         {
             throw new InvalidOperationException(ex.Message);
         }
 
         return RedirectToAction(nameof(All));
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(int id)
+    {
+        if (!User.IsAdmin())
+        {
+            TempData[ErrorMessage] = ErrorMessages.AdminToEdit;
+            return RedirectToAction(nameof(All));
+        }
+
+        try
+        {
+
+            if (!await storeService.IsStoreExistByIdAsync(id))
+            {
+                TempData[ErrorMessage] = ErrorMessages.StoreDoesNotExist;
+                return RedirectToAction(nameof(All));
+            }
+
+            StoreFormModel formModel = await storeService.GetStoreByIdAsync(id);
+            formModel.AddressForm.Cities = await addressService.GetAllCitiesAsync();
+            formModel.AddressForm.Countries = await addressService.GetAllCountriesAsync();
+
+            return View(formModel);
+        }
+        catch (Exception ex)
+        {
+            throw new InvalidOperationException(ex.Message);
+        }
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(StoreFormModel formModel, int id)
+    {
+        return Ok();
     }
 }

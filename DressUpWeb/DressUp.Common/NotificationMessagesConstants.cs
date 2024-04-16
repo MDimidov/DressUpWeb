@@ -23,6 +23,7 @@ public static class NotificationMessagesConstants
         public const string AdminToAdd = "To add the product you must be Administrator";
         public const string AdminToDelete = "To delete this product you must be Administrator";
         public const string ProductDoesNotExist = "The product with given Id does not exist";
+        public const string StoreDoesNotExist = "The store with given Id does not exist";
         public const string CityDoesNotExist = "The city with given Id does not exist";
         public const string CountryDoesNotExist = "The country with given Id does not exist";
         public const string LogInError = "There was an error while logging you in! Please try again later or contact an administrator.";
