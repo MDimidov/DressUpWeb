@@ -11,113 +11,149 @@ namespace DressUp.Services.Data;
 
 public class StoreService : IStoreService
 {
-	private readonly DressUpDbContext dbContext;
+    private readonly DressUpDbContext dbContext;
+    private readonly IAddressService addressService;
 
-	public StoreService(DressUpDbContext dbContext)
-	{
-		this.dbContext = dbContext;
-	}
+    public StoreService(
+        DressUpDbContext dbContext,
+        IAddressService addressService)
+    {
+        this.dbContext = dbContext;
+        this.addressService = addressService;
+    }
 
-	public async Task<AllStoresFilteredAndPagedServiceModel> AllStoresAsync(AllStoresQueryModel queryModel)
-	{
-		IQueryable<Store> storesQuery = dbContext
-			.Stores
-			.AsQueryable();
+    public async Task AddStoreAsync(StoreFormModel formModel)
+    {
+        Address? address = await
+            dbContext
+            .Addresses
+            .FirstOrDefaultAsync(a =>
+                a.Street.ToLower() == formModel.AddressForm.Street.ToLower());
 
-		if (!string.IsNullOrWhiteSpace(queryModel.SearchString))
-		{
-			string wildCard = $"%{queryModel.SearchString.ToLower()}%";
-			storesQuery = storesQuery
-				.Where(s => EF.Functions.Like(s.Name, wildCard) ||
-								EF.Functions.Like(s.Address.City.Name, wildCard) ||
-								EF.Functions.Like(s.Address.Country.Name, wildCard) ||
-								EF.Functions.Like(s.ContactInfo, wildCard));
-		}
+        if (address == null)
+        {
+            address = new()
+            {
+                Street = formModel.AddressForm.Street,
+                CityId = formModel.AddressForm.CityId,
+                CountryId = formModel.AddressForm.CountryId,
+            };
+        }
 
-		storesQuery = queryModel.StoreStatus switch
-		{
-			StoreStatus.All => storesQuery,
+        Store store = new()
+        {
+            Name = formModel.Name,
+            Address = address,
+            OpeningTime = formModel.OpeningTime,
+            ClosingTime = formModel.ClosingTime,
+            ContactInfo = formModel.ContactInfo,
+            ImageUrl = formModel.ImageUrl,
+        };
 
-			StoreStatus.Open => storesQuery
-				.Where(s => s.ClosingTime.TimeOfDay > DateTime.Now.TimeOfDay
-					&& s.OpeningTime.TimeOfDay <= DateTime.Now.TimeOfDay),
+        await dbContext.Stores.AddAsync(store);
+        await dbContext.SaveChangesAsync();
+    }
 
-			StoreStatus.Closed => storesQuery
-				.Where(s => s.ClosingTime.TimeOfDay <= DateTime.Now.TimeOfDay
-					|| s.OpeningTime.TimeOfDay > DateTime.Now.TimeOfDay),
+    public async Task<AllStoresFilteredAndPagedServiceModel> AllStoresAsync(AllStoresQueryModel queryModel)
+    {
+        IQueryable<Store> storesQuery = dbContext
+            .Stores
+            .AsQueryable();
 
-			_ => storesQuery.OrderByDescending(s => s.ClosingTime.TimeOfDay > DateTime.Now.TimeOfDay),
-		};
+        if (!string.IsNullOrWhiteSpace(queryModel.SearchString))
+        {
+            string wildCard = $"%{queryModel.SearchString.ToLower()}%";
+            storesQuery = storesQuery
+                .Where(s => EF.Functions.Like(s.Name, wildCard) ||
+                                EF.Functions.Like(s.Address.City.Name, wildCard) ||
+                                EF.Functions.Like(s.Address.Country.Name, wildCard) ||
+                                EF.Functions.Like(s.ContactInfo, wildCard));
+        }
+
+        storesQuery = queryModel.StoreStatus switch
+        {
+            StoreStatus.All => storesQuery,
+
+            StoreStatus.Open => storesQuery
+                .Where(s => s.ClosingTime.TimeOfDay > DateTime.Now.TimeOfDay
+                    && s.OpeningTime.TimeOfDay <= DateTime.Now.TimeOfDay),
+
+            StoreStatus.Closed => storesQuery
+                .Where(s => s.ClosingTime.TimeOfDay <= DateTime.Now.TimeOfDay
+                    || s.OpeningTime.TimeOfDay > DateTime.Now.TimeOfDay),
+
+            _ => storesQuery.OrderByDescending(s => s.ClosingTime.TimeOfDay > DateTime.Now.TimeOfDay),
+        };
 
 
-		IEnumerable<AllStoresViewModel> allStores = await storesQuery
-			.Skip((queryModel.CurrentPage - 1) * queryModel.StoresPerPage)
-			.Take(queryModel.StoresPerPage)
-			.Select(s => new AllStoresViewModel()
-			{
-				Id = s.Id,
-				Name = s.Name,
-				ImageUrl = s.ImageUrl,
-				OpeningTime = s.OpeningTime,
-				ClosingTime = s.ClosingTime,
-			})
-			.ToArrayAsync();
+        IEnumerable<AllStoresViewModel> allStores = await storesQuery
+            .Skip((queryModel.CurrentPage - 1) * queryModel.StoresPerPage)
+            .Take(queryModel.StoresPerPage)
+            .Select(s => new AllStoresViewModel()
+            {
+                Id = s.Id,
+                Name = s.Name,
+                ImageUrl = s.ImageUrl,
+                OpeningTime = s.OpeningTime,
+                ClosingTime = s.ClosingTime,
+            })
+            .ToArrayAsync();
 
-		int totalStores = storesQuery.Count();
+        int totalStores = storesQuery.Count();
 
-		return new AllStoresFilteredAndPagedServiceModel()
-		{
-			TotalStoresCount = totalStores,
-			Stores = allStores
-		};
-	}
+        return new AllStoresFilteredAndPagedServiceModel()
+        {
+            TotalStoresCount = totalStores,
+            Stores = allStores
+        };
+    }
 
-	public IEnumerable<StoreStatus> GetAllStoreStatus()
-	{
-		StoreStatus[] storeStatuses =
-		{
-			StoreStatus.All,
-			StoreStatus.Open,
-			StoreStatus.Closed
-		};
+    public IEnumerable<StoreStatus> GetAllStoreStatus()
+    {
+        StoreStatus[] storeStatuses =
+        {
+            StoreStatus.All,
+            StoreStatus.Open,
+            StoreStatus.Closed
+        };
 
-		return storeStatuses;
-	}
+        return storeStatuses;
+    }
 
-	public async Task<StoreDetailsViewModel> GetStoreDetailsAsyncById(int storeId)
-		=> await dbContext
-		.Stores
-		.AsNoTracking()
-		.Where(s => s.Id == storeId)
-		.Select(s => new StoreDetailsViewModel()
-		{
-			Id = s.Id,
-			Name = s.Name,
-			Address = $"{s.Address.Street}, {s.Address.City.Name}, {s.Address.Country.Name}",
-			OpeningTime = s.OpeningTime,
-			ClosingTime = s.ClosingTime,
-			ContactInfo = s.ContactInfo,
-			ImageUrl = s.ImageUrl,
-		})
-		.FirstAsync();
+    public async Task<StoreDetailsViewModel> GetStoreDetailsAsyncById(int storeId)
+        => await dbContext
+        .Stores
+        .AsNoTracking()
+        .Where(s => s.Id == storeId)
+        .Select(s => new StoreDetailsViewModel()
+        {
+            Id = s.Id,
+            Name = s.Name,
+            Address = $"{s.Address.Street}, {s.Address.City.Name}, {s.Address.Country.Name}",
+            OpeningTime = s.OpeningTime,
+            ClosingTime = s.ClosingTime,
+            ContactInfo = s.ContactInfo,
+            ImageUrl = s.ImageUrl,
+        })
+        .FirstAsync();
 
-	public async Task<bool> IsStoreExistByIdAsync(int storeId)
-		=> await dbContext
-		.Stores
-		.AsNoTracking()
-		.AnyAsync(s => s.Id == storeId);
+    public async Task<bool> IsStoreExistByIdAsync(int storeId)
+        => await dbContext
+        .Stores
+        .AsNoTracking()
+        .AnyAsync(s => s.Id == storeId);
 
-	public async Task<IEnumerable<IndexViewModel>> LastThreeOpenStoresAsync()
-		=> await dbContext
-		.Stores
-		.Where(s => s.ClosingTime.TimeOfDay > DateTime.Now.TimeOfDay
-			&& s.OpeningTime.TimeOfDay <= DateTime.Now.TimeOfDay)
-		.AsNoTracking()
-		.Select(a => new IndexViewModel
-		{
-			Address = $"{a.Address.Street}, {a.Address.City.Name}, {a.Address.Country.Name}",
-			Id = a.Id,
-			ImageUrl = a.ImageUrl,
-		})
-		.ToArrayAsync();
+    public async Task<IEnumerable<IndexViewModel>> LastThreeOpenStoresAsync()
+        => await dbContext
+        .Stores
+        .Where(s => s.ClosingTime.TimeOfDay > DateTime.Now.TimeOfDay
+            && s.OpeningTime.TimeOfDay <= DateTime.Now.TimeOfDay)
+        .AsNoTracking()
+        .Select(a => new IndexViewModel
+        {
+            Address = $"{a.Address.Street}, {a.Address.City.Name}, {a.Address.Country.Name}",
+            Id = a.Id,
+            ImageUrl = a.ImageUrl,
+        })
+        .ToArrayAsync();
 }

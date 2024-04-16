@@ -1,4 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿#nullable disable
+
+using DressUp.Web.ViewModels.Address;
+using System.ComponentModel.DataAnnotations;
 using static DressUp.Common.EntityValidationConstants.Store;
 
 namespace DressUp.Web.ViewModels.Store;
@@ -8,9 +11,6 @@ public class StoreFormModel
 	[Required]
 	[StringLength(NameMaxLength, MinimumLength = NameMinLength)]
 	public string Name { get; set; }
-
-	[Required]
-	public string AddressId { get; set; }
 
 	[Required]
 	[StringLength(ContactInfoMaxLength, MinimumLength = ContactInfoMinLength)]
@@ -25,4 +25,6 @@ public class StoreFormModel
 
 	[Required]
 	public DateTime ClosingTime { get; set; }
+
+	public AddressFormModel AddressForm { get; set; }
 }

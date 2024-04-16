@@ -1,5 +1,6 @@
 ﻿using DressUp.Data.Models;
 using DressUp.Services.Data.Models.Store;
+using DressUp.Web.ViewModels.Address;
 using DressUp.Web.ViewModels.Home;
 using DressUp.Web.ViewModels.Store;
 using DressUp.Web.ViewModels.Store.Enums;
@@ -17,4 +18,8 @@ public interface IStoreService
     Task<StoreDetailsViewModel> GetStoreDetailsAsyncById(int storeId);
 
     Task<bool> IsStoreExistByIdAsync(int storeId);
+
+    //Task<bool> IsStoreExistByAddressAsync(AddressFormModel addressFormModel);
+
+    Task AddStoreAsync(StoreFormModel formModel);
 }
