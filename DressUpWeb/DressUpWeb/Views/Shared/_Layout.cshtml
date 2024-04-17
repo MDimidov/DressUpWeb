@@ -30,7 +30,7 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Stores</a>
 							<div class="dropdown-menu">
-								@if (User.IsAdmin())
+								@if (User.IsAdmin() || User.IsModerator())
 								{
 									<a class="dropdown-item" asp-area="" asp-controller="Store" asp-action="Add">Add Store</a>
 									<div class="dropdown-divider"></div>
