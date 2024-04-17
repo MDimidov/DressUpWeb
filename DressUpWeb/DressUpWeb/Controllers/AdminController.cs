@@ -7,6 +7,7 @@ using static DressUp.Common.NotificationMessagesConstants;
 
 namespace DressUp.Web.Controllers;
 
+// Controller Only Admin has Access to it
 [Authorize(Roles = AdminRoleName)]
 public class AdminController : BaseController
 {
@@ -21,22 +22,33 @@ public class AdminController : BaseController
 		this.userService = userService;
 	}
 
+	// Action to Add or Delete role
 	[HttpGet]
 	public async Task<IActionResult> AddDeleteRole()
 	{
-		AddRoleViewModel form = new()
+		try
 		{
-			Roles = await adminService.GetAllRoles()
-		};
+			AddRoleViewModel form = new()
+			{
+				// Get all existing roles and returned it with model
+				Roles = await adminService.GetAllRoles()
+			};
 
-		return View(form);
+			return View(form);
+		}
+		catch
+		{
+			return GeneralError();
+		}
 	}
 
+	// Action to Add or Delete role
 	[HttpPost]
 	public async Task<IActionResult> AddDeleteRole(AddRoleViewModel roleForm)
 	{
 		if (!ModelState.IsValid)
 		{
+			// Get all existing roles and returned it with model
 			roleForm.Roles = await adminService.GetAllRoles();
 			return View(roleForm);
 		}
@@ -45,7 +57,11 @@ public class AdminController : BaseController
 		{
 			if (await adminService.IsRoleExist(roleForm.RoleName))
 			{
-				TempData[ErrorMessage] = string.Format(ErrorMessages.RoleAlreadyExist, roleForm.RoleName);
+				// If role exist add error message to ModelState
+				ModelState.AddModelError(nameof(roleForm.RoleName),
+					string.Format(ErrorMessages.RoleAlreadyExist, roleForm.RoleName)); ;
+
+				// Get all existing roles and returned it with model
 				roleForm.Roles = await adminService.GetAllRoles();
 				return View(roleForm);
 			}
@@ -53,23 +69,33 @@ public class AdminController : BaseController
 			await adminService.CreateRole(roleForm.RoleName);
 			TempData[SuccessMessage] = string.Format(SuccessMessages.CreatedRole, roleForm.RoleName);
 		}
-		catch (Exception ex)
+		catch
 		{
-			throw new ArgumentException(ex.Message, nameof(roleForm));
+			return GeneralError();
 		}
 
+		// After creating role return it to the same page
 		return RedirectToAction(nameof(AddDeleteRole));
 	}
 
+	// Action to Add user in role
 	[HttpGet]
 	public async Task<IActionResult> AddUserToRolе()
 	{
-		AddUserToRoleViewModel formModel = new()
+		try
 		{
-			Roles = await adminService.GetAllRoles()
-		};
+			AddUserToRoleViewModel formModel = new()
+			{
+				// Get all existing roles and returned it with model
+				Roles = await adminService.GetAllRoles()
+			};
 
-		return View(formModel);
+			return View(formModel);
+		}
+		catch
+		{
+			return GeneralError();
+		}
 	}
 
 	[HttpPost]
@@ -77,6 +103,7 @@ public class AdminController : BaseController
 	{
 		if (!ModelState.IsValid)
 		{
+			// Get all existing roles and returned it with model
 			userToRoleForm.Roles = await adminService.GetAllRoles();
 			return View(userToRoleForm);
 		}
@@ -85,45 +112,54 @@ public class AdminController : BaseController
 		{
 			if (!await adminService.IsRoleExist(userToRoleForm.RoleName))
 			{
-				TempData[ErrorMessage] = string.Format(ErrorMessages.RoleDoesNotExist, userToRoleForm.RoleName);
+				ModelState.AddModelError(nameof(userToRoleForm.RoleName), 
+					string.Format(ErrorMessages.RoleDoesNotExist, userToRoleForm.RoleName));
 
+				// Get all existing roles and returned it with model
 				userToRoleForm.Roles = await adminService.GetAllRoles();
 				return View(userToRoleForm);
 			}
 
 			if (!await userService.IsUserExistByEmailAsync(userToRoleForm.UserEmail))
 			{
-				ModelState.AddModelError(nameof(userToRoleForm.UserEmail), 
+				ModelState.AddModelError(nameof(userToRoleForm.UserEmail),
 					string.Format(ErrorMessages.UserDoesNotExist, userToRoleForm.UserEmail));
 
+				// Get all existing roles and returned it with model
 				userToRoleForm.Roles = await adminService.GetAllRoles();
 				return View(userToRoleForm);
 			}
 
 			if (await adminService.IsUserHasRole(userToRoleForm.UserEmail, userToRoleForm.RoleName))
 			{
-				TempData[ErrorMessage] = string.Format(ErrorMessages.UserAlreadyHasARole, userToRoleForm.UserEmail, userToRoleForm.RoleName);
+				ModelState.AddModelError(nameof(userToRoleForm.UserEmail), 
+					string.Format(ErrorMessages.UserAlreadyHasARole, userToRoleForm.UserEmail, userToRoleForm.RoleName));
+
+				// Get all existing roles and returned it with model
 				userToRoleForm.Roles = await adminService.GetAllRoles();
 				return View(userToRoleForm);
 			}
 
 			await adminService.AddUserToRoleAsync(userToRoleForm.UserEmail, userToRoleForm.RoleName);
-			TempData[SuccessMessage] = string.Format(SuccessMessages.AddedUserToRole, userToRoleForm.UserEmail, userToRoleForm.RoleName);
+			TempData[SuccessMessage] = string.Format(SuccessMessages.AddedUserToRole, 
+				userToRoleForm.UserEmail, userToRoleForm.RoleName);
 		}
-		catch (Exception ex)
+		catch
 		{
-			throw new ArgumentException(ex.Message);
+			return GeneralError();
 		}
 
-
-		return RedirectToAction("Index", "Home");
+		// After adding user to role return it to the same page
+		return RedirectToAction(nameof(AddUserToRolе));
 	}
 
+	// Delete Role if it exist
 	[HttpGet]
 	public async Task<IActionResult> DeleteRole(string roleId, string roleName)
 	{
 		try
 		{
+			// If role does not exist redirecto to AddDeleteRole Action
 			if (!await adminService.IsRoleExist(roleName))
 			{
 				TempData[ErrorMessage] = string.Format(ErrorMessages.RoleDoesNotExist, roleName);
@@ -135,9 +171,17 @@ public class AdminController : BaseController
 
 			return RedirectToAction(nameof(AddDeleteRole));
 		}
-		catch (Exception ex)
+		catch
 		{
-			throw new ArgumentException(ex.Message, nameof(roleName));
+			return GeneralError();
 		}
+	}
+
+	private IActionResult GeneralError()
+	{
+		TempData[ErrorMessage] = ErrorMessages.UnexpextedError;
+
+
+		return RedirectToAction("Index", "Home");
 	}
 }

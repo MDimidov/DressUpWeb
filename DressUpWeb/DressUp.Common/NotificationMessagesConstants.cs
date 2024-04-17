@@ -34,7 +34,8 @@ public static class NotificationMessagesConstants
         public const string RoleAlreadyExist = "Role {0} already exist!";
         public const string UserDoesNotExist = "User with e-mail: {0} does not exist";
         public const string UserAlreadyHasARole = "User {0} already has a role {1}!";
-    }
+        public const string UnexpextedError = "Unexpected error occurred! Please try again later or contact administrator";
+	}
 
     public static class WarningMessages
     {
