@@ -4,6 +4,7 @@ using DressUp.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DressUp.Data.Migrations
 {
     [DbContext(typeof(DressUpDbContext))]
-    partial class DressUpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240417061654_ChangeProductAddedDate")]
+    partial class ChangeProductAddedDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -160,7 +162,7 @@ namespace DressUp.Data.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000001"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dca95dad-ca99-4dd4-b5b1-73b83c6d780e",
+                            ConcurrencyStamp = "4773499f-bf1e-426c-9395-f566b7bffedb",
                             Email = "admin@softuni.bg",
                             EmailConfirmed = true,
                             FirstName = "Admin",
@@ -169,7 +171,7 @@ namespace DressUp.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@SOFTUNI.BG",
                             NormalizedUserName = "ADMIN@SOFTUNI.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEHp7Dsd/uUoIuWSVHGM+C+5ocPSRewIlLNsTxDvqlzPYoCyoOVVpFV0dsnhDYDLCzg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEOQFSUfYTYR7OiqhhD7aKY6sx6yTzE517lmvOp6TECTmEg8bFmaFwwUNy+748ACJ4A==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "078f1394-e303-4e74-9d19-0a9c539b7bd7",
                             TwoFactorEnabled = false,
@@ -179,7 +181,7 @@ namespace DressUp.Data.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000002"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a78b333c-6b34-4f45-802d-7c06420f49c9",
+                            ConcurrencyStamp = "61df3c55-b703-4cd1-90c3-15bbeb301316",
                             Email = "user@softuni.bg",
                             EmailConfirmed = true,
                             FirstName = "User",
@@ -188,7 +190,7 @@ namespace DressUp.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@SOFTUNI.BG",
                             NormalizedUserName = "USER@SOFTUNI.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEOGAFOUiqL1+I88YXTziOFxY6twwuoifN4zYZhOsmarmMBcwnn7Afq+rNzLNhWQ45A==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKCDNW/COA6XiqfQAE9HE/nogZ5VhVhOxVufXzDTU4YjGvNqJLGAsORFf0S0mfPZcw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "5ef1716d-6383-48af-b42e-cf0d4f3a1b31",
                             TwoFactorEnabled = false,
@@ -198,7 +200,7 @@ namespace DressUp.Data.Migrations
                         {
                             Id = new Guid("00000000-0000-0000-0000-000000000003"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "dcf30a7f-8abb-4fda-955c-29daf3afc592",
+                            ConcurrencyStamp = "e01a07e8-eeb4-43a9-b0e1-a6b92c820263",
                             Email = "moderator@softuni.bg",
                             EmailConfirmed = true,
                             FirstName = "Moderator",
@@ -207,7 +209,7 @@ namespace DressUp.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "MODERATOR@SOFTUNI.BG",
                             NormalizedUserName = "MODERATOR@SOFTUNI.BG",
-                            PasswordHash = "AQAAAAEAACcQAAAAEEbVBiko7KxGQ+v6SjyGb+EjP6VkiKPQ4KCbDovH171TB8idYeRIX1CRXF+fB7YdZQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIKjqmyYy5TUS4yFd9MRcpa+hPyT21114izKz21IN4oNAjcII/St+B7uSrvbFYFiLA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "7c9e579e-36b4-464b-bf11-8f26f1d525d9",
                             TwoFactorEnabled = false,

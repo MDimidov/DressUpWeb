@@ -7,7 +7,8 @@
     "CategoryId": 1,
     "Price": 15.99,
     "Quantity": 100,
-    "SizeType": "Men"
+    "SizeType": "Men",
+    "AddedOn": "2024-04-15T10:30:00"
   },
   {
     "Id": 2,
@@ -17,7 +18,8 @@
     "CategoryId": 2,
     "Price": 29.99,
     "Quantity": 50,
-    "SizeType": "Men"
+    "SizeType": "Men",
+    "AddedOn": "2024-04-16T11:45:00"
   },
   {
     "Id": 3,
@@ -27,7 +29,8 @@
     "CategoryId": 1,
     "Price": 24.99,
     "Quantity": 75,
-    "SizeType": "Men"
+    "SizeType": "Men",
+    "AddedOn": "2024-04-17T09:15:00"
   },
   {
     "Id": 4,
@@ -37,7 +40,8 @@
     "CategoryId": 3,
     "Price": 19.99,
     "Quantity": 60,
-    "SizeType": "Women"
+    "SizeType": "Women",
+    "AddedOn": "2024-04-18T14:20:00"
   },
   {
     "Id": 5,
@@ -47,7 +51,8 @@
     "CategoryId": 4,
     "Price": 49.99,
     "Quantity": 30,
-    "SizeType": "Men"
+    "SizeType": "Men",
+    "AddedOn": "2024-04-19T08:00:00"
   },
   {
     "Id": 6,
@@ -57,7 +62,8 @@
     "CategoryId": 1,
     "Price": 34.99,
     "Quantity": 80,
-    "SizeType": "Men"
+    "SizeType": "Men",
+    "AddedOn": "2024-04-20T13:10:00"
   },
   {
     "Id": 7,
@@ -67,7 +73,8 @@
     "CategoryId": 2,
     "Price": 22.99,
     "Quantity": 45,
-    "SizeType": "Men"
+    "SizeType": "Men",
+    "AddedOn": "2024-04-21T16:30:00"
   },
   {
     "Id": 8,
@@ -77,7 +84,8 @@
     "CategoryId": 3,
     "Price": 39.99,
     "Quantity": 65,
-    "SizeType": "Women"
+    "SizeType": "Women",
+    "AddedOn": "2024-04-22T17:20:00"
   },
   {
     "Id": 9,
@@ -87,7 +95,8 @@
     "CategoryId": 1,
     "Price": 29.99,
     "Quantity": 70,
-    "SizeType": "Women"
+    "SizeType": "Women",
+    "AddedOn": "2024-04-23T11:00:00"
   },
   {
     "Id": 10,
@@ -97,6 +106,7 @@
     "CategoryId": 4,
     "Price": 79.99,
     "Quantity": 25,
-    "SizeType": "Men"
+    "SizeType": "Men",
+    "AddedOn": "2024-04-24T10:45:00"
   }
 ]

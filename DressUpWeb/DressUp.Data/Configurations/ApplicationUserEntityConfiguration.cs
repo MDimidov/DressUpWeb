@@ -39,6 +39,7 @@ public class ApplicationUserEntityConfiguration : IEntityTypeConfiguration<Appli
                 Gender = u.Gender,
                 EmailConfirmed = u.EmailConfirmed,
                 SecurityStamp = u.SecurityStamp,
+                ConcurrencyStamp = u.ConcurrencyStamp
             })
             .ToArray();
 
