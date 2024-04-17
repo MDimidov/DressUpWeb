@@ -7,6 +7,7 @@ using DressUp.Web.ViewModels.Address;
 using DressUp.Web.ViewModels.Store;
 using DressUp.Web.ViewModels.Store.Enums;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 namespace DressUp.Services.Data;
 
@@ -28,7 +29,7 @@ public class StoreService : IStoreService
 		{
 			address = new()
 			{
-				Street = formModel.AddressForm.Street,
+				Street = WebUtility.HtmlEncode(formModel.AddressForm.Street),
 				CityId = formModel.AddressForm.CityId,
 				CountryId = formModel.AddressForm.CountryId,
 			};
@@ -36,12 +37,12 @@ public class StoreService : IStoreService
 
 		Store store = new()
 		{
-			Name = formModel.Name,
+			Name = WebUtility.HtmlEncode(formModel.Name),
 			Address = address,
 			OpeningTime = formModel.OpeningTime,
 			ClosingTime = formModel.ClosingTime,
-			ContactInfo = formModel.ContactInfo,
-			ImageUrl = formModel.ImageUrl,
+			ContactInfo = WebUtility.HtmlEncode(formModel.ContactInfo),
+			ImageUrl = WebUtility.HtmlEncode(formModel.ImageUrl)
 		};
 
 		await dbContext.Stores.AddAsync(store);
@@ -120,7 +121,7 @@ public class StoreService : IStoreService
 		{
 			address = new()
 			{
-				Street = formModel.AddressForm.Street,
+				Street = WebUtility.HtmlEncode(formModel.AddressForm.Street),
 				CityId = formModel.AddressForm.CityId,
 				CountryId = formModel.AddressForm.CountryId,
 			};
@@ -132,13 +133,12 @@ public class StoreService : IStoreService
 			.Stores
 			.FirstAsync(s => s.Id == storeId);
 
-		store.Name = formModel.Name;
-		store.Address = address;
+		store.Name = WebUtility.HtmlEncode(formModel.Name);
 		store.Address = address;
 		store.OpeningTime = formModel.OpeningTime;
 		store.ClosingTime = formModel.ClosingTime;
-		store.ContactInfo = formModel.ContactInfo;
-		store.ImageUrl = formModel.ImageUrl;
+		store.ContactInfo = WebUtility.HtmlEncode(formModel.ContactInfo);
+		store.ImageUrl = WebUtility.HtmlEncode(formModel.ImageUrl);
 
 		await dbContext.SaveChangesAsync();
 	}

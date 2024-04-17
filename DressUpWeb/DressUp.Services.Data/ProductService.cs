@@ -8,6 +8,7 @@ using DressUp.Web.ViewModels.Product.Enums;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
+using System.Net;
 
 namespace DressUp.Services.Data;
 
@@ -98,9 +99,9 @@ public class ProductService : IProductService
     {
         Product product = new()
         {
-            Name = model.Name,
-            Description = model.Description,
-            BrandId = model.BrandId,
+            Name = WebUtility.HtmlEncode(model.Name),
+			Description = WebUtility.HtmlEncode(model.Description),
+			BrandId = model.BrandId,
             CategoryId = model.CategoryId,
             SizeType = model.SizeType,
             Price = model.Price,
@@ -228,8 +229,8 @@ public class ProductService : IProductService
             return;
         }
 
-        product.Name = model.Name;
-        product.Description = model.Description;
+        product.Name = WebUtility.HtmlEncode(model.Name);
+        product.Description = WebUtility.HtmlEncode(model.Description);
         product.BrandId = model.BrandId;
         product.CategoryId = model.CategoryId;
         product.SizeType = model.SizeType;
