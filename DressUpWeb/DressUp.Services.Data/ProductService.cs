@@ -212,7 +212,7 @@ public class ProductService : IProductService
             .ToArray();
 
         dbContext.Products.Remove(product);
-        //await dbContext.SaveChangesAsync();
+        await dbContext.SaveChangesAsync();
 
         DeleteImages(imagesPath);
     }
