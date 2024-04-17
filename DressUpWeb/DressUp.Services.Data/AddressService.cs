@@ -14,11 +14,6 @@ public class AddressService : IAddressService
         this.dbContext = dbContext;
     }
 
-    public Task AddAddressAsync(AddressFormModel address)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<IEnumerable<CityViewModel>> GetAllCitiesAsync()
         => await dbContext
         .Cities
@@ -40,12 +35,6 @@ public class AddressService : IAddressService
             Name = c.Name
         })
         .ToArrayAsync();
-
-    //public async Task<bool> IsAddressExistByStreetAsync(string street)
-    //    => await dbContext
-    //    .Addresses
-    //    .AsNoTracking()
-    //    .AnyAsync(a => a.Street.ToLower() == street.ToLower());
 
     public async Task<bool> IsCityExistByIdAsync(int id)
         => await dbContext

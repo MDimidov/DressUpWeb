@@ -1,5 +1,4 @@
 using DressUp.Data.Models;
-using DressUp.Services.Data;
 using DressUp.Services.Data.Interfaces;
 using DressUp.Web.Data;
 using DressUp.Web.Infrastructure.Extensions;
@@ -77,7 +76,7 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-//Seed first Admin
+// Seed first Admin
 if (app.Environment.IsDevelopment())
 {
     app.SeedAdministrator(DevelopmentAdminEmail);
@@ -92,10 +91,5 @@ app.UseEndpoints(endpoints =>
 	endpoints.MapDefaultControllerRoute();
 	endpoints.MapRazorPages();
 });
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
-//app.MapDefaultControllerRoute();
-//app.MapRazorPages();
 
 app.Run();

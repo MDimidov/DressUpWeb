@@ -11,8 +11,4 @@ public interface IAddressService
     Task<IEnumerable<CountryViewModel>> GetAllCountriesAsync();
 
     Task<bool> IsCountryExistByIdAsync(int id);
-
-    //Task<bool> IsAddressExistByStreetAsync(string street);
-
-    Task AddAddressAsync(AddressFormModel address);
 }

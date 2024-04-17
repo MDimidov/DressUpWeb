@@ -5,7 +5,6 @@ using DressUp.Web.Data;
 using DressUp.Web.ViewModels.Product;
 using DressUp.Web.ViewModels.Product.Enums;
 using Microsoft.EntityFrameworkCore;
-using static DressUp.Common.EntityValidationConstants;
 using Product = DressUp.Data.Models.Product;
 
 namespace DressUp.Services.Data;

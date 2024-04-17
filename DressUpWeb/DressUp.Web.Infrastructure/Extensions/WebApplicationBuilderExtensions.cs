@@ -1,6 +1,4 @@
 ﻿using DressUp.Data.Models;
-using DressUp.Services.Data;
-using DressUp.Services.Data.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;

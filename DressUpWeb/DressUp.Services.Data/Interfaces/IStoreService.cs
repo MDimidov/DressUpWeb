@@ -1,6 +1,4 @@
-﻿using DressUp.Data.Models;
-using DressUp.Services.Data.Models.Store;
-using DressUp.Web.ViewModels.Address;
+﻿using DressUp.Services.Data.Models.Store;
 using DressUp.Web.ViewModels.Home;
 using DressUp.Web.ViewModels.Store;
 using DressUp.Web.ViewModels.Store.Enums;

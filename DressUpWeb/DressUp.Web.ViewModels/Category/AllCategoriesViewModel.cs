@@ -1,4 +1,6 @@
-﻿namespace DressUp.Web.ViewModels.Category;
+﻿#nullable disable
+
+namespace DressUp.Web.ViewModels.Category;
 
 public class AllCategoriesViewModel
 {

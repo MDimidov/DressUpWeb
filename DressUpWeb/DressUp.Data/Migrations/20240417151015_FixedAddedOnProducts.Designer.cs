@@ -4,6 +4,7 @@ using DressUp.Web.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DressUp.Data.Migrations
 {
     [DbContext(typeof(DressUpDbContext))]
-    partial class DressUpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240417151015_FixedAddedOnProducts")]
+    partial class FixedAddedOnProducts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
