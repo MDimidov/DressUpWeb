@@ -1,5 +1,4 @@
-﻿using DressUp.Data.Models.Enums;
-using DressUp.Services.Data.Interfaces;
+﻿using DressUp.Services.Data.Interfaces;
 using DressUp.Services.Data.Models.Product;
 using DressUp.Web.Infrastructure.Extensions;
 using DressUp.Web.ViewModels.Product;
@@ -42,7 +41,6 @@ public class ProductController : BaseController
 			queryModel.Categories = await categoryService.GetCategoriesNamesAsync();
 			queryModel.Brands = await brandService.GetBrandsNameAsync();
 			queryModel.SizeTypes = productService.GetAllSizeTypes();
-
 
 			return View(queryModel);
 		}
