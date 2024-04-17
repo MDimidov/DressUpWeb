@@ -4,6 +4,7 @@ using DressUp.Web.Data;
 using DressUp.Web.Infrastructure.Extensions;
 using DressUp.Web.Infrastructure.ModelBinders;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static DressUp.Common.GeneralApplicationConstants;
 
@@ -38,10 +39,17 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 	.AddEntityFrameworkStores<DressUpDbContext>()
 	.AddDefaultTokenProviders();
 
+
+// Add Protection from CSRF Attack
+builder.Services.AddMvc(options =>
+{
+	options.Filters.Add(new AutoValidateAntiforgeryTokenAttribute());
+});
+
 builder.Services.ConfigureApplicationCookie(cfg =>
 {
 	cfg.LoginPath = "/User/Login";
-	//cfg.AccessDeniedPath = "/Home/Error/401";
+	cfg.AccessDeniedPath = "/Home/Error/401";
 });
 
 builder.Services

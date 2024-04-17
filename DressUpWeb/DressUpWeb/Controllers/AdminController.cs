@@ -154,7 +154,7 @@ public class AdminController : BaseController
 	}
 
 	// Delete Role if it exist
-	[HttpGet]
+	[HttpPost]
 	public async Task<IActionResult> DeleteRole(string roleId, string roleName)
 	{
 		try
