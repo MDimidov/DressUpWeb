@@ -30,13 +30,11 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Stores</a>
 							<div class="dropdown-menu">
-								<a class="dropdown-item" asp-area="" asp-controller="Store" asp-action="All">All</a>
-								@if (User.Identity?.IsAuthenticated ?? false)
+								@if (User.IsAdmin())
 								{
-									<a class="dropdown-item" asp-area="" asp-controller="Store" asp-action="Add">Add</a>
-									<a class="dropdown-item" asp-area="" asp-controller="Store" asp-action="Delete">Delete</a>
+									<a class="dropdown-item" asp-area="" asp-controller="Store" asp-action="Add">Add Store</a>
+									<div class="dropdown-divider"></div>
 								}
-								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" asp-area="" asp-controller="Store" asp-action="All">All Stores</a>
 							</div>
 						</li>
@@ -44,7 +42,7 @@
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dress for</a>
 							<div class="dropdown-menu">
-								@if (User.Identity?.IsAuthenticated ?? false && User.IsInRole(AdminRoleName))
+								@if (User.IsAdmin() || User.IsModerator())
 								{
 									<a class="dropdown-item" asp-area="" asp-controller="Product" asp-action="Add">Add product</a>
 								}
@@ -69,10 +67,6 @@
 					</ul>
 				</div>
 				<partial name="_LoginPartial" />
-				@* <form class="d-flex">
-					<input class="form-control me-sm-2" type="search" placeholder="Search">
-					<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-				</form> *@
 			</div>
 		</nav>
 	</header>
@@ -97,7 +91,7 @@
 
 	<script src="~/lib/jquery/dist/jquery.min.js"></script>
 	<script src="~/js/toastr.js"></script>
-	<script src="~/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+	<script src="~/js/bootstrap.bundle.min.js"></script>
 	<script src="~/js/site.js" asp-append-version="true"></script>
 	<partial name="_NotificationsPartial" />
 	@await RenderSectionAsync("Scripts", required: false)

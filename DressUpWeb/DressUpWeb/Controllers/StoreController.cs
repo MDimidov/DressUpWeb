@@ -139,7 +139,7 @@ public class StoreController : BaseController
     {
         if (!User.IsAdmin())
         {
-            TempData[ErrorMessage] = ErrorMessages.AdminToEdit;
+            TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToEdit;
             return RedirectToAction(nameof(All));
         }
 
@@ -169,7 +169,7 @@ public class StoreController : BaseController
     {
 		if (!User.IsAdmin())
 		{
-			TempData[ErrorMessage] = ErrorMessages.AdminToEdit;
+			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToEdit;
 			return RedirectToAction(nameof(All));
 		}
 
@@ -218,7 +218,7 @@ public class StoreController : BaseController
     {
 		if (!User.IsAdmin())
 		{
-			TempData[ErrorMessage] = ErrorMessages.AdminToEdit;
+			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToEdit;
 			return RedirectToAction(nameof(All));
 		}
         

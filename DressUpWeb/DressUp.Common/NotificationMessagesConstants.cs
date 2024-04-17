@@ -19,10 +19,10 @@ public static class NotificationMessagesConstants
         public const string InvalidProductToFavorite = "This product does not exist, plese add to Favorite avaliable product";
         public const string InvalidProductToRemoveFromFavorite = "This product does not exist in your Favorites list";
         public const string LogInToOrder = "To order this product you must be Loged In";
-        public const string AdminToEdit = "To edit this product you must be Administrator";
-        public const string AdminToAddProduct = "To add the product you must be Administrator";
+        public const string AdminOrModeratorToEdit = "To edit this product you must be Administrator or Moderator";
+        public const string AdminOrModeratorToAddProduct = "To add the product you must be Administrator or Moderator";
         public const string AdminToAddStore = "To add the store you must be Administrator";
-        public const string AdminToDelete = "To delete this product you must be Administrator";
+        public const string AdminOrModeratorToDelete = "To delete this product you must be Administrator or Moderator";
         public const string ProductDoesNotExist = "The product with given Id does not exist";
         public const string StoreDoesNotExist = "The store with given Id does not exist";
         public const string CityDoesNotExist = "The city with given Id does not exist";
