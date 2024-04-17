@@ -1,6 +1,7 @@
 ﻿using DressUp.Data.Models.Enums;
 using DressUp.Services.Data.Models.Product;
 using DressUp.Web.ViewModels.Product;
+using Microsoft.AspNetCore.Http;
 
 namespace DressUp.Services.Data.Interfaces;
 
@@ -29,4 +30,6 @@ public interface IProductService
 	Task<AllProductsFilteredAndPagedServiceModel> AllAsync(AllProductsQueryModel queryModel);
 
 	Task<bool> IsProductFavorite(string userId, int productId);
+
+	IEnumerable<string> UploadImages(IEnumerable<IFormFile> files, SizeType sizeType);
 }

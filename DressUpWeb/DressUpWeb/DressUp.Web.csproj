@@ -56,4 +56,8 @@
     <ProjectReference Include="..\DressUp.Web.ViewModels\DressUp.Web.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\DressPics\Child\" />
+  </ItemGroup>
+
 </Project>
