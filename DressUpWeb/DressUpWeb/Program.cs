@@ -79,7 +79,8 @@ app.UseAuthorization();
 // Seed first Admin
 if (app.Environment.IsDevelopment())
 {
-    app.SeedAdministrator(DevelopmentAdminEmail);
+    app.SeedRole(DevelopmentAdminEmail, AdminRoleName);
+    app.SeedRole(DevelopmentModeratorEmail, ModeratorRoleName);
 }
 
 app.UseEndpoints(endpoints =>

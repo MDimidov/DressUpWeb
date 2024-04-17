@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
-using static DressUp.Common.GeneralApplicationConstants;
 
 namespace DressUp.Web.Infrastructure.Extensions;
 
@@ -49,7 +48,7 @@ public static class WebApplicationBuilderExtensions
     /// <param name="app"></param>
     /// <param name="email"></param>
     /// <returns></returns>
-    public static IApplicationBuilder SeedAdministrator(this IApplicationBuilder app, string email)
+    public static IApplicationBuilder SeedRole(this IApplicationBuilder app, string email, string roleName)
     {
         using IServiceScope scopedSerivces = app.ApplicationServices.CreateScope();
 
@@ -63,19 +62,19 @@ public static class WebApplicationBuilderExtensions
 
         Task.Run(async () =>
         {
-            if (await roleManager.RoleExistsAsync(AdminRoleName))
+            if (await roleManager.RoleExistsAsync(roleName))
             {
                 return;
             }
 
-            IdentityRole<Guid> role = new(AdminRoleName);
+            IdentityRole<Guid> role = new(roleName);
 
             await roleManager.CreateAsync(role);
 
-            ApplicationUser adminUser = await userManager
+            ApplicationUser userWithRole = await userManager
                 .FindByEmailAsync(email);
 
-            await userManager.AddToRoleAsync(adminUser, AdminRoleName);
+            await userManager.AddToRoleAsync(userWithRole, roleName);
         })
         .GetAwaiter()
         .GetResult();

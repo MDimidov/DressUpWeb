@@ -30,8 +30,8 @@
 					{
 						<li>
 							<input disabled="disabled" class="btn-group text-center" value="@role.RoleName" />
-							@* First Admin Role can not be deleted *@
-							@if (role.RoleName != AdminRoleName)
+							@* First Admin and Moderator Role can not be deleted *@
+							@if (role.RoleName != AdminRoleName && role.RoleName != ModeratorRoleName)
 							{
 								<a class="btn btn-danger btn-sm" asp-action="DeleteRole" asp-route-roleId="@role.Id" asp-route-roleName="@role.RoleName"
 								   onclick="return confirm('Are you sure you want to delete role: @role.RoleName')">Delete</a>
