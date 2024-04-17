@@ -2,38 +2,49 @@
 using DressUp.Web.ViewModels.Home;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+using static DressUp.Common.NotificationMessagesConstants;
 
 namespace DressUp.Web.Controllers;
 
 [AllowAnonymous]
 public class HomeController : BaseController
 {
-    private readonly IStoreService storeService;
-    public HomeController(IStoreService storeService)
-    {
-        this.storeService = storeService;
-    }
+	private readonly IStoreService storeService;
+	public HomeController(IStoreService storeService)
+	{
+		this.storeService = storeService;
+	}
 
-    public async Task<IActionResult> Index()
-    {
-        IEnumerable<IndexViewModel> viewModel = await storeService.LastThreeOpenStoresAsync();
-        return View(viewModel);
-    }
+	public async Task<IActionResult> Index()
+	{
+		IEnumerable<IndexViewModel> viewModel;
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error(int statusCode)
-    {
-        if(statusCode == 400 || statusCode == 404)
-        {
-            return View("Error404");
-        }
-        else if(statusCode == 401)
-        {
-            return View("Error401");
-        }
+		try
+		{
+			// Show Last three open stores
+			viewModel = await storeService.LastThreeOpenStoresAsync();
+		}
+		catch
+		{
+			TempData[ErrorMessage] = ErrorMessages.UnexpextedError;
+			viewModel = new List<IndexViewModel>();
+		}
 
-        return View();
-        //return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+		return View(viewModel);
+	}
+
+	[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+	public IActionResult Error(int statusCode)
+	{
+		if (statusCode == 400 || statusCode == 404)
+		{
+			return View("Error404");
+		}
+		else if (statusCode == 401)
+		{
+			return View("Error401");
+		}
+
+		return View();
+	}
 }

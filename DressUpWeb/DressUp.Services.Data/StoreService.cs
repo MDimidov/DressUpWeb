@@ -217,15 +217,17 @@ public class StoreService : IStoreService
     public async Task<IEnumerable<IndexViewModel>> LastThreeOpenStoresAsync()
         => await dbContext
         .Stores
+        .AsNoTracking()
         .Where(s => s.ClosingTime.TimeOfDay > DateTime.Now.TimeOfDay
             && s.OpeningTime.TimeOfDay <= DateTime.Now.TimeOfDay)
-        .AsNoTracking()
+        .OrderByDescending(s => s.ClosingTime.TimeOfDay)
         .Select(a => new IndexViewModel
         {
             Address = $"{a.Address.Street}, {a.Address.City.Name}, {a.Address.Country.Name}",
             Id = a.Id,
             ImageUrl = a.ImageUrl,
         })
+        .Take(3)
         .ToArrayAsync();
 
     private async Task<Address?> GetAddressByModelAsync(AddressFormModel addressModel)
