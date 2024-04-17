@@ -67,7 +67,7 @@ public class ProductService : IProductService
                     string filepath =
                         new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "DressPics", size)).Root + $@"\{newFileName}";
 
-                    using (FileStream fs = System.IO.File.Create(filepath))
+                    using (FileStream fs = File.Create(filepath))
                     {
                         file.CopyTo(fs);
                         fs.Flush();
@@ -77,19 +77,21 @@ public class ProductService : IProductService
                     filepath = filepath.Replace(@"\", @"/");
                     imagesUrl.Add(filepath);
                 }
-                //else
-                //{
-                //    string formats = string.Empty;
-
-                //    foreach (var exte in allowedFiledExtensions)
-                //    {
-                //        formats += $" {exte}";
-                //    }
-                //}
             }
         }
 
         return imagesUrl.ToArray();
+    }
+
+    public void DeleteImages(IEnumerable<string> ImagesUrls)
+    {
+        foreach (string imgUrl in ImagesUrls)
+        {
+            string imagePath = imgUrl;
+            imagePath = imagePath.Replace("~", Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"));
+            imagePath = imagePath.Replace(@"/", @"\");
+            File.Delete(imagePath);
+        }
     }
 
     public async Task AddProductAsync(ProductFormModel model)
@@ -105,7 +107,7 @@ public class ProductService : IProductService
             Quantity = model.Quantity,
             ProductImages = model.Images
                 .Select(i => new ProductImage
-                { 
+                {
                     ImageUrl = i.ImageUrl
                 })
                 .ToArray()
@@ -201,10 +203,18 @@ public class ProductService : IProductService
     {
         Product product = await dbContext
             .Products
+            .Include(p => p.ProductImages)
             .FirstAsync(p => p.Id == id);
 
+        IEnumerable<string> imagesPath = product
+            .ProductImages
+            .Select(pi => pi.ImageUrl)
+            .ToArray();
+
         dbContext.Products.Remove(product);
-        await dbContext.SaveChangesAsync();
+        //await dbContext.SaveChangesAsync();
+
+        DeleteImages(imagesPath);
     }
 
     public async Task EditProductAsync(ProductFormModel model, int id)
@@ -366,5 +376,7 @@ public class ProductService : IProductService
             .Favorites
             .AnyAsync(f => f.ProductId == productId
                                 && f.UserId.ToString() == userId);
+
+
 
 }

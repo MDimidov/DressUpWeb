@@ -32,4 +32,6 @@ public interface IProductService
 	Task<bool> IsProductFavorite(string userId, int productId);
 
 	IEnumerable<string> UploadImages(IEnumerable<IFormFile> files, SizeType sizeType);
+
+	void DeleteImages(IEnumerable<string> ImagesPath);
 }
