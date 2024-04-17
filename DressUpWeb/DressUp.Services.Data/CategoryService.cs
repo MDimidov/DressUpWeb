@@ -1,6 +1,5 @@
 ﻿using DressUp.Services.Data.Interfaces;
 using DressUp.Web.Data;
-using DressUp.Web.ViewModels.Brand;
 using DressUp.Web.ViewModels.Category;
 using Microsoft.EntityFrameworkCore;
 
