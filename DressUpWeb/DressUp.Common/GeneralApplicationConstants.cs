@@ -13,4 +13,7 @@ public static class GeneralApplicationConstants
     public const string DevelopmentAdminEmail= "admin@softuni.bg";
     public const string ModeratorRoleName = "Moderator";
     public const string DevelopmentModeratorEmail= "moderator@softuni.bg";
+
+    //Area
+    public const string AdminAreaName = "Admin";
 }

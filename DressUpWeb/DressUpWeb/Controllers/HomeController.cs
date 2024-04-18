@@ -1,8 +1,10 @@
 ﻿using DressUp.Services.Data.Interfaces;
+using DressUp.Web.Infrastructure.Extensions;
 using DressUp.Web.ViewModels.Home;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using static DressUp.Common.NotificationMessagesConstants;
+using static DressUp.Common.GeneralApplicationConstants;
 
 namespace DressUp.Web.Controllers;
 
@@ -17,6 +19,11 @@ public class HomeController : BaseController
 
 	public async Task<IActionResult> Index()
 	{
+		if (User.IsAdmin())
+		{
+			return RedirectToAction(nameof(Index), "Home", new { Area = AdminAreaName });
+		}
+
 		IEnumerable<IndexViewModel> viewModel;
 
 		try

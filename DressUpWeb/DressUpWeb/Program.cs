@@ -94,9 +94,15 @@ if (app.Environment.IsDevelopment())
 app.UseEndpoints(endpoints =>
 {
 	endpoints.MapControllerRoute(
+			name: "areas",
+			pattern: "/{area:exists}/{controller=Home}/{action=Index}/{id?}"
+		  );
+
+	endpoints.MapControllerRoute(
 		  name: "ProtectingUrlPattern",
 		  pattern: "/{controller}/{action}/{id}/{information}",
 		  defaults: new { Controller = "Product", Action = "Details"});
+	
 	endpoints.MapDefaultControllerRoute();
 	endpoints.MapRazorPages();
 });
