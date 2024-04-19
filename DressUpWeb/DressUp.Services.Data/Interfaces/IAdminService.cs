@@ -15,4 +15,6 @@ public interface IAdminService
 	Task<bool> IsUserHasRole(string userEmail, string roleName);
 
 	Task DeleteRoleAsync(string roleName, string roleId);
+
+	Task<IList<string>> GetUserRolesByEmailAsync(string email);
 }

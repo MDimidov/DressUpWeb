@@ -3,26 +3,26 @@
 }
 
 <div class="mt-4 p-5 bg-light text-center">
-	<h2 class="display-4">hello, admin!</h2>
+	<h2 class="display-4">Hello, Admin!</h2>
 	<p class="lead mb-1 mt-3">
 		this is your administrator area - you can <b>read</b>, <b>create</b>,
-		<b>delete</b> and <b>edit</b> houses.
-		<br />you can <b>rent</b> and <b>leave</b> the free ones, too!
+		<b>delete</b> and <b>edit</b> products and stores.
+		<br />you can <b>order</b> and <b>add to favorite</b>, too!
 	</p>
 	<p class="lead mt-1">
-		you can also see <b>all users and agents</b> and <b>all rents</b> in the system.
+		you can also see <b>all users and moderators</b> and <b>all favorites products</b> in the system.
 	</p>
 	<hr class="my-4">
-	<a asp-area="" asp-controller="house" asp-action="all"
-	   class="btn btn-primary btn-lg">all houses</a>
-	<a asp-area="" asp-controller="house" asp-action="add"
-	   class="btn btn-primary btn-lg">add house</a>
+	<a asp-area="" asp-controller="Product" asp-action="all"
+	   class="btn btn-primary btn-lg">All pproducts</a>
+	<a asp-area="" asp-controller="Product" asp-action="add"
+	   class="btn btn-primary btn-lg">Add product</a>
 	<span>  |   </span>
-	<a asp-area="admin" asp-controller="house" asp-action="mine"
-	   class="btn btn-primary btn-lg">my houses</a>
+	<a asp-area="Admin" asp-controller="Product" asp-action="Favorite"
+	   class="btn btn-primary btn-lg">Favorites</a>
 	<span>  |   </span>
-	<a asp-area="admin" asp-controller="rent" asp-action="all"
-	   class="btn btn-primary btn-lg">all rents</a>
-	<a asp-area="admin" asp-controller="user" asp-action="all"
-	   class="btn btn-primary btn-lg">all users</a>
+	<a asp-area="Admin" asp-controller="Store" asp-action="All"
+	   class="btn btn-primary btn-lg">All stores</a>
+	<a asp-area="Admin" asp-controller="User" asp-action="All"
+	   class="btn btn-primary btn-lg">All users</a>
 </div>

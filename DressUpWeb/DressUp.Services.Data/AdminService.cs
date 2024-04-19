@@ -1,4 +1,5 @@
-﻿using DressUp.Data.Models;
+﻿using DressUp.Data.Migrations;
+using DressUp.Data.Models;
 using DressUp.Services.Data.Interfaces;
 using DressUp.Web.Data;
 using DressUp.Web.ViewModels.Admin;
@@ -71,5 +72,13 @@ public class AdminService : IAdminService
 
 		await roleManager.DeleteAsync(role);
 	}
+
+    public async Task<IList<string>> GetUserRolesByEmailAsync(string email)
+    {
+        ApplicationUser user = await userManager.FindByEmailAsync(email);
+
+
+        return await userManager.GetRolesAsync(user);
+    }
 }
 
