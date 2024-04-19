@@ -1,4 +1,5 @@
 ﻿using DressUp.Data.Models;
+using DressUp.Web.Infrastructure.Middlewares;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
@@ -81,4 +82,7 @@ public static class WebApplicationBuilderExtensions
 
         return app;
     }
+
+    public   static IApplicationBuilder EnableOnlineUsersCheck(this IApplicationBuilder app)
+        => app.UseMiddleware<OnlineUsersMiddleware>();
 }

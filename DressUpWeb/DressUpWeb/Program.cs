@@ -84,6 +84,8 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.EnableOnlineUsersCheck();
+
 // Seed first Admin
 if (app.Environment.IsDevelopment())
 {
