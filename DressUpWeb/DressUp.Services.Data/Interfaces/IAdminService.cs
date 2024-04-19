@@ -12,6 +12,8 @@ public interface IAdminService
 
 	Task AddUserToRoleAsync(string userEmail, string roleName);
 
+	Task RemoveUserFromRoleAsync(string userEmail, string roleName);
+
 	Task<bool> IsUserHasRole(string userEmail, string roleName);
 
 	Task DeleteRoleAsync(string roleName, string roleId);

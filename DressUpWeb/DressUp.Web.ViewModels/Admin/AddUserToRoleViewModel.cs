@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using static DressUp.Common.EntityValidationConstants.Role;
 namespace DressUp.Web.ViewModels.Admin;
 
-public class AddUserToRoleViewModel
+public class AddOrRemoveUserToRoleViewModel
 {
-    public AddUserToRoleViewModel()
+    public AddOrRemoveUserToRoleViewModel()
     {
         Roles = new List<RoleViewModel>();
     }

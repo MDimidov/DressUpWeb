@@ -19,7 +19,7 @@ public class UserService : IUserService
         this.adminService = adminService;
     }
 
-    public async Task<IEnumerable<UserViewModel>> AllUsersAsync()
+    public async Task<IEnumerable<UserViewModel>> GetAllUsersAsync()
     {
         IEnumerable<UserViewModel> users = await dbContext
             .Users
@@ -38,7 +38,9 @@ public class UserService : IUserService
                 await adminService.GetUserRolesByEmailAsync(user.Email);
         }
 
-        return users;
+        return users
+            .OrderByDescending(u => u.Roles.Any())
+            .ThenBy(u => u.Email);
     }
 
     public async Task<string> GetFullNameByEmailAsync(string email)

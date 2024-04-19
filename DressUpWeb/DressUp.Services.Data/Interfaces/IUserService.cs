@@ -8,5 +8,5 @@ public interface IUserService
 
 	Task<bool> IsUserExistByEmailAsync(string email);
 
-	Task<IEnumerable<UserViewModel>> AllUsersAsync();
+	Task<IEnumerable<UserViewModel>> GetAllUsersAsync();
 }

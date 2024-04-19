@@ -16,8 +16,16 @@ public class UserController : BaseAdminController
     [HttpGet]
     public async Task<IActionResult> All()
     {
-        IEnumerable<UserViewModel> model = await userService.AllUsersAsync();
+        IEnumerable<UserViewModel> model = await userService.GetAllUsersAsync();
 
         return View(model);
     }
+
+	[HttpGet]
+	public async Task<IActionResult> RemoveUserFromRole()
+	{
+		IEnumerable<UserViewModel> model = await userService.GetAllUsersAsync();
+
+		return View(model);
+	}
 }

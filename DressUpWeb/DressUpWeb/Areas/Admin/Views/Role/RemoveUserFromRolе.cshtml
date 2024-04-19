@@ -1,6 +1,6 @@
 ﻿@model AddOrRemoveUserToRoleViewModel
 
-<h2 class="text-center">Add role to user</h2>
+<h2 class="text-center">Remove role from user</h2>
 <form method="post">
     <div class="form-group mt-2">
         <label asp-for="UserEmail" class="control-label">User e-mail</label>
@@ -14,5 +14,5 @@
         </select>
         <span asp-validation-for="RoleName" class="text-danger"></span>
     </div>
-    <button type="submit" class="btn btn-primary mt-2">Add to Role</button>
+    <button type="submit" class="btn btn-primary mt-2">Remove from Role</button>
 </form>

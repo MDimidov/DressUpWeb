@@ -28,10 +28,7 @@ public class AdminService : IAdminService
 	{
 		ApplicationUser user = await userManager.FindByEmailAsync(userEmail);
 
-		if (!await userManager.IsInRoleAsync(user, roleName))
-		{
-			await userManager.AddToRoleAsync(user, roleName);
-		}
+		await userManager.AddToRoleAsync(user, roleName);
 	}
 
 	public async Task<bool> IsRoleExist(string roleName)
@@ -73,12 +70,20 @@ public class AdminService : IAdminService
 		await roleManager.DeleteAsync(role);
 	}
 
-    public async Task<IList<string>> GetUserRolesByEmailAsync(string email)
-    {
-        ApplicationUser user = await userManager.FindByEmailAsync(email);
+	public async Task<IList<string>> GetUserRolesByEmailAsync(string email)
+	{
+		ApplicationUser user = await userManager.FindByEmailAsync(email);
 
 
-        return await userManager.GetRolesAsync(user);
-    }
+		return await userManager.GetRolesAsync(user);
+	}
+
+	public async Task RemoveUserFromRoleAsync(string userEmail, string roleName)
+	{
+		ApplicationUser user = await userManager.FindByEmailAsync(userEmail);
+
+		await userManager.RemoveFromRoleAsync(user, roleName);
+
+	}
 }
 

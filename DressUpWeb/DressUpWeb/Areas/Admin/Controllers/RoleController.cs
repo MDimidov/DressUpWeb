@@ -1,5 +1,4 @@
-﻿using DressUp.Services.Data;
-using DressUp.Services.Data.Interfaces;
+﻿using DressUp.Services.Data.Interfaces;
 using DressUp.Web.ViewModels.Admin;
 using Microsoft.AspNetCore.Mvc;
 using static DressUp.Common.NotificationMessagesConstants;
@@ -82,7 +81,7 @@ public class RoleController : BaseAdminController
     {
         try
         {
-            AddUserToRoleViewModel formModel = new()
+            AddOrRemoveUserToRoleViewModel formModel = new()
             {
                 // Get all existing roles and returned it with model
                 Roles = await adminService.GetAllRoles()
@@ -97,7 +96,7 @@ public class RoleController : BaseAdminController
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddUserToRolе(AddUserToRoleViewModel userToRoleForm)
+    public async Task<IActionResult> AddUserToRolе(AddOrRemoveUserToRoleViewModel userToRoleForm)
     {
         if (!ModelState.IsValid)
         {
@@ -181,4 +180,79 @@ public class RoleController : BaseAdminController
 
         return RedirectToAction("Index", "Home");
     }
+
+	// Action to Remove user in role
+	[HttpGet]
+	public async Task<IActionResult> RemoveUserFromRolе()
+	{
+		try
+		{
+			AddOrRemoveUserToRoleViewModel formModel = new()
+			{
+				// Get all existing roles and returned it with model
+				Roles = await adminService.GetAllRoles()
+			};
+
+			return View(formModel);
+		}
+		catch
+		{
+			return GeneralError();
+		}
+	}
+
+	[HttpPost]
+	public async Task<IActionResult> RemoveUserFromRolе(AddOrRemoveUserToRoleViewModel userToRoleForm)
+	{
+		if (!ModelState.IsValid)
+		{
+			// Get all existing roles and returned it with model
+			userToRoleForm.Roles = await adminService.GetAllRoles();
+			return View(userToRoleForm);
+		}
+
+		try
+		{
+			if (!await adminService.IsRoleExist(userToRoleForm.RoleName))
+			{
+				ModelState.AddModelError(nameof(userToRoleForm.RoleName),
+					string.Format(ErrorMessages.RoleDoesNotExist, userToRoleForm.RoleName));
+
+				// Get all existing roles and returned it with model
+				userToRoleForm.Roles = await adminService.GetAllRoles();
+				return View(userToRoleForm);
+			}
+
+			if (!await userService.IsUserExistByEmailAsync(userToRoleForm.UserEmail))
+			{
+				ModelState.AddModelError(nameof(userToRoleForm.UserEmail),
+					string.Format(ErrorMessages.UserDoesNotExist, userToRoleForm.UserEmail));
+
+				// Get all existing roles and returned it with model
+				userToRoleForm.Roles = await adminService.GetAllRoles();
+				return View(userToRoleForm);
+			}
+
+			if (!await adminService.IsUserHasRole(userToRoleForm.UserEmail, userToRoleForm.RoleName))
+			{
+				ModelState.AddModelError(nameof(userToRoleForm.UserEmail),
+					string.Format(ErrorMessages.UserDoesNotHaveARole, userToRoleForm.UserEmail, userToRoleForm.RoleName));
+
+				// Get all existing roles and returned it with model
+				userToRoleForm.Roles = await adminService.GetAllRoles();
+				return View(userToRoleForm);
+			}
+
+			await adminService.RemoveUserFromRoleAsync(userToRoleForm.UserEmail, userToRoleForm.RoleName);
+			TempData[InformationMessage] = string.Format(InformationMessages.RemovedUserFromRole,
+				userToRoleForm.UserEmail, userToRoleForm.RoleName);
+		}
+		catch
+		{
+			return GeneralError();
+		}
+
+		// After adding user to role return it to the same page
+		return RedirectToAction(nameof(RemoveUserFromRolе));
+	}
 }
