@@ -7,10 +7,6 @@ namespace DressUp.Services.Data.Interfaces;
 
 public interface IProductService
 {
-	Task<AllProductsViewModel[]> GetAllProductsAsync();
-
-	Task<AllProductsViewModel[]> GetMenProductsAsync();
-
 	Task AddProductAsync(ProductFormModel model);
 
 	IEnumerable<SizeType> GetAllSizeTypes();

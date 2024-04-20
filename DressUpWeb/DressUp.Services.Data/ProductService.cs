@@ -238,27 +238,6 @@ public class ProductService : IProductService
 		}        
     }
 
-    public async Task<AllProductsViewModel[]> GetAllProductsAsync()
-        => await dbContext.Products
-        .AsNoTracking()
-        .Select(p => new AllProductsViewModel
-        {
-            Id = p.Id,
-            Name = p.Name,
-            Brand = p.Brand.Name,
-            Category = p.Category.Name,
-            Price = p.Price,
-            Quantity = p.Quantity,
-            Images = p.ProductImages
-                .Select(pi => new ProductImagesViewModel()
-                {
-                    Id = pi.Id,
-                    ImageUrl = pi.ImageUrl,
-                })
-                .ToList()
-        })
-        .ToArrayAsync();
-
     public IEnumerable<SizeType> GetAllSizeTypes()
     {
         SizeType[] sizeTypes =
@@ -270,28 +249,6 @@ public class ProductService : IProductService
 
         return sizeTypes;
     }
-
-    public async Task<AllProductsViewModel[]> GetMenProductsAsync()
-        => await dbContext.Products
-        .AsNoTracking()
-        .Where(p => p.SizeType == SizeType.Men)
-        .Select(p => new AllProductsViewModel
-        {
-            Id = p.Id,
-            Name = p.Name,
-            Brand = p.Brand.Name,
-            Category = p.Category.Name,
-            Price = p.Price,
-            Quantity = p.Quantity,
-            Images = p.ProductImages
-                .Select(pi => new ProductImagesViewModel()
-                {
-                    Id = pi.Id,
-                    ImageUrl = pi.ImageUrl,
-                })
-                .ToList()
-        })
-        .ToArrayAsync();
 
     public async Task<ProductFormModel> GetProductByIdAsync(int id)
         => await dbContext

@@ -7,19 +7,27 @@ namespace DressUp.Data.Configurations;
 
 public class CategoryEntityConfiguration : IEntityTypeConfiguration<Category>
 {
-    public void Configure(EntityTypeBuilder<Category> builder)
-    {
-        builder.HasData(GeneratesCategories());
-    }
+	public void Configure(EntityTypeBuilder<Category> builder)
+	{
+		builder.HasData(GeneratesCategories());
+	}
 
-    private Category[] GeneratesCategories()
-    {
+	private Category[] GeneratesCategories()
+	{
+		string categoriesData;
 
-        string categoriesData = File.ReadAllText("../DressUp.Data/Seed/CategoriesSeed.json");
+		try
+		{
+			categoriesData = File.ReadAllText("../DressUp.Data/Seed/CategoriesSeed.json");
+		}
+		catch
+		{
+			categoriesData = File.ReadAllText("../../../../DressUp.Data/Seed/CategoriesSeed.json");
+		}
 
 
 
-        return JsonConvert
-                .DeserializeObject<Category[]>(categoriesData)!;
-    }
+		return JsonConvert
+				.DeserializeObject<Category[]>(categoriesData)!;
+	}
 }

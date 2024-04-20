@@ -27,6 +27,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DressUp.Web.Infrastructure"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DressUp.Services.Data.Models", "DressUp.Services.Data.Models\DressUp.Services.Data.Models.csproj", "{9E076D12-8C9B-4508-80BE-B30DD0CB8CBA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{98CA6F03-9C2F-4E64-B9AA-F5BBC9094A85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DressUp.Services.Test", "DressUp.Services.Test\DressUp.Services.Test.csproj", "{640C9E4D-BCA6-4A9A-BF56-5E4BB1D03D8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +73,10 @@ Global
 		{9E076D12-8C9B-4508-80BE-B30DD0CB8CBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E076D12-8C9B-4508-80BE-B30DD0CB8CBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E076D12-8C9B-4508-80BE-B30DD0CB8CBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{640C9E4D-BCA6-4A9A-BF56-5E4BB1D03D8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{640C9E4D-BCA6-4A9A-BF56-5E4BB1D03D8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{640C9E4D-BCA6-4A9A-BF56-5E4BB1D03D8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{640C9E4D-BCA6-4A9A-BF56-5E4BB1D03D8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -82,6 +90,7 @@ Global
 		{48A083FF-CA3F-4F7F-AA66-57718F3005C8} = {74304E8F-A8C0-4A5D-91BC-D7036533986E}
 		{88B434C6-FB47-40F5-84A3-43DA61885E59} = {38F2F9F3-02B5-4971-826E-E5DA36F0121C}
 		{9E076D12-8C9B-4508-80BE-B30DD0CB8CBA} = {74304E8F-A8C0-4A5D-91BC-D7036533986E}
+		{640C9E4D-BCA6-4A9A-BF56-5E4BB1D03D8F} = {98CA6F03-9C2F-4E64-B9AA-F5BBC9094A85}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {12A267E3-C3FD-49AE-860D-26CF68BFE47E}

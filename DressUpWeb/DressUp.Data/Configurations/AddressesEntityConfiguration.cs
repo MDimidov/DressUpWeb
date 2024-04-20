@@ -7,19 +7,24 @@ namespace DressUp.Data.Configurations;
 
 public class AddressEntityConfiguration : IEntityTypeConfiguration<Address>
 {
-    public void Configure(EntityTypeBuilder<Address> builder)
-    {
-        builder.HasData(GeneratesAddresses());
-    }
+	public void Configure(EntityTypeBuilder<Address> builder)
+	{
+		builder.HasData(GeneratesAddresses());
+	}
 
-    private Address[] GeneratesAddresses()
-    {
+	private Address[] GeneratesAddresses()
+	{
+		string addressesData;
+		try
+		{
+			addressesData = File.ReadAllText("../DressUp.Data/Seed/AddressesSeed.json");
+		}
+		catch
+		{
+			addressesData = File.ReadAllText("../../../../DressUp.Data/Seed/AddressesSeed.json");
+		}
 
-        string categoriesData = File.ReadAllText("../DressUp.Data/Seed/AddressesSeed.json");
-
-
-
-        return JsonConvert
-                .DeserializeObject<Address[]>(categoriesData)!;
-    }
+		return JsonConvert
+				.DeserializeObject<Address[]>(addressesData)!;
+	}
 }

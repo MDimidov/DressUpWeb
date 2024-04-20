@@ -7,19 +7,27 @@ namespace DressUp.Data.Configurations;
 
 public class ProductImageEntityConfiguration : IEntityTypeConfiguration<ProductImage>
 {
-    public void Configure(EntityTypeBuilder<ProductImage> builder)
-    {
-        builder.HasData(GeneratesProductImages());
-    }
+	public void Configure(EntityTypeBuilder<ProductImage> builder)
+	{
+		builder.HasData(GeneratesProductImages());
+	}
 
-    private ProductImage[] GeneratesProductImages()
-    {
+	private ProductImage[] GeneratesProductImages()
+	{
+		string productImagesData;
 
-        string categoriesData = File.ReadAllText("../DressUp.Data/Seed/ProductImagesSeed.json");
+		try
+		{
+			productImagesData = File.ReadAllText("../DressUp.Data/Seed/ProductImagesSeed.json");
+		}
+		catch
+		{
+			productImagesData = File.ReadAllText("../../../../DressUp.Data/Seed/ProductImagesSeed.json");
+		}
 
 
 
-        return JsonConvert
-                .DeserializeObject<ProductImage[]>(categoriesData)!;
-    }
+		return JsonConvert
+				.DeserializeObject<ProductImage[]>(productImagesData)!;
+	}
 }

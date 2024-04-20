@@ -7,19 +7,24 @@ namespace DressUp.Data.Configurations;
 
 public class CountryEntityConfiguration : IEntityTypeConfiguration<Country>
 {
-    public void Configure(EntityTypeBuilder<Country> builder)
-    {
-        builder.HasData(GeneratesCountries());
-    }
+	public void Configure(EntityTypeBuilder<Country> builder)
+	{
+		builder.HasData(GeneratesCountries());
+	}
 
-    private Country[] GeneratesCountries()
-    {
+	private Country[] GeneratesCountries()
+	{
+		string countriesData;
+		try
+		{
+			countriesData = File.ReadAllText("../DressUp.Data/Seed/CountriesSeed.json");
+		}
+		catch
+		{
+			countriesData = File.ReadAllText("../../../../DressUp.Data/Seed/CountriesSeed.json");
+		}
 
-        string categoriesData = File.ReadAllText("../DressUp.Data/Seed/CountriesSeed.json");
-
-
-
-        return JsonConvert
-                .DeserializeObject<Country[]>(categoriesData)!;
-    }
+		return JsonConvert
+				.DeserializeObject<Country[]>(countriesData)!;
+	}
 }

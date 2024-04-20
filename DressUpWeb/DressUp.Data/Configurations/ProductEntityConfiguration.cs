@@ -7,19 +7,25 @@ namespace DressUp.Data.Configurations;
 
 public class ProductEntityConfiguration : IEntityTypeConfiguration<Product>
 {
-    public void Configure(EntityTypeBuilder<Product> builder)
-    {
-        builder.HasData(GeneratesProducts());
-    }
+	public void Configure(EntityTypeBuilder<Product> builder)
+	{
+		builder.HasData(GeneratesProducts());
+	}
 
-    private Product[] GeneratesProducts()
-    {
+	private Product[] GeneratesProducts()
+	{
+		string productsData;
 
-        string categoriesData = File.ReadAllText("../DressUp.Data/Seed/ProductsSeed.json");
+		try
+		{
+			productsData = File.ReadAllText("../DressUp.Data/Seed/ProductsSeed.json");
+		}
+		catch
+		{
+			productsData = File.ReadAllText("../../../../DressUp.Data/Seed/ProductsSeed.json");
+		}
 
-
-
-        return JsonConvert
-                .DeserializeObject<Product[]>(categoriesData)!;
-    }
+		return JsonConvert
+				.DeserializeObject<Product[]>(productsData)!;
+	}
 }

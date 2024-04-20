@@ -7,19 +7,25 @@ namespace DressUp.Data.Configurations;
 
 public class StoreEntityConfiguration : IEntityTypeConfiguration<Store>
 {
-    public void Configure(EntityTypeBuilder<Store> builder)
-    {
-        builder.HasData(GeneratesStores());
-    }
+	public void Configure(EntityTypeBuilder<Store> builder)
+	{
+		builder.HasData(GeneratesStores());
+	}
 
-    private Store[] GeneratesStores()
-    {
+	private Store[] GeneratesStores()
+	{
+		string storesData;
 
-        string categoriesData = File.ReadAllText("../DressUp.Data/Seed/StoresSeed.json");
+		try
+		{
+			storesData = File.ReadAllText("../DressUp.Data/Seed/StoresSeed.json");
+		}
+		catch
+		{
+			storesData = File.ReadAllText("../../../../DressUp.Data/Seed/StoresSeed.json");
+		}
 
-
-
-        return JsonConvert
-                .DeserializeObject<Store[]>(categoriesData)!;
-    }
+		return JsonConvert
+				.DeserializeObject<Store[]>(storesData)!;
+	}
 }

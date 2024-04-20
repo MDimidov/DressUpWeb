@@ -24,11 +24,11 @@
 		<div class="col-md-12 mt-3">
 			<hr />
 			<h2>Existings roles</h2>
-			<div class="">
-				<ul class="">
+			<div>
+				<ul>
 					@foreach (RoleViewModel role in Model.Roles)
 					{
-						<li>
+						<li class="list-group-item">
 							<input disabled="disabled" class="btn-group text-center" value="@role.RoleName" />
 							@* First Admin and Moderator Role can not be deleted *@
 							@if (role.RoleName != AdminRoleName && role.RoleName != ModeratorRoleName)

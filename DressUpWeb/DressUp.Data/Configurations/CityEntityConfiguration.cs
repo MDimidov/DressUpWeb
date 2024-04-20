@@ -7,19 +7,24 @@ namespace DressUp.Data.Configurations;
 
 public class CityEntityConfiguration : IEntityTypeConfiguration<City>
 {
-    public void Configure(EntityTypeBuilder<City> builder)
-    {
-        builder.HasData(GeneratesCities());
-    }
+	public void Configure(EntityTypeBuilder<City> builder)
+	{
+		builder.HasData(GeneratesCities());
+	}
 
-    private City[] GeneratesCities()
-    {
+	private City[] GeneratesCities()
+	{
+		string citiesData;
+		try
+		{
+			citiesData = File.ReadAllText("../DressUp.Data/Seed/CitiesSeed.json");
+		}
+		catch
+		{
+			citiesData = File.ReadAllText("../../../../DressUp.Data/Seed/CitiesSeed.json");
+		}
 
-        string categoriesData = File.ReadAllText("../DressUp.Data/Seed/CitiesSeed.json");
-
-
-
-        return JsonConvert
-                .DeserializeObject<City[]>(categoriesData)!;
-    }
+		return JsonConvert
+				.DeserializeObject<City[]>(citiesData)!;
+	}
 }

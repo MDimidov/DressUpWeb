@@ -7,19 +7,27 @@ namespace DressUp.Data.Configurations;
 
 public class BrandEntityConfiguration : IEntityTypeConfiguration<Brand>
 {
-    public void Configure(EntityTypeBuilder<Brand> builder)
-    {
-        builder.HasData(GeneratesBrands());
-    }
+	public void Configure(EntityTypeBuilder<Brand> builder)
+	{
+		builder.HasData(GeneratesBrands());
+	}
 
-    private Brand[] GeneratesBrands()
-    {
+	private Brand[] GeneratesBrands()
+	{
+		string brandsData;
 
-        string categoriesData = File.ReadAllText("../DressUp.Data/Seed/BrandsSeed.json");
+		try
+		{
+			brandsData = File.ReadAllText("../DressUp.Data/Seed/BrandsSeed.json");
+		}
+		catch
+		{
+			brandsData = File.ReadAllText("../../../../DressUp.Data/Seed/BrandsSeed.json");
+		}
 
 
 
-        return JsonConvert
-                .DeserializeObject<Brand[]>(categoriesData)!;
-    }
+		return JsonConvert
+				.DeserializeObject<Brand[]>(brandsData)!;
+	}
 }
