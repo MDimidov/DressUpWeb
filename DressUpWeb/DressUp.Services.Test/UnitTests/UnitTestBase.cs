@@ -22,6 +22,8 @@ public class UnitTestBase
 
     public IEnumerable<Category> Categories { get; private set; }
 
+    public IEnumerable<Brand> Brands { get; private set; }
+
     private void SeedDatabase()
     {
         //Products
@@ -41,5 +43,11 @@ public class UnitTestBase
 
 		Categories = JsonConvert.
 			DeserializeObject<IEnumerable<Category>>(categoriesData)!;
+
+		//Brands
+		string brandsData = File.ReadAllText("../../../../DressUp.Data/Seed/BrandsSeed.json");
+
+		Brands = JsonConvert.
+			DeserializeObject<IEnumerable<Brand>>(brandsData)!;
 	}
 }

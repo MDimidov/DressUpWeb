@@ -31,12 +31,11 @@ public class CategoryServiceTests : UnitTestBase
 	[Test]
 	public async Task ShoudReturnAllCategoriesNameAsync()
 	{
-		IEnumerable<string> categoriesModel = await categoryService.GetCategoriesNamesAsync();
+		IEnumerable<string> categoryNames = await categoryService.GetCategoriesNamesAsync();
 
 		foreach (string category in Categories.Select(c => c.Name))
 		{
-
-			Assert.That(categoriesModel.Contains(category), Is.True);
+			Assert.That(categoryNames.Contains(category), Is.True);
 		}
 	}
 }
