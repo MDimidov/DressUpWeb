@@ -34,6 +34,4 @@ public class UnitTestBase
 		Users = JsonConvert.
 			DeserializeObject<IEnumerable<ApplicationUser>>(usersData)!;
 	}
-
-
 }

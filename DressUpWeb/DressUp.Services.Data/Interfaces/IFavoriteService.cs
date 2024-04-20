@@ -9,7 +9,5 @@ public interface IFavoriteService
 
 	Task RemoveFromFavoriteAsync(int productId, string userId);
 
-	Task<IEnumerable<AllProductsViewModel>> GetFavoriteProductsAsync(string userId);
-
 	Task<AllProductsFilteredAndPagedServiceModel> AllFavoritesAsync(AllProductsQueryModel queryModel, string userId);
 }

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DressUp.Services.Test.UnitTests;
 
-
+[TestFixture]
 public class ProductServiceTest : UnitTestBase
 {
 	private IProductService productService;
