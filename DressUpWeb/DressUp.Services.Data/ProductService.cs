@@ -224,20 +224,18 @@ public class ProductService : IProductService
             .Products
             .FindAsync(id);
 
-        if (product == null)
+        if (product != null)
         {
-            return;
-        }
+			product.Name = WebUtility.HtmlEncode(model.Name);
+			product.Description = WebUtility.HtmlEncode(model.Description);
+			product.BrandId = model.BrandId;
+			product.CategoryId = model.CategoryId;
+			product.SizeType = model.SizeType;
+			product.Price = model.Price;
+			product.Quantity = model.Quantity;
 
-        product.Name = WebUtility.HtmlEncode(model.Name);
-        product.Description = WebUtility.HtmlEncode(model.Description);
-        product.BrandId = model.BrandId;
-        product.CategoryId = model.CategoryId;
-        product.SizeType = model.SizeType;
-        product.Price = model.Price;
-        product.Quantity = model.Quantity;
-
-        await dbContext.SaveChangesAsync();
+			await dbContext.SaveChangesAsync();
+		}        
     }
 
     public async Task<AllProductsViewModel[]> GetAllProductsAsync()
