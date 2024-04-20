@@ -20,6 +20,8 @@ public class UnitTestBase
 
     public IEnumerable<ApplicationUser> Users { get; private set; }
 
+    public IEnumerable<Category> Categories { get; private set; }
+
     private void SeedDatabase()
     {
         //Products
@@ -33,5 +35,11 @@ public class UnitTestBase
 
 		Users = JsonConvert.
 			DeserializeObject<IEnumerable<ApplicationUser>>(usersData)!;
+
+		//Categories
+		string categoriesData = File.ReadAllText("../../../../DressUp.Data/Seed/CategoriesSeed.json");
+
+		Categories = JsonConvert.
+			DeserializeObject<IEnumerable<Category>>(categoriesData)!;
 	}
 }
