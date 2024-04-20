@@ -5,6 +5,7 @@ using DressUp.Web.ViewModels.Brand;
 
 namespace DressUp.Services.Test.UnitTests;
 
+[TestFixture]
 public class BrandServiceTests : UnitTestBase
 {
 	private IBrandService brandService;
