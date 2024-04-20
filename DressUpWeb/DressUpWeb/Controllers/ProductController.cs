@@ -146,7 +146,7 @@ public class ProductController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToAddProduct;
-			return RedirectToAction(nameof(All));
+			return Unauthorized();
 		}
 
 		try
@@ -178,7 +178,7 @@ public class ProductController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToAddProduct;
-			return RedirectToAction(nameof(All));
+			return Unauthorized();
 		}
 
 		try
@@ -215,7 +215,7 @@ public class ProductController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToEdit;
-			return RedirectToAction(nameof(All));
+			return Unauthorized();
 		}
 
 		try
@@ -248,7 +248,7 @@ public class ProductController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToEdit;
-			return RedirectToAction(nameof(All));
+			return Unauthorized();
 		}
 
 		if (!ModelState.IsValid)
@@ -306,7 +306,7 @@ public class ProductController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToDelete;
-			return BadRequest();
+			return Unauthorized();
 		}
 
 		try
@@ -333,7 +333,7 @@ public class ProductController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToDelete;
-			return BadRequest();
+			return Unauthorized();
 		}
 
 		try

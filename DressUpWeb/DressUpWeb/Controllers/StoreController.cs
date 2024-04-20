@@ -70,7 +70,7 @@ public class StoreController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToAddStore;
-			return RedirectToAction(nameof(All));
+			return Unauthorized();
 		}
 
 		try
@@ -104,7 +104,7 @@ public class StoreController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToAddStore;
-			return RedirectToAction(nameof(All));
+			return Unauthorized();
 		}
 
 		try
@@ -146,7 +146,7 @@ public class StoreController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToEditStore;
-			return RedirectToAction(nameof(All));
+			return Unauthorized();
 		}
 
 		try
@@ -175,7 +175,7 @@ public class StoreController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToEditStore;
-			return RedirectToAction(nameof(All));
+			return Unauthorized();
 		}
 
 		if (!ModelState.IsValid)
@@ -209,7 +209,7 @@ public class StoreController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToEditStore;
-			return RedirectToAction(nameof(All));
+			return Unauthorized();
 		}
 
 		try
@@ -236,7 +236,7 @@ public class StoreController : BaseController
 		if (!User.IsAdmin() && !User.IsModerator())
 		{
 			TempData[ErrorMessage] = ErrorMessages.AdminOrModeratorToEditStore;
-			return RedirectToAction(nameof(All));
+			return Unauthorized();
 		}
 
 		try
