@@ -30,8 +30,9 @@
 					<span class="text-danger"><strong>Closed</strong></span>
 				}
 			</h6>
+
 			<div class="form-inline">
-				@if (User.Identity?.IsAuthenticated ?? false)
+				@if (User.IsAdmin() || User.IsModerator())
 				{
 					<a asp-area="" asp-controller="Store" asp-action="Edit" asp-route-id="@Model.Id"
 					   class="btn btn-warning">Edit</a>

@@ -1,9 +1,16 @@
 ﻿@using static DressUp.Common.NotificationMessagesConstants;
 @model ProductDetailsViewModel
 
+@inject IProductService ProductService
+
 @{
 	ViewBag.Title = "Product Details";
 	List<ProductImagesViewModel> dressImages = Model.Images.ToList();
+	bool isProductFavorite = false;
+	if (User.Identity?.IsAuthenticated ?? false)
+	{
+		isProductFavorite = await ProductService.IsProductFavorite(User.GetId(), Model.Id);
+	}
 }
 
 <h2 class="text-center">@ViewBag.Title</h2>
@@ -41,6 +48,7 @@
 					 src="~/DressPics/ImageCommingSoon.jpg" alt="Coming Soon Image">
 			}
 		</div>
+
 		<div class="card col-8 border-0">
 			<p style="font-size:25px;"><u>@Model.Name</u></p>
 			<p>@Model.Description</p>
@@ -55,23 +63,32 @@
 			<div class="form-inline">
 				@if (User.Identity?.IsAuthenticated ?? false)
 				{
-					<a asp-area="" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
-					   class="btn btn-warning">Edit</a>
-					<a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
-					   class="btn btn-danger">Delete</a>
-					<a asp-area="" asp-controller="Product" asp-action="AddToFavorite" asp-route-ProductId="@Model.Id"
-					   class="btn btn-success">Add to favorite</a>
+					if (User.IsAdmin() || User.IsModerator())
+					{
+						<a asp-area="" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
+						   class="btn btn-warning">Edit</a>
+						<a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
+						   class="btn btn-danger">Delete</a>
+					}
+
+					if (isProductFavorite)
+					{
+						<a asp-area="" asp-controller="Product" asp-action="RemoveFromFavorite" asp-route-productId="@Model.Id"
+						   class="btn btn-success">Remove from favorite</a>
+					}
+					else
+					{
+						<a asp-area="" asp-controller="Product" asp-action="AddToFavorite" asp-route-productId="@Model.Id"
+						   class="btn btn-success">Add to favorite</a>
+					}
 					<p></p>
 
 					@if (Model.Quantity > 0)
 					{
-						@if (User.Identity?.IsAuthenticated ?? false)
-						{
-							<form class="input-group-sm" asp-area="" asp-controller="Product"
-								  asp-action="Order" asp-route-id="@Model.Id" method="post">
-								<input class="btn btn-primary" type="submit" value="Order" />
-							</form>
-						}
+						<form class="input-group-sm" asp-area="" asp-controller="Product"
+							  asp-action="Order" asp-route-id="@Model.Id" method="post">
+							<input class="btn btn-primary" type="submit" value="Order" />
+						</form>
 					}
 				}
 				else

@@ -39,10 +39,14 @@
 
 			@if (User.Identity?.IsAuthenticated ?? false)
 			{
-				<a asp-area="" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
-				   class="btn btn-warning">Edit</a>
-				<a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
-				   class="btn btn-danger">Delete</a>
+				if (User.IsAdmin() || User.IsModerator())
+				{
+					<a asp-area="" asp-controller="Product" asp-action="Edit" asp-route-id="@Model.Id"
+					   class="btn btn-warning">Edit</a>
+					<a asp-area="" asp-controller="Product" asp-action="Delete" asp-route-id="@Model.Id"
+					   class="btn btn-danger">Delete</a>
+				}
+
 				if (isProductFavorite)
 				{
 					<a asp-area="" asp-controller="Product" asp-action="RemoveFromFavorite" asp-route-productId="@Model.Id"
@@ -58,17 +62,10 @@
 
 				@if (Model.Quantity > 0)
 				{
-					@if (User.Identity?.IsAuthenticated ?? false)
-					{
-						<form class="input-group-sm" asp-area="" asp-controller="Product"
-							  asp-action="Order" asp-route-id="@Model.Id" method="post">
-							<input class="btn btn-primary" type="submit" value="Order" />
-						</form>
-					}
-				}
-				else
-				{
-
+					<form class="input-group-sm" asp-area="" asp-controller="Product"
+						  asp-action="Order" asp-route-id="@Model.Id" method="post">
+						<input class="btn btn-primary" type="submit" value="Order" />
+					</form>
 				}
 			}
 		</div>

@@ -43,12 +43,12 @@ public static class NotificationMessagesConstants
 	{
 		public const string ProductDeletedSuccessfuly = "The product was deleted successfuly";
 		public const string DeletedStore = "The store was deleted successfully";
-		public const string DeletedRole = "The role {0} was deleted successfully";
 
 	}
 
 	public static class InformationMessages
 	{
+		public const string DeletedRole = "The role {0} was deleted successfully";
 		public const string RemovedUserFromRole = "You removed successfully user {0}, from role {1}";
 	}
 

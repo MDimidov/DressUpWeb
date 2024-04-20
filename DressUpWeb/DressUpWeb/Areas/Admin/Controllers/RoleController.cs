@@ -163,7 +163,7 @@ public class RoleController : BaseAdminController
             }
 
             await adminService.DeleteRoleAsync(roleName, roleId);
-            TempData[WarningMessage] = string.Format(WarningMessages.DeletedRole, roleName);
+            TempData[InformationMessage] = string.Format(InformationMessages.DeletedRole, roleName);
 
             return RedirectToAction(nameof(AddDeleteRole));
         }

@@ -23,15 +23,12 @@
 			<br />
 			<a asp-area="" asp-controller="Store" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-success">Details</a>
 
-
-
-			@if (User.Identity?.IsAuthenticated ?? false)
+			@if (User.IsAdmin() || User.IsModerator())
 			{
 				<a asp-area="" asp-controller="Store" asp-action="Edit" asp-route-id="@Model.Id"
 				   class="btn btn-warning">Edit</a>
 				<a asp-area="" asp-controller="Store" asp-action="Delete" asp-route-id="@Model.Id"
 				   class="btn btn-danger">Delete</a>
-
 				<p></p>
 			}
 		</div>
