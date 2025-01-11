@@ -4,8 +4,8 @@
 Welcome to **DressUp Web**, your dress-based application built on **ASP.NET Core MVC**! **DressUp** is designed to be your fast way to choose your new clothes.
 
 # 📖 Features
-🏪 **DressStore:** *Browse through an extensive collection of dress available for purchase. Find your next clothes adventure with ease.* <br>
-📄 **Physical Stores:** *Find easily your next destination if you want to dress up before buying your clothes.* <br>
+👕 **DressStore:** *Browse through an extensive collection of dress available for purchase. Find your next clothes adventure with ease.* <br>
+🏪 **Physical Stores:** *Find easily your next destination if you want to dress up before buying your clothes.* <br>
 📌 **Favorites:** *Discover your favorites clothes and add them to favorite list.* <br>
 
 Enjoy wearing your new clothes!
